@@ -1,0 +1,4 @@
+#
+www-data ALL=(ALL) NOPASSWD:SETENV: /usr/bin/docker
+#
+

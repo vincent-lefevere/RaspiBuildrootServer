@@ -1,0 +1,10 @@
+FROM debian:12.10
+
+RUN apt-get update && apt-get install -y --no-install-recommends apt-transport-https wget gnupg ca-certificates
+
+RUN wget -qO /etc/apt/keyrings/influxdata-archive_compat.key https://repos.influxdata.com/influxdata-archive_compat.key  
+RUN echo "deb [signed-by=/etc/apt/keyrings/influxdata-archive_compat.key] https://repos.influxdata.com/debian stable main" | tee /etc/apt/sources.list.d/influxdata.list
+
+RUN apt-get update && apt-get install -y telegraf
+
+CMD [ "/usr/bin/telegraf" ]

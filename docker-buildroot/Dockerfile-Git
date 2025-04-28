@@ -1,0 +1,6 @@
+FROM debian:12.10
+
+RUN apt-get update && apt-get install -y git
+RUN mkdir -p /srv/git/projets.git && cd /srv/git/projets.git && git init --bare && touch /srv/git/projets.git/git-daemon-export-ok && git config daemon.receivepack true
+
+CMD [ "/usr/bin/git", "daemon", "--reuseaddr", "--base-path=/srv/git/", "/srv/git/" ]

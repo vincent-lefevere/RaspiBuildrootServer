@@ -1,0 +1,10 @@
+FROM debian:12.10
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends apt-transport-https wget gnupg ca-certificates build-essential libncurses5-dev libncursesw5-dev cpio unzip rsync file bc python3 graphviz python3-matplotlib less git m4 libwebsockets17 proftpd proftpd-mod-crypto proftpd-mod-mysql
+RUN deluser www-data && \
+    addgroup --gid 33 buildroot && \
+    adduser --home /home/buildroot --uid 33 --gid 33 buildroot && \
+    chmod 777 /home && chmod 755 /home/buildroot
+RUN chown -R 33 /home/buildroot
+COPY --chmod=755 bin/wsssh /usr/local/sbin/wsssh
+CMD proftpd ; /usr/local/sbin/wsssh /etc/wsssh/conf.xml

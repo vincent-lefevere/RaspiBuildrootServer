@@ -1,0 +1,91 @@
+services:
+
+  master:
+    restart: "no"
+    build:
+      context: .
+      dockerfile: Dockerfile-Master
+
+  git:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-Git
+    networks:
+      web_net:
+        ipv4_address: 172.31.255.7
+
+  mqtt2mysql:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-Mqtt2mysql
+    links:
+      - mosquitto
+      - mariadb
+    networks:
+      web_net:
+        ipv4_address: 172.31.255.6
+
+  telegraf:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-Telegraf
+    links:
+      - mosquitto
+    volumes:
+      - ./conf/telegraf:/etc/telegraf
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      web_net:
+        ipv4_address: 172.31.255.5
+
+  mosquitto:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-Mosquitto
+    volumes:
+      - ./conf/mosquitto:/etc/mosquitto
+    networks:
+      web_net:
+        ipv4_address: 172.31.255.4
+
+  mariadb:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: "yes"
+      MARIADB_ROOT_HOST: "172.31.255.2"
+    networks:
+      web_net:
+        ipv4_address: 172.31.255.3
+
+  web:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-Web
+    links:
+      - mariadb
+    ports:
+      - "443:443"
+    volumes:
+      - ./conf/web/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./conf/web/server.cer:/etc/ssl/private/server.cer
+      - ./conf/web/server.key:/etc/ssl/private/server.key
+      - ./html:/var/www/html
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./conf/web/docker-sudoers:/etc/sudoers.d/docker-sudoers
+      - ./data:/data
+    networks:
+      web_net:
+        ipv4_address: 172.31.255.2
+
+networks:
+  web_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.31.255.0/24"

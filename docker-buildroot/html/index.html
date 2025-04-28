@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Vincent Lefévère">
+    <title>Buildroot/Raspberry PI Serveur V2</title>
+    <link rel="stylesheet" href="css/xterm.css" />
+    <link rel="stylesheet" href="css/buildroot.css" />    
+    <script src="js/xterm.js"></script>
+    <script src="js/mqttws31.min.js"></script>
+    <script src="js/lang.class.js"></script>
+    <script src="js/auth.class.js"></script>
+    <script src="js/term.class.js"></script>
+    <script src="js/prj.class.js"></script>
+    <script src="js/settings.class.js"></script>
+    <script src="js/admin.class.js"></script>
+    <script src="js/backend.class.js"></script>
+    <script src="js/graph.class.js"></script>
+    <script src="js/spa.class.js"></script>
+  </head>
+  <body onload="spa=new MySPA();">
+    <header>
+      <div class="buildroot"></div>
+      <div class="enterprise"></div>
+      <div class="raspberry"></div>
+    </header>
+    <div>
+      <input id="identDisplay" type="checkbox" checked="checked"/>
+      <main id="ident">
+        <form onsubmit="return(false);">
+          <label for="lang"><span class="fr">Langue :</span><span class="en">Language:</span></label>
+          <select id="lang" onchange="spa.langue();">
+            <option value="fr">Français</option>
+            <option value="en">English</option>
+          </select><br/>
+          <label for="login"><span class="fr">email :</span><span class="en">your mail:</span></label><input type="text" id="login"/><br/>
+          <label for="passwd"><span class="fr">mot de passe :</span><span class="en">password:</span></label><input type="password" id="passwd" onkeydown="spa.checkchangepasswd();" onkeyup="spa.checkchangepasswd();"/><br/><br/>
+          <label></label><input class="fr login" type="submit" value="connexion" onclick="spa.login();"/><input class="en login" type="submit" value="login" onclick="spa.login();"/><br/>
+          <p style="display:none;"><span class="fr">Mot de passe incorrect.</span><span class="en">Invalid password.</span></p><br/>
+          <span class="fr">Pour changer votre mot de passe, indiquez également ci-dessous deux fois le même nouveau mot de passe et cliquez sur le bouton "changer".</span><span class="en">To change your password, also enter the same new password twice below and click on the "change" button.</span><br/><br/>
+          <label for="newpasswd"><span class="fr">mot de passe :</span><span class="en">password:</span></label><input type="password" id="newpasswd" onkeydown="spa.checkchangepasswd();" onkeyup="spa.checkchangepasswd();"/><br/>
+          <label for="newpasswd2"><span class="fr">mot de passe :</span><span class="en">password:</span></label><input type="password" id="newpasswd2" onkeydown="spa.checkchangepasswd();" onkeyup="spa.checkchangepasswd();"/><br/><br/>
+          <label></label><input class="fr changepasswd" type="submit" value="changer" onclick="spa.changepasswd();"/><input class="en changepasswd" type="submit" value="change" onclick="spa.changepasswd();"/><br/>
+        </form>
+      </main>
+
+      <input id="projectsDisplay" type="checkbox" checked="checked"/>
+      <main id="projects">
+        <center><img class="prof" src="img/config.png" onclick="spa.adminShow();"/><span class="fr">Bonjour</span><span class="en">Hello</span> <span id="name"></span> <input class="fr" type="button" value="déconnexion" onclick="spa.logout();"><input class="en" type="button" value="logout" onclick="spa.logout();"></center>
+        <h2><label for="dpt"><span class="fr">Mes projets</span><span class="en">My projects</span></label></h2>
+        <input id="dpt" style="display:none;" type="radio" name="seldpt">      
+        <div class="my" id="tag_my"></div>
+        <div class="separation"></div>
+        <div id="tag_dpt"></div>
+        <h2 class="prof">
+          <button class="add" onclick="spa.addDpt();"></button>
+          <label><span class="fr">Créer une nouvelle catégorie de projets</span><span class="en">Create a new project category</span></label>
+        </h2>
+      </main>
+
+      <input id="settingsDisplay" type="checkbox"/>
+      <main id="settings">
+        <img src="img/status.png" width="20px" onclick="spa.metshow();"/>
+        <span onclick="spa.settingsBack();">X</span>
+        <div style="height: 92px;">
+          <center><span class="fr">projet n°</span><span class="en">project n°</span> <span id="settings_id"></span></center>
+          <p><span class="fr">titre :</span><span class="en">title:</span> <input id="settings_title" type="text" onblur="spa.renPrj(this);" /></p>
+          <p><span class="fr">Verrouiller l'accès au projet</span><span class="en">Lock access to the project</span> <input id="settings_lock" type="checkbox" onchange="spa.lock(this);"></p>
+        </div>
+        <div style="height: 92px;">
+          <p class="poweroff">
+            <span class="fr">Sélectionnez une version de compilation :</span>
+            <span class="en">Select a compilation version:</span>
+            <select id="settings_versions" onchange="spa.choiceImage(this);"></select>
+          </p>
+          <p class="poweron out">
+            <span class="fr">Version de compilation :</span>
+            <span class="en">Compilation version:</span>
+            <input id="settings_version" type="text" value="" readonly />
+          </p>
+        </div>
+        <div style="height: 182px;">
+          <p class="fr">Liste des membres du projet</p><p class="en">List of project members</p>
+          <form id="settings_members"></form>        
+        </div>
+        <div style="height: 182px;">
+          <p class="poweroff"><input class="fr" type="button" value="Supprimer le projet" onclick="spa.supPrj();"><input class="en" type="button" value="Delete project" onclick="spa.supPrj();"></p>
+          <p class="poweroff"><input class="fr" type="button" value="Démarrer Machine Virtuelle" onclick="spa.startVM();"><input class="en" type="button" value="Start Virtual Machine" onclick="spa.startVM();"></p>
+          <p class="poweron"><input class="fr" type="button" value="Arrêter Machine Virtuelle" onclick="spa.stopVM();"><input class="en" type="button" value="Stop Virtual Machine"></p>
+          <p class="poweron"><input class="fr" type="button" value="Visualiser Machine Virtuelle" onclick="spa.displayVM();"><input class="en" type="button" value="Display Virtual Machine" onclick="spa.displayVM();"></p>
+          <p class="poweron"><b><span class="fr">Accès aux fichiers par sftp sur le port n°</span><span class="en">Access to files via sftp on port n°</span> <span id="settings_sftp"></span></b></p>
+        </div>
+        <div id="gitlog"></div>
+      </main>
+
+      <input id="buildrootDisplay" type="checkbox"/>
+      <main id="buildroot">
+        <img src="img/status.png" width="20px" onclick="spa.metshow();"/>
+        <span onclick="spa.buildrootBack();">X</span>
+        <div id="terminal"></div>
+        <div id="right">
+          <input class="fr" type="button" value="actualiser le terminal" onclick="spa.sendcmd('');"/><input class="en" type="button" value="update the terminal" onclick="spa.sendcmd('');"/><hr/>
+          <input class="color" type="button" value="make menuconfig" onclick="spa.sendcmd('menuconfig');"/><br/>
+          <input class="color" type="button" value="make manip_defconfig" onclick="spa.sendcmd('loaddefconfig');"/><br/>
+          <input class="color" type="button" value="make savedefconfig BR2_DEFCONFIG=..._defconfig" onclick="spa.sendcmd('savedefconfig');"/><br/>
+          <input class="color" type="button" value="make linux-menuconfig" onclick="spa.sendcmd('linux-menuconfig');"/><br/>
+          <input class="color" type="button" value="make" onclick="spa.sendcmd('make');"/><br/>
+          <input class="color" type="button" value="du -s -m target" onclick="spa.sendcmd('du');"/><br/>
+          <input class="color" type="button" value="make graph-depends" onclick="spa.sendcmd('graph-depends');"/><br/>
+          <input class="color" type="button" value="make <PACKAGE>-build" onclick="spa.sendcmd('build');"/><br/>
+          <input class="color" type="button" value="make <PACKAGE>-dirclean" onclick="spa.sendcmd('dirclean');"/><br/>
+          <input class="color" type="button" value="make clean" onclick="spa.sendcmd('clean');"/>
+        </div>
+      </main>
+
+      <input id="adminDisplay" type="checkbox"/>
+      <main id="admin">
+        <img src="img/status.png" width="20px" onclick="spa.metshow();"/>
+        <span onclick="spa.adminBack();">X</span>
+        <table><tr><td colspan="3">
+          <form>
+            <p><span class="fr">Sélectionnez le fichier csv des utilisateurs à modifier</span><span class="en">Select the csv file of users to be modified</span> <input type="file" id="admin_csv" onchange="spa.loadusers(this);"/></p>
+          </form>
+        </td></tr><tr class="separation"></tr><tr><td>
+          <form onsubmit="return(false);">
+            <p><span class="fr">Renseignez le numéro de la version à installer :</span><span class="en">Enter the number of the version to be installed:</span> <input id="admin_version" type="text" value=""/></p>
+            <p><input class="fr" type="submit" value="Ajouter la version indiquée" onclick="spa.adminAdd();" /><input class="en" type="submit" value="Add the indicated version" onclick="spa.adminAdd();" /></p>
+            <p id="admin_errorAdd" class="error"><span class="fr">Ajout impossible, car la version existe déjà dans le système !</span><span class="en">Impossible to add, as the version already exists in the system!</span></p>
+          </form>
+        </td><td class="separation"></td><td>
+          <form onsubmit="return(false);">
+            <p><span class="fr">Choisissez un matériel cible :</span><span class="en">Choose a hardware target:</span> <select id="admin_defconfs" onchange="spa.adminRefresh1();"></select></p>
+            <p><span class="fr">Choisissez la version de toolchain à compiler :</span><span class="en">Choose the version of toolchain to make:</span> <select id="admin_versions_for_tc"></select></p>
+            <p><input class="fr" type="submit" value="Lancer la création de la toolchain" onclick="spa.adminCompileTC();" /><input class="en" type="submit" value="Start creating the toolchain" onclick="spa.adminCompileTC();" /></p>
+          </form>
+        </td></tr><tr class="separation"></tr><tr><td>
+          <form onsubmit="return(false);">
+            <p><span class="fr">Choisissez un matériel cible et sa toolchain :</span><span class="en">Choose a hardware target ans its toolchain:</span> <select id="admin_toolchains" onchange="spa.adminRefresh2();"></select></p>
+            <p><span class="fr">Choisissez la version de buildroot :</span><span class="en">Choose the version of buildroot:</span> <select id="admin_versions"></select></p>
+            <p><span class="fr">Choisissez une liste de précompilation :</span><span class="en" style="display: none;">Select a pre-compilation list:</span> <select id="speedup_list"></select></p>
+            <p><input class="fr" type="submit" value="Lancer la création de l'image pour les Machines Virtuelles" onclick="spa.adminCompile();" /><input class="en" type="submit" value="Start creating the image for Virtual Machines" onclick="spa.adminCompile();" /></p>
+          </form>
+        </td><td class="separation"></td><td>
+          <form onsubmit="return(false);">
+            <p><span class="fr">Titre de la liste :</span><span class="en" style="display: none;">Title of the list:</span> <input type="text" id="speedup_title"></p>
+            <p><span class="fr">Listez les packages à pré-compiler :</span><span class="en" style="display: none;">List packages to be pre-compiled:</span><br><textarea style="width: 100%; resize:vertical;" rows="2" id="speedup_pkgs"></textarea></p>
+            <p><input class="fr" type="submit" value="Création de la liste de pré-compilation" onclick="spa.speedupAdd();"><input class="en" type="submit" value="Creating the pre-compilation list" onclick="spa.speedupAdd();" style="display: none;"></p>
+          </form>
+        </td></tr></table>
+      </main>
+
+      <input id="cm" type="checkbox"/>
+      <div id="mtlg">
+        <span onclick="spa.metunshow();">X</span>
+        <div>
+          <span><canvas id="graph4" width="360" height="100"></canvas><b><span class="fr">Mémoire utilisée par le projet : </span><span class="en">Memory used by the project: </span><span id="val4">0</span>%</b></span>
+          <span><canvas id="graph5" width="360" height="100"></canvas><b><span class="fr">CPU utilisée par le projet : </span><span class="en">CPU used by the project: </span><span id="val5">0</span>%</b></span>
+          <span></span>
+          <span><canvas id="graph1" width="360" height="100"></canvas><b><span class="fr">Mémoire globalement utilisée : </span><span class="en">Total memory used: </span><span id="val1">0</span>%</b></span>
+          <span><canvas id="graph2" width="360" height="100"></canvas><b><span class="fr">SWAP globalement utilisé : </span><span class="en">Total SWAP used: </span><span id="val2">0</span>%</b></span>
+          <span><canvas id="graph3" width="360" height="100"></canvas><b><span class="fr">CPU globalement utilisée : </span><span class="en">Total CPU used: </span><span id="val3">0</span>%</b></span>
+        </div>
+      </div>
+    </div>
+    <footer class="en"><strong>RaspiBuildrootServer</strong> : Server <a href="https://buildroot.org" target="_blank">Buildroot</a> generating images for <a href="https://www.raspberrypi.com" target="_blank">Raspberry Pi</a> by <a href="mailto:vincent.lefevere@junia.com">Vincent Lefévère</a> of <a href="https://www.junia.com" target="_blank">Junia</a> <span style="display:inline-block; transform: rotate(180deg);">&copy;</span> april 2025 (GNU licence)</footer>
+    <footer class="fr"><strong>RaspiBuildrootServer</strong> : Serveur <a href="https://buildroot.org" target="_blank">Buildroot</a> générant des images pour <a href="https://www.raspberrypi.com" target="_blank">Raspberry Pi</a> par <a href="mailto:vincent.lefevere@junia.com">Vincent Lefévère</a> de <a href="https://www.junia.com" target="_blank">Junia</a> <span style="display:inline-block; transform: rotate(180deg);">&copy;</span> avril 2025 (licence GNU)</footer>
+    <footer style="display:none;">
+      <div id="template_project">
+        <p onclick="spa.selectPrj(this);"><span class="fr">projet n°</span><span class="en">project n°</span> <span class="tag_idprj"></span><br/><span class="tag_title"></span><br/><br/><span class="tag_mail"></span></p>
+      </div>
+      <div id="template_department">
+        <input type="hidden"/>        
+        <h2>
+          <button class="supr prof" onclick="spa.supDpt(this);"></button>
+          <label class="tag_dpt_title"></label>
+        </h2>
+        <input class="dpt" type="radio" name="seldpt">
+        <div class="dpt"></div>
+        <p class="addprj" onclick="spa.addPrj(this);"><span class="fr">créer nouveau projet</span><span class="en">create new project</span></p>
+        <div class="separation"></div>
+      </div>
+      <div id="template_member">
+        <button class="valid" type="button" onclick="spa.enroll(this);"></button>
+        <button class="supr" type="button" onclick="spa.unenroll(this);"></button>
+        <input type="text" value="" readonly/>
+        <input class="blink" type="text" value="" readonly/>
+      </div>
+      <div id="template_gitlog">
+        <input type="hidden" value=""/>
+        <img src="img/rollback.png" width="20px" onclick="spa.rollback(this);" />
+      </div>
+    </footer>
+  </body>
+</html>

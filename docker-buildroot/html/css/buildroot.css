@@ -1,0 +1,361 @@
+@charset "UTF-8";
+
+:root {
+ --color1:#a09929;
+ --color2:#febf00;
+ --color3:#bd0940;
+ --color4:#76ab23;
+}
+
+body.wait * {
+  cursor: wait;
+}
+
+body > div {
+  position: fixed;
+  width: 100%;
+  top: 105px;
+  bottom: 20px;
+  left: 0px;
+  overflow-y: scroll;
+}
+
+header {
+  height: 104px;
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  top: 0px;
+  left: 0px;
+}
+
+header > div {
+  height: 84px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 10px;
+}
+header > div.buildroot {
+  width: calc(25% - 23px);
+  background-image: url(../img/logo-buildroot.png);
+  background-position-x: left;
+}
+header.install > div.buildroot {
+  animation-duration: 3s;
+  animation-name: clignoter;
+  animation-iteration-count: infinite;
+  transition: none;
+}
+@keyframes clignoter {
+  0%   { opacity:1; }
+  60%   {opacity:0; }
+  100% { opacity:1; }
+}
+header > div.enterprise {
+  width: calc(50% - 22px);
+  background-image: url(../img/logo-enterprise.png);
+  background-position-x: center;
+}
+header > div.raspberry {
+  width: calc(25% - 23px);
+  background-image: url(../img/logo-Raspberry_Pi.png);
+  background-position-x: right;
+}
+
+footer {
+  height: 20px;
+  position: fixed;
+  width: max-content;
+  background-color: white;
+  bottom: 0px;
+  animation-duration: 240s;
+  animation-name: scrolling;
+  animation-iteration-count: infinite;
+  transition: none;
+ }
+
+@keyframes scrolling {
+  0%  { left: max(950px, 100%); }
+  100% { left: -950px; }
+}
+
+#identDisplay:checked ~ main, #identDisplay:not(:checked) ~ main#ident { display: none; }
+#identDisplay:checked ~ main#ident { display: block; }
+main { width: calc(100% - 10px); position: absolute; }
+
+
+/* ********************************************************************** *
+ * Debut du block main#ident                                              *
+ * ********************************************************************** */
+#identDisplay { display: none; }
+
+#ident > form {
+  width: 500px;
+  margin-left: calc(50% - 270px);
+  margin-right: calc(50% - 270px);
+  padding: 20px;
+  background-color: lightyellow;
+}
+#ident > form > label {
+  width: 100px;
+  display: inline-block;
+}
+#ident > form > input, #ident > form > select {
+  width: 392px;
+}
+#ident > form > input[type=button] {
+  width: 400px;
+}
+#ident > form > p {
+  text-align: center;
+  color: red;
+  width: calc(100% - 100px);
+  font-weight: bold;
+  margin-left: 100px;
+}
+
+/* ********************************************************************** *
+ * Fin du block main#ident                                                *
+ * ********************************************************************** */
+
+/* ********************************************************************** *
+ * Debut du block main#project                                            *
+ * ********************************************************************** */
+
+#projectsDisplay, #projectsDisplay:not(:checked) ~ #projects,
+#projects div.dpt, #projects p.addprj, #projects input.dpt, #projects.stud .prof { display: none; }
+
+#projects img.prof { position: relative; top: 6px; }
+#projects h2 { background-color:var(--color1); color:var(--color2); font-size:24px; line-height:20px; text-shadow:1px 1px #aaaaaa; letter-spacing:2px; padding:5px; }
+#projects h2 label { cursor:pointer; }
+#projects h2:hover { background-color: var(--color2); color: var(--color1); }
+#projects h2 button { width: 18px; height: 18px; background-size: cover; }
+#projects h2 button.supr { background-image: url(../img/supr.png); }
+#projects h2 button.add { background-image: url(../img/add.png); }
+
+#projects input.dpt:checked + div.dpt { display: block; }
+.install > #projects input.dpt:checked ~ p.addprj { display: block; }
+#projects div > p.addprj { width:170px; overflow: hidden; }
+#projects div > p { width:340px; overflow-y: scroll; overflow-x: hidden; cursor:pointer; }
+#projects div > p { float:left; height:150px; border:thin #cccccc solid; border-radius:5px; box-shadow:5px 5px 5px black; padding:10px; text-align:center; margin:5px; color: #0000ff; }
+#projects div.dpt > p.me { border-color: var(--color3); box-shadow:5px 5px 5px var(--color3); }
+#projects div > p.on { background-color: var(--color2); }
+#projects div.dpt > p:hover, #projects div.my > p:hover { background-color:#eaffdf; box-shadow:5px 5px 5px #005500; color:#ff0000; }
+#projects div.separation { clear:both; }
+#projects div > p.addprj { background-image: url(../img/add.png); background-size: cover; }
+
+/* ********************************************************************** *
+ * Fin du block main#project                                              *
+ * ********************************************************************** */
+
+#settingsDisplay, #settingsDisplay:not(:checked) ~ #settings,
+#settings > div > .poweroff, #settings > div > .poweron, #settings.in > div > .out, #settings.prof > div > .out { display: none; }
+
+/* ********************************************************************** *
+ * Debut du block main#settings                                           *
+ * ********************************************************************** */
+
+#settings { background-color: var(--color1); border: var(--color1) solid 10px; border-radius:5px; width: calc(100% - 60px); margin: 10px; }
+#settings > img { position: absolute; left: -6px; top: -6px; cursor: pointer; }
+#settings > span { position: absolute; right: 6px; top: -6px; cursor: pointer; }
+#settings > div { border: var(--color2) solid 2px; border-radius:5px; width: calc(50% - 50px); margin: 10px; padding: 10px; vertical-align: top; display: inline-block; }
+#settings.off.in > div > .poweroff, #settings.on.in > div > .poweron, #settings > div > .out,
+#settings.off.prof > div:nth-child(4) > .poweroff, #settings.on.prof > div:nth-child(4) > .poweron {display: block; }
+#settings > div > p > input[type=button] { width: 100%; }
+#settings > div > p { margin-block-start: 0.5em; margin-block-end: 0.5em; }
+
+#settings > div#gitlog { width: calc(100% - 50px); display: none; }
+#settings.in > div#gitlog { display: block; }
+#gitlog > div > img { cursor: pointer; background-color: var(--color2); }
+#gitlog > div > span { position: absolute; padding-left: 18px; font-weight: bold; color: darkblue; }
+#gitlog > div > pre { padding-left: 40px; padding-top: 18px; }
+
+#settings_versions, #settings_version { width: calc(100% - 10px); }
+
+#settings_members {
+    overflow-y: scroll;
+    height: 132px;
+}
+#settings #me > input[type=text] {
+  font-style: normal;
+}
+#settings.in #me > input[type=text] {
+  font-weight: bold;
+}
+#settings.out #me > input[type=text],
+#settings_members > .out > input[type=text] {
+  font-style: italic;
+}
+#settings_members.prof > #me > input[type=text] {
+  color: red;
+}
+#settings_members > #me > button.valid {
+  background-image: url(../img/add.png);
+}
+#settings.in div > button,
+#settings.prof div > button,
+#settings_members > #me > button.valid,
+#settings.in #me > button.supr,
+#settings.out #me > button.supr {
+  visibility: visible;
+}
+#settings_members > #me,
+#settings_members.prof > #me,
+#settings_members > div.in,
+#settings_members > div.out {
+  display: block;
+}
+#settings_members > div {
+  display: none;
+}
+#settings_members > #me > button.supr,
+#settings.in #me > button.valid,
+#settings.out #me > button.valid,
+#settings_members > div > button,
+#settings_members > .in > button.valid {
+  visibility: hidden;
+}
+#settings_members > div > button {
+  width: 18px; height: 18px; background-size: cover;
+}
+#settings_members > div > button.valid {
+  background-image: url(../img/valid.png);
+}
+#settings_members > div > button.supr {
+  background-image: url(../img/supr.png);
+}
+#settings_members > div > input[type=text] {
+  width: calc(100% - 52px);
+}
+#settings_members > div > input[type=text].blink {
+   position: relative;
+   top: -21px;
+   left: 44px;
+   animation-duration: 4s;
+   animation-name: blink;
+   animation-iteration-count: infinite;
+   transition: none;
+}
+#settings_members > div { height: 22px ; }
+@keyframes blink {
+  0%   { z-index:-1; }
+  49.9%  { z-index:-1; }
+  50%   { z-index:0; }
+  99.9%  { z-index:0; }
+}
+
+/* ********************************************************************** *
+ * Fin du block main#settings                                             *
+ * ********************************************************************** */
+
+/* ********************************************************************** *
+ * Début du block de métrologie                                           *
+ * ********************************************************************** */
+label.mtlg img {
+  vertical-align: bottom;
+}
+#mtlg {
+  z-index: 10;
+  position: fixed;
+  height: calc(100% - 124px);
+  top: 104px;
+  width: calc(100% - 20px);
+  border: solid 10px white;
+  left: 0px;
+}
+#mtlg > span { position: absolute; right: 6px; top: 3px; cursor: pointer; }
+#mtlg > div {
+  background-color: var(--color1);
+  border: solid 10px var(--color1);
+  border-radius: 5px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  left: 0px;
+}
+#cm, #mtlg { display: none; }
+#cm:checked ~ #mtlg { display: block; }
+
+#mtlg > div > span > canvas { background-color: #f0f0f0; margin: 12px;
+  width: calc(100% - 34px); height: calc(100% - 34px);
+  border: solid 5px var(--color2);
+}
+#mtlg > div > span > b {
+  position: relative;
+  top: -4px; left: 12px;
+  border-radius: 0px 0px 8px 8px; padding: 4px; background-color: lightgrey;
+}
+#mtlg > div > span {
+  width: calc(33.33% - 3px); height: calc(50% - 25px);
+  display: inline-block;
+  text-align: left;
+}
+
+/* ********************************************************************** *
+ * Fin du block de métrologie                                             *
+ * ********************************************************************** */
+
+/* ********************************************************************** *
+ * Debut du block main#buildroot                                          *
+ * ********************************************************************** */
+
+#buildrootDisplay, #buildrootDisplay:not(:checked) ~ #buildroot { display: none; }
+#buildroot { background-color: var(--color1); border: var(--color1) solid 10px; border-radius:5px; width: calc(100% - 60px); margin: 10px; padding-top: 15px; }
+#buildroot > img { position: absolute; left: -6px; top: -6px; cursor: pointer; }
+#buildroot > span { position: absolute; right: 6px; top: -6px; cursor: pointer; }
+
+#buildroot > div#terminal {
+  display: inline-block;
+  width: 738px; height: 408px;
+}
+#buildroot > div#right {
+  display : inline-block;
+  width: calc(100% - 742px);
+  min-width: 150px;
+  vertical-align: top;
+}
+#right > input {
+  width: 100%;
+}
+#right.red > input.color {
+  color: red;
+}
+#right.green > input.color {
+  color: green;
+}
+
+/* ********************************************************************** *
+ * Fin du block main#buildroot                                            *
+ * ********************************************************************** */
+
+/* ********************************************************************** *
+ * Debut du block main#admin                                              *
+ * ********************************************************************** */
+#adminDisplay, #adminDisplay:not(:checked) ~ #admin { display: none; }
+#admin { background-color: var(--color1); border: var(--color1) solid 10px; border-radius:5px; width: calc(100% - 60px); margin: 10px; padding-top: 15px; }
+#admin > img { position: absolute; left: -6px; top: -6px; cursor: pointer; }
+#admin > span { position: absolute; right: 6px; top: -6px; cursor: pointer; }
+#admin > table { width: 100%; }
+#admin tr.separation { height:10px; }
+#admin td.separation { width: 10px; background-color: var(--color1); border: var(--color1) solid 10px; padding: 0px; }
+#admin td { 
+  width: 50%; vertical-align: top; 
+  background-color: var(--color2); border: var(--color2) solid 10px; border-radius:5px; 
+  margin: 10px; padding: 10px; }
+#admin .error { visibility: hidden; color:red; font-weight: bold; }
+#admin option.compiled { background-color: lightgreen; }
+#admin option.compiling { background-color: orange; }
+#admin option.compiling.now {
+  animation-duration: 2s;
+  animation-name: option-blink;
+  animation-iteration-count: infinite;
+  transition: none;
+}
+@keyframes option-blink {
+  0%   { background-color: orange; }
+  50%   { background-color: lightgreen; }
+}
+
+/* ********************************************************************** *
+ * Fin du block main#admin                                                *
+ * ********************************************************************** */
