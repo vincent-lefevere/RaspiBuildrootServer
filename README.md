@@ -35,8 +35,8 @@ cd RaspiBuildrootServer
 
 ## Construction des containers 
 
-Dans le répertoire "[docker-buildroot](tree/main/docker-buildroot)",
-se trouve un script "[build.sh](blob/main/docker-buildroot/build.sh)"
+Dans le répertoire "[docker-buildroot](../../tree/main/docker-buildroot)",
+se trouve un script "[build.sh](../../blob/main/docker-buildroot/build.sh)"
 qui sert à générer les différents containers du projet.
 
 ```bash
@@ -45,14 +45,14 @@ cd docker-buildroot
 ```
 
 **Remarque** : un certificat autosigné et une clef privée (qui serviront pour la connexion https)
-sont générés et placés dans le sous-répertoire "[conf/web](tree/main/docker-buildroot/conf/web)"
+sont générés et placés dans le sous-répertoire "[conf/web](../../tree/main/docker-buildroot/conf/web)"
 du répertoire courant (RaspiBuildrootServer/docker-buildroot).
 Ils peuvent être remplacés par une clef privée à mettre dans un fichier nommé "server.key" et
 un certificat à mettre dans un fichier nommé "server.cer".
 
 ## Lancement de RaspiBuilrootServer
 
-Pour lancer les containers, un script "[up.sh](blob/main/docker-buildroot/up.sh)"
+Pour lancer les containers, un script "[up.sh](../../blob/main/docker-buildroot/up.sh)"
 est mis à disposition. Il provoque le lancement des containers et configure Docker pour le
 redémarrage automatique en cas de reboot de la machine virtuelle hébergeant le logiciel.
 
@@ -68,7 +68,7 @@ accès administrateur initial.
 
 ## Arrêt complet du logiciel
 
-Pour demander l'arrêt complet des containers, un script "[down.sh](blob/main/docker-buildroot/down.sh)"
+Pour demander l'arrêt complet des containers, un script "[down.sh](../../blob/main/docker-buildroot/down.sh)"
 est fourni.
 
 ```bash
