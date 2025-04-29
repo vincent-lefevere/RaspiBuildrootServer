@@ -2,7 +2,7 @@
 Ce logiciel est un Serveur Web destiné à donner l'accès à [Buildroot](https://buildroot.org)
 pour l'apprentissage de l'outil en utilisant une cible matériel de type [Raspberry PI](https://www.raspberrypi.com).
 
-Cela permet à des apprenants de travailler en groupe sur des projets en diminuant les temps de compilation
+Cela permet à des apprenants de travailler en groupe (<i>30 groupes maximum actifs en même temps</i>) sur des projets en diminuant les temps de compilation
 à supporter pendant les travaux pratiques via une optimisation du paramètrage. La précompilation commune
 pour tous les projets de la chaîne de développement (toolchain) et d'un certain nombre de packages, permet
 également d'offir un temps de génération des images réduites pour chaque groupe.
@@ -74,5 +74,5 @@ est fourni.
 
 <b>Remarque</b> : Les containers base de données (utilisant "[Mariadb](https://mariadb.org)" et
 "[Git](https://git-scm.com/)") étant arrêtés, et comme il n'y a pas de persistance des données de mis
-en place, l'intégralité de la configuration et de données utilisateurs sont alors perdus.
+en place, l'intégralité de la configuration et des données utilisateurs sont alors perdus.
 
