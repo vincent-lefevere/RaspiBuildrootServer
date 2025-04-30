@@ -58,7 +58,7 @@ function frontend($p) {
   else $result=$mysqli->query("SELECT projects.*, (projects.power IS NULL) AS off FROM projects INNER JOIN act ON projects.id=act.id WHERE email='$login' UNION SELECT *, (power IS NULL) AS off FROM projects WHERE NOT pub ORDER BY id");
  while ($val=$result->fetch_assoc()) {
   $id=$val['id'];
-  $title=$val['title'];
+  $title=str_replace(array('"'),array('\"'),$val['title']);
   list($users,$token)=get_users($id);
   $version=($val['image']==null)?'null':(int)$val['image'];
   $lock=$val['pub'];
@@ -81,7 +81,7 @@ function frontend($p) {
  $result=$mysqli->query("SELECT id, title FROM departments");
  while ($val=$result->fetch_assoc()) {
   $id=$val['id'];
-  $title=$val['title'];
+  $title=str_replace(array('"'),array('\"'),$val['title']);
   $list=get_projects($id);
   $dpts.='{"id":'.$id.',"title":"'.$title.'","projects":['.$list.']},';
  }
