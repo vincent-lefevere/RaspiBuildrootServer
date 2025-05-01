@@ -89,7 +89,7 @@ version du logiciel).
 
 La première rubrique en haut de la fenêtre sur toute la largeur offre un accès de téléchargement d'un fichier ".csv" contenant la liste des utilisateurs à créer, à modifier, ou à détruire.
 
-![rubrique gestion des utilisateurs](../../blob/main/docker-buildroot/documentation/img_fr/conf_rub1.png)
+![rubrique gestion des utilisateurs](../../blob/main/documentation/img_fr/conf_rub1.png)
 
 Le fichier ".csv" doit être codé en UTF-8 avec 4 colonnes (séparées par des points virgules) :
 

@@ -91,7 +91,7 @@ The first heading at the top of the full-width window provides access
 to download a ".csv" file containing the list of users to be created,
 modified or deleted.
 
-![user management section](../../blob/main/docker-buildroot/documentation/img_en/conf_rub1.png)
+![user management section](../../blob/main/documentation/img_en/conf_rub1.png)
 
 The ".csv" file must be encoded in UTF-8 with 4 columns (separated by semicolons):
 
