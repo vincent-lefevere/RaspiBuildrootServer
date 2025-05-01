@@ -111,6 +111,12 @@ sont mis à jour.
 
 ### Téléchargement du logiciel Buildroot
 
+La seconde rubrique, au milieu à gauche de la fenêtre, offre un accès pour récupérer depuis [le site officiel](https://buildroot.org/downloads/), via l'accès internet, la version de buildroot que nous voulons utiliser.
+
+![rubrique téléchargement de Buildroot](../../blob/main/documentation/img_fr/conf_rub2.png)
+
+Pour récupérer, par exemple, le fichier buildroot-2025.02.1.tar.gz, on indique seulement **2025.02.1** et on clique sur le bouton "**Ajouter la version indiquée**". Une fois téléchargé avec succès, on voit la version apparaître dans la listes de choix de la rubrique suivante.
+
 ### Génération du toolchain
 
 ### Génération de l'image Buildroot précompilée

@@ -112,6 +112,14 @@ and the type and the first names/surnames of existing accounts are updated.
 
 ### Download Buildroot software
 
+The second section, in the middle left of the window, provides access to retrieve the buildroot
+version we want to use from [the official site](https://buildroot.org/downloads/),
+via Internet access.
+
+![Buildroot download section](../../blob/main/documentation/img_fr/conf_rub2.png)
+
+To retrieve the buildroot-2025.02.1.tar.gz file, for example, just enter **2025.02.1** and click on the "**Add the indicated version**" button. Once successfully downloaded, the version will appear in the list of choices in the next section.
+
 ### Toolchain generation
 
 ### Generating the precompiled Buildroot image
