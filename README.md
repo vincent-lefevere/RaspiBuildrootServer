@@ -50,6 +50,14 @@ du répertoire courant (RaspiBuildrootServer/docker-buildroot).
 Ils peuvent être remplacés par une clef privée à mettre dans un fichier nommé "server.key" et
 un certificat à mettre dans un fichier nommé "server.cer".
 
+## Customisation du logo centrale
+
+L'interface web du logiciel présente un bandeau avec à gauche le logo de Buildroot,
+à droite le logo de Raspberry PI et au centre une place pour le logo d'institutionnel
+de l'établissement utilisant le logiciel. Pour changer ce logo central, vous devez
+placer votre logo dans le répertoire "[html/img](../../tree/main/docker-buildroot/html/img)"
+sous le nom "logo-enterprise.png".
+
 ## Lancement de RaspiBuilrootServer
 
 Pour lancer les containers, un script "[up.sh](../../blob/main/docker-buildroot/up.sh)"
@@ -65,6 +73,47 @@ redémarrage automatique en cas de reboot de la machine virtuelle hébergeant le
 Lors d'une première connexion https, via un navigateur, on obtient l'interface de connexion
 demandant un couple, sous la forme d'un email et d'un mot de passe, qui sera utilisé comme
 accès administrateur initial.
+
+**Remarque** : Le champ nom/prénom associé à ce compte sera initialisé la valeur "FIRST ADMIN"
+(que l'on pourra changer par la suite si on le désire).
+
+## Paramètrage du logiciel
+
+Pour accéder à la fenêtre de paramètrage, vous cliquez sur l'icone ![de la roue](../../blob/main/docker-buildroot/html/img/config.png)
+située devant "**Bonjour FIRST ADMIN**". Cette fenêtre offre 5 rubriques de paramètrage.
+
+**Remarque** : La 5ème et dernière rubrique (en bas à droite n'est pas fonctionnelle dans cette
+version du logiciel).
+
+### Gestion des utilisateurs
+
+La première rubrique en haut de la fenêtre sur toute la largeur offre un accès de téléchargement d'un fichier ".csv" contenant la liste des utilisateurs à créer, à modifier, ou à détruire.
+
+![rubrique gestion des utilisateurs](../../blob/main/docker-buildroot/documentation/img_fr/conf_rub1.png)
+
+Le fichier ".csv" doit être codé en UTF-8 avec 4 colonnes (séparées par des points virgules) :
+
+- En première colonne, mettre une valeur 0 (pour le compte d'un étudiant) ou 1 (pour le compte d'un professeur).
+
+- En seconde colonne, mettre l'email de connexion au compte.
+
+- En troisième colonne, mettre le mot de passe initial (en clair).
+Ce dernier pourra être changé par l'utilisateur (et sera conservé dans la base de données
+sous un format chiffré). Si le mot de passe est vide, le compte est supprimé
+(mais on ne peut pas supprimer son propre compte).
+
+- En Quatrième colonne, mettre le Prénom et le Nom de l'utilisateur.
+
+En cliquant sur le bouton "choisir un fichier", on sélectionne sur son ordinateur le fichier ".csv" à traiter.
+Une fois, validé, le traitement du fichier commence tout de suite : Les nouveaux comptes sont créés,
+les comptes existant ayant un mot de passe vide sont supprimés enfin le type et les Prénom/Nom des comptes existant
+sont mis à jour.
+
+### Téléchargement du logiciel Buildroot
+
+### Génération du toolchain
+
+### Génération de l'image Buildroot précompilée
 
 ## Arrêt complet du logiciel
 

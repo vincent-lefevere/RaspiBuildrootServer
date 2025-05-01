@@ -49,6 +49,14 @@ of the current directory (`RaspiBuildrootServer/docker-buildroot`).
 They can be replaced by a private key saved as `server.key`  
 and a certificate saved as `server.cer`.
 
+## Customisation du logo centrale
+
+The software's web interface features a banner with the Buildroot logo on the left,
+the Raspberry PI logo on the right and a space in the centre for the institutional
+logo of the establishment using the software. To change this central logo, you need
+to place your logo in the "[html/img](../../tree/main/docker-buildroot/html/img)"
+directory under the name "logo-enterprise.png".
+
 ## Launching RaspiBuildrootServer
 
 To start the containers, use the provided script  
@@ -65,6 +73,48 @@ in case the host virtual machine is rebooted.
 During the first HTTPS connection via a web browser,  
 a login screen will appear asking for an email and password.  
 These credentials will be used to create the initial administrator account.
+
+**Note** : The surname/first name field associated with this account will
+be set to "FIRST ADMIN" (which can be changed later if you wish).
+
+## Software configuration
+
+To access the settings window, click on the icon ![of the wheel](../../blob/main/docker-buildroot/html/img/config.png)
+située devant "**Bonjour FIRST ADMIN**". Cette fenêtre offre 5 rubriques de paramètrage.
+
+**Note** : The 5th and last section (bottom right) is not functional
+in this version of the software.
+
+### User management
+
+The first heading at the top of the full-width window provides access
+to download a ".csv" file containing the list of users to be created,
+modified or deleted.
+
+![user management section](../../blob/main/docker-buildroot/documentation/img_en/conf_rub1.png)
+
+The ".csv" file must be encoded in UTF-8 with 4 columns (separated by semicolons):
+
+- In the first column, enter a value of 0 (for a student account) or 1 (for a teacher account).
+
+- In the second column, enter the account login email.
+
+- In the third column, enter the initial password (in clear text).
+This can be changed by the user (and will be stored in the database in encrypted format).
+If the password is empty, the account is deleted (but you cannot delete your own account).
+
+- In the fourth column, enter the user's First Name and Last Name.
+
+Click on the "Choose a file" button to select the ".csv" file to be processed on your computer.
+Once the file has been validated, processing begins immediately:
+new accounts are created, existing accounts with empty passwords are deleted
+and the type and the first names/surnames of existing accounts are updated.
+
+### Download Buildroot software
+
+### Toolchain generation
+
+### Generating the precompiled Buildroot image
 
 ## Full Shutdown of the Software
 
