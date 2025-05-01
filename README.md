@@ -111,32 +111,63 @@ sont mis à jour.
 
 ### Téléchargement du logiciel Buildroot
 
-La seconde rubrique, au milieu à gauche de la fenêtre, offre un accès pour récupérer depuis [le site officiel](https://buildroot.org/downloads/), via l'accès internet, la version de Buildroot que nous voulons utiliser.
+La seconde rubrique, au milieu à gauche de la fenêtre, offre un accès pour récupérer
+depuis [le site officiel](https://buildroot.org/downloads/), via l'accès internet,
+la version de Buildroot que nous voulons utiliser.
 
 ![rubrique téléchargement de Buildroot](../../blob/main/documentation/img_fr/conf_rub2.png)
 
-Pour récupérer, par exemple, le fichier buildroot-2025.02.1.tar.gz, on indique seulement **2025.02.1** et on clique sur le bouton "**Ajouter la version indiquée**". Une fois téléchargé avec succès, on voit la version apparaître dans la listes de choix de la rubrique suivante.
+Pour récupérer, par exemple, le fichier buildroot-2025.02.1.tar.gz, on indique seulement **2025.02.1**
+et on clique sur le bouton "**Ajouter la version indiquée**".
+Une fois téléchargé avec succès, on voit la version apparaître dans la listes de choix de la rubrique suivante.
 
 ### Génération du toolchain
 
-La troisième rubrique, au milieu à droite de la fenêtre, permet la génération de la toolchain (ou chaine de compilation) en choisissant dans la première liste déroulante le modèle de Raspberry Pi que l'on souhaite utiliser. Le contenu de cette liste de choix est automatiquement construite à partir des modèles de Raspberry Pi disponible en fonction des versions de Buildroot que l'on a téléchargées. La liste de choix suivante permet de sélectionner une version de Buildroot compatible avec le type de Raspberry Pi sélectionné.
+La troisième rubrique, au milieu à droite de la fenêtre, permet la génération de la toolchain
+(ou chaine de compilation) en choisissant dans la première liste déroulante le modèle de Raspberry Pi
+que l'on souhaite utiliser.
+Le contenu de cette liste de choix est automatiquement construite à partir des modèles de Raspberry Pi
+disponibles en fonction des versions de Buildroot que l'on a téléchargées.
+La liste de choix suivante permet de sélectionner une version de Buildroot compatible avec le type de
+Raspberry Pi sélectionné.
 
 ![rubrique génération du toolchain](../../blob/main/documentation/img_fr/conf_rub3.png)
 
-Pendant la génération d'un toolchain, le logo Buildroot en haut à gauche de la page web clignotte. On peut en profiter pour demander la génération d'une autre toolchain mais celle-ci sera mise en file d'attente.
-Les toolchains en attente apparaissent, dans la liste de choix des toolchains de la rubrique suivante, sur fond orange, celle qui est en cours de génération sur fond orange et vert clignotant. Enfin celles qui sont terminées sur fond vert.
+Pendant la génération d'une toolchain, le logo Buildroot en haut à gauche de la page web clignotte.
+On peut en profiter pour demander la génération d'une autre toolchain mais celle-ci sera mise en file d'attente.
+Les toolchains en attente apparaissent, dans la liste de choix des toolchains de la rubrique suivante,
+sur fond orange, celle qui est en cours de génération sur fond orange et vert clignotant.
+Enfin celles qui sont terminées sur fond vert.
 
 ### Génération de l'image Buildroot précompilée
 
+La quatrième rubrique en bas à gauche de la fenêtre, permet la génération d'une image précompilée de Buildroot,
+en choisissant :
 
+- premièrement la toolchain qui sera utilisée pour compiler,
 
+- deuxièmement la version de Buildroot (qui par défaut sera la même que celle utilisée pour générer la toolchain),
 
+- troisièmement une liste de packages qui seront précompilés afin de diminuer les temps de compilation,
+par la suite, pour les utilisateurs.
+
+Le logiciel est pourvu de 2 listes prédéfinies de packages :
+
+- "**Empty**" : une liste vide.
+
+- "**GrovePi in Python**" : une liste de packages permétant d'accélérer la compilation des packages
+(et de leurs dépendances) lors de l'usage du HAT GrovePi en Python.
 
 ![rubrique génération de l'image précompilée](../../blob/main/documentation/img_fr/conf_rub4.png)
 
+Pour valider ses choix et demander la génération de l'image précompilée, on clique sur le bouton
+"**Lancer la création de l'image pour les Machines Virtuelles**"
 
-
-
+Pendant la génération d'une image précompilée, le logo Buildroot en haut à gauche de la page web clignotte.
+On peut en profiter pour demander la génération d'une autre image mais celle-ci sera mise
+en file d'attente avec les demandes de génération des toolchains.
+**Remarque** : La génération d'une toolchain est prioritaire sur la génération d'une image pour sortir
+de cette file d'attente.
 
 ## Arrêt complet du logiciel
 

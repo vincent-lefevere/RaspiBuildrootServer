@@ -118,11 +118,19 @@ via Internet access.
 
 ![Buildroot download section](../../blob/main/documentation/img_en/conf_rub2.png)
 
-To retrieve the buildroot-2025.02.1.tar.gz file, for example, just enter **2025.02.1** and click on the "**Add the indicated version**" button. Once successfully downloaded, the version will appear in the list of choices in the next section.
+To retrieve the buildroot-2025.02.1.tar.gz file, for example, just enter **2025.02.1** and
+click on the "**Add the indicated version**" button.
+Once successfully downloaded, the version will appear in the list of choices in the next section.
 
 ### Toolchain generation
 
-The third section, in the middle right of the window, is used to generate the toolchain (or compilation chain) by choosing the Raspberry Pi model you wish to use from the first drop-down list. The contents of this drop-down list are automatically constructed from the Raspberry Pi models available for the versions of Buildroot you have downloaded. The following list allows you to select a version of Buildroot compatible with the type of Raspberry Pi selected.
+The third section, in the middle right of the window, is used to generate the toolchain
+(or compilation chain) by choosing the Raspberry Pi model you wish to use from the first
+drop-down list.
+The contents of this drop-down list are automatically constructed from the Raspberry Pi
+models available for the versions of Buildroot you have downloaded.
+The following list allows you to select a version of Buildroot compatible with the type
+of Raspberry Pi selected.
 
 ![toolchain generation section](../../blob/main/documentation/img_en/conf_rub3.png)
 
@@ -134,14 +142,32 @@ Finally, those that have been completed are highlighted in green.
 
 ### Generating the precompiled Buildroot image
 
+The fourth section, at the bottom left of the window, allows you to generate a precompiled image of Buildroot,
+by choosing:
 
+- firstly the toolchain which will be used to compile,
 
+- secondly, the Buildroot version (which by default will be the same as the one used to generate the toolchain),
+
+- thirdly, a list of packages that will be precompiled in order to reduce compilation times for users.
+
+The software comes with 2 predefined lists of packages:
+
+- "**Empty**": an empty list.
+
+- "**GrovePi in Python**": a list of packages to speed up compilation of packages (and their dependencies)
+when using GrovePi HAT in Python.
 
 ![pre-copiled image generation section](../../blob/main/documentation/img_en/conf_rub4.png)
 
+To confirm your choices and request generation of the precompiled image, click on the button:
+"**Start creating the image for Virtual Machines**"
 
+While a precompiled image is being generated, the Buildroot logo at the top left of the web page flashes.
+You can take advantage of this to request the generation of another image, but this will be queued
+with the toolchain generation requests.
 
-
+**Note**: Generating a toolchain takes priority over generating an image to get out of this queue.
 
 ## Full Shutdown of the Software
 
