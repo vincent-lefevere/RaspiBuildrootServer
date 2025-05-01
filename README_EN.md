@@ -45,9 +45,9 @@ cd docker-buildroot
 **Note**: A self-signed certificate and a private key (used for HTTPS connections)  
 are generated and placed in the subdirectory  
 "[conf/web](../../tree/main/docker-buildroot/conf/web)"  
-of the current directory (`RaspiBuildrootServer/docker-buildroot`).  
-They can be replaced by a private key saved as `server.key`  
-and a certificate saved as `server.cer`.
+of the current directory ("RaspiBuildrootServer/docker-buildroot").  
+They can be replaced by a private key saved as "server.key"  
+and a certificate saved as "server.cer".
 
 ## Customisation du logo centrale
 
@@ -80,7 +80,7 @@ be set to "FIRST ADMIN" (which can be changed later if you wish).
 ## Software configuration
 
 To access the settings window, click on the icon ![of the wheel](../../blob/main/docker-buildroot/html/img/config.png)
-située devant "**Bonjour FIRST ADMIN**". Cette fenêtre offre 5 rubriques de paramètrage.
+in front of "**Hello FIRST ADMIN**". This window offers 5 parameter settings.
 
 **Note** : The 5th and last section (bottom right) is not functional
 in this version of the software.

@@ -19,20 +19,25 @@
 
  $speedups='';
  $result=$mysqli->query("SELECT id, title FROM speedups ORDER BY id");
- while ($val=$result->fetch_assoc()) $speedups.='{"id":'.$val['id'].',"title":"'.$val['title'].'"},';
+ while ($val=$result->fetch_assoc()) {
+  $title=str_replace(array('"'), array('\"'),$val['title']);
+  $speedups.='{"id":'.$val['id'].',"title":"'.$title.'"},';
+ }
  $speedups=substr($speedups,0,-1);
-
 
  $defconfs='';
  $result=$mysqli->query("SELECT id, defconfig FROM defconfs ORDER BY id");
- while ($val=$result->fetch_assoc()) $defconfs.='{"id":'.$val['id'].',"defconfig":"'.$val['defconfig'].'"},';
+ while ($val=$result->fetch_assoc()) {
+  $defconfig=str_replace(array('"'), array('\"'), $val['defconfig']);
+  $defconfs.='{"id":'.$val['id'].',"defconfig":"'.$defconfig.'"},';
+ }
  $defconfs=substr($defconfs,0,-1);
 
  $versions='';
  $result=$mysqli->query("SELECT id, title FROM versions ORDER BY id");
  while ($val=$result->fetch_assoc()) {
   $id=$val['id'];
-  $title=$val['title'];
+  $title=str_replace(array('"'), array('\"'), $val['title']);
   $list=get_defconfs($id);
   $versions.='{"id":'.$id.',"title":"'.$title.'","defconfs":['.$list.']},';
  }
