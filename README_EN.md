@@ -116,13 +116,32 @@ The second section, in the middle left of the window, provides access to retriev
 version we want to use from [the official site](https://buildroot.org/downloads/),
 via Internet access.
 
-![Buildroot download section](../../blob/main/documentation/img_fr/conf_rub2.png)
+![Buildroot download section](../../blob/main/documentation/img_en/conf_rub2.png)
 
 To retrieve the buildroot-2025.02.1.tar.gz file, for example, just enter **2025.02.1** and click on the "**Add the indicated version**" button. Once successfully downloaded, the version will appear in the list of choices in the next section.
 
 ### Toolchain generation
 
+The third section, in the middle right of the window, is used to generate the toolchain (or compilation chain) by choosing the Raspberry Pi model you wish to use from the first drop-down list. The contents of this drop-down list are automatically constructed from the Raspberry Pi models available for the versions of Buildroot you have downloaded. The following list allows you to select a version of Buildroot compatible with the type of Raspberry Pi selected.
+
+![toolchain generation section](../../blob/main/documentation/img_en/conf_rub3.png)
+
+While a toolchain is being generated, the Buildroot logo at the top left of the web page flashes.
+You can take advantage of this to request the generation of another toolchain, but this will be queued.
+Queued toolchains appear on an orange background in the list of toolchain choices in the next section,
+and the toolchain currently being generated appears on a flashing orange and green background.
+Finally, those that have been completed are highlighted in green.
+
 ### Generating the precompiled Buildroot image
+
+
+
+
+![pre-copiled image generation section](../../blob/main/documentation/img_en/conf_rub4.png)
+
+
+
+
 
 ## Full Shutdown of the Software
 
