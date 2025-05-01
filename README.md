@@ -50,10 +50,10 @@ du répertoire courant (RaspiBuildrootServer/docker-buildroot).
 Ils peuvent être remplacés par une clef privée à mettre dans un fichier nommé "server.key" et
 un certificat à mettre dans un fichier nommé "server.cer".
 
-## Customisation du logo centrale
+## Customisation du logo central
 
 L'interface web du logiciel présente un bandeau avec à gauche le logo de Buildroot,
-à droite le logo de Raspberry PI et au centre une place pour le logo d'institutionnel
+à droite le logo de Raspberry PI et au centre une place pour le logo institutionnel
 de l'établissement utilisant le logiciel. Pour changer ce logo central, vous devez
 placer votre logo dans le répertoire "[html/img](../../tree/main/docker-buildroot/html/img)"
 sous le nom "logo-enterprise.png".
@@ -74,7 +74,7 @@ Lors d'une première connexion https, via un navigateur, on obtient l'interface 
 demandant un couple, sous la forme d'un email et d'un mot de passe, qui sera utilisé comme
 accès administrateur initial.
 
-**Remarque** : Le champ nom/prénom associé à ce compte sera initialisé la valeur "FIRST ADMIN"
+**Remarque** : Le champ nom/prénom associé à ce compte sera initialisé avec la valeur "FIRST ADMIN"
 (que l'on pourra changer par la suite si on le désire).
 
 ## Paramètrage du logiciel
@@ -82,12 +82,12 @@ accès administrateur initial.
 Pour accéder à la fenêtre de paramètrage, vous cliquez sur l'icone ![de la roue](../../blob/main/docker-buildroot/html/img/config.png)
 située devant "**Bonjour FIRST ADMIN**". Cette fenêtre offre 5 rubriques de paramètrage.
 
-**Remarque** : La 5ème et dernière rubrique (en bas à droite n'est pas fonctionnelle dans cette
-version du logiciel).
+**Remarque** : La 5ème et dernière rubrique (en bas à droite) n'est pas fonctionnelle dans cette
+version du logiciel.
 
 ### Gestion des utilisateurs
 
-La première rubrique en haut de la fenêtre sur toute la largeur offre un accès de téléchargement d'un fichier ".csv" contenant la liste des utilisateurs à créer, à modifier, ou à détruire.
+La première rubrique, en haut de la fenêtre sur toute la largeur, offre un accès de téléchargement d'un fichier ".csv" contenant la liste des utilisateurs à créer, à modifier, ou à détruire.
 
 ![rubrique gestion des utilisateurs](../../blob/main/documentation/img_fr/conf_rub1.png)
 
@@ -102,7 +102,7 @@ Ce dernier pourra être changé par l'utilisateur (et sera conservé dans la bas
 sous un format chiffré). Si le mot de passe est vide, le compte est supprimé
 (mais on ne peut pas supprimer son propre compte).
 
-- En Quatrième colonne, mettre le Prénom et le Nom de l'utilisateur.
+- En quatrième colonne, mettre le Prénom et le Nom de l'utilisateur.
 
 En cliquant sur le bouton "choisir un fichier", on sélectionne sur son ordinateur le fichier ".csv" à traiter.
 Une fois, validé, le traitement du fichier commence tout de suite : Les nouveaux comptes sont créés,
@@ -119,7 +119,7 @@ la version de Buildroot que nous voulons utiliser.
 
 Pour récupérer, par exemple, le fichier buildroot-2025.02.1.tar.gz, on indique seulement **2025.02.1**
 et on clique sur le bouton "**Ajouter la version indiquée**".
-Une fois téléchargé avec succès, on voit la version apparaître dans la listes de choix de la rubrique suivante.
+Une fois téléchargé avec succès, on voit la version apparaître dans la liste de choix de la rubrique suivante.
 
 ### Génération du toolchain
 
@@ -155,13 +155,13 @@ Le logiciel est pourvu de 2 listes prédéfinies de packages :
 
 - "**Empty**" : une liste vide.
 
-- "**GrovePi in Python**" : une liste de packages permétant d'accélérer la compilation des packages
+- "**GrovePi in Python**" : une liste de packages permettant d'accélérer la compilation des packages
 (et de leurs dépendances) lors de l'usage du HAT GrovePi en Python.
 
 ![rubrique génération de l'image précompilée](../../blob/main/documentation/img_fr/conf_rub4.png)
 
 Pour valider ses choix et demander la génération de l'image précompilée, on clique sur le bouton
-"**Lancer la création de l'image pour les Machines Virtuelles**"
+"**Lancer la création de l'image pour les Machines Virtuelles**".
 
 Pendant la génération d'une image précompilée, le logo Buildroot en haut à gauche de la page web clignotte.
 On peut en profiter pour demander la génération d'une autre image mais celle-ci sera mise
@@ -179,6 +179,6 @@ est fourni.
 ```
 
 **Remarque** : Les containers base de données (utilisant "[Mariadb](https://mariadb.org)" et
-"[Git](https://git-scm.com/)") étant arrêtés, et comme il n'y a pas de persistance des données de mis
-en place, l'intégralité de la configuration et des données utilisateurs sont alors perdus.
+"[Git](https://git-scm.com/)") étant arrêtés, et comme il n'y a pas de persistance des données de mise
+en place, l'intégralité de la configuration et des données utilisateurs sont alors perdues.
 

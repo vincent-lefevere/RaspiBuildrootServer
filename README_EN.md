@@ -161,7 +161,7 @@ when using GrovePi HAT in Python.
 ![pre-copiled image generation section](../../blob/main/documentation/img_en/conf_rub4.png)
 
 To confirm your choices and request generation of the precompiled image, click on the button:
-"**Start creating the image for Virtual Machines**"
+"**Start creating the image for Virtual Machines**".
 
 While a precompiled image is being generated, the Buildroot logo at the top left of the web page flashes.
 You can take advantage of this to request the generation of another image, but this will be queued
