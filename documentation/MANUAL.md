@@ -17,7 +17,9 @@ et **professeur1@institut.fr**
 
 On commence par choisir sa langue (français ou anglais), puis on indique son mail de connexion
 et son mot de passe initial associé que l'enseignant vous a communiqués.
-Il est fortement conseillé de changer tout de suite son mot de passe.
+
+**Remarque** : *Il est fortement conseillé de changer tout de suite son mot de passe.*
+
 Pour cela, on saisi dans les deux champs " **mot de passe**" en bas du bloc jaune.
 Si les deux mots de passe sont bien identiques le bouton "**connexion**" va se désactiver
 tandis que le bouton "**changer**" va s'activer.
