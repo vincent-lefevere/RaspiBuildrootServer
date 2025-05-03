@@ -169,6 +169,31 @@ with the toolchain generation requests.
 
 **Note**: Generating a toolchain takes priority over generating an image to get out of this queue.
 
+### Exit the settings window
+
+While the generation of toolchains and images is underway, we can already create project categories
+in which users can then create their own projects.
+To do this, first exit the **Software settings** window by clicking on the close cross at the top
+right of the window, and then return to the project list.
+
+## Creating project categories
+
+The main window managing projects by category begins by displaying, at the top, a banner grouping
+together the projects in which you are participating (whatever the category in which they were
+created) like a list of shortcuts.
+
+Below are the banners for the different categories, created by the teachers.
+Clicking on the category title in the banner opens the selected category and closes the previously
+open category.
+
+![category creation](../../blob/main/documentation/img_en/proj_rub1.png)
+
+The last banner, which only appears for teachers, allows you to create a new category by clicking
+on the blue cross. A popup asks for the title of the category to be created.
+
+**Note** : *As soon as an image is finished being built, a pictogram of a large blue cross will
+appear in each project category, enabling users to create projects there.*
+
 ## Full Shutdown of the Software
 
 To completely stop the containers, a script named  

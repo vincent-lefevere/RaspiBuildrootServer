@@ -169,6 +169,32 @@ en file d'attente avec les demandes de génération des toolchains.
 **Remarque** : La génération d'une toolchain est prioritaire sur la génération d'une image pour sortir
 de cette file d'attente.
 
+### Ressortir de la fenêtre de paramétrage
+
+Pendant que les générations de toolchains et d'images se déroulent, on peut déjà créer des catégories
+de projets dans lesquels les utilisateurs pourront ensuite y créer leur projet.
+Pour cela il faut d'abord quitter la fenêtre de **Paramétrage du logiciel** en cliquant sur la croix
+de fermeture située en haut à droite de la fenêtre et ainsi retourner dans la liste des projet.
+
+## Création des catégories de projets
+
+La fenêtre principale gérant les projets par catégorie commence par présenter, en haut, un bandeau
+regroupant les projets auxquels vous participez (quelque soit la catégorie dans laquelle ils ont
+été créés) comme une liste de raccourcies.
+
+En dessous, on trouve les bandeaux des différentes catégories qui ont été créés par les enseignants.
+Si on clique sur le titre de la catégorie dans son bandeau, la catégorie sélectionnée s'ouvre tandis
+que la catégorie précédemment ouverte se referme.
+
+![création de catégorie](../../blob/main/documentation/img_fr/proj_rub1.png)
+
+Le dernier bandeau, apparaissant uniquement pour les enseignants, permet la création d'une nouvelle
+catégorie en cliquant sur la croix bleue. Un popup demande alors le titre de la catégorie à créer.
+
+**Remarque** : *Dès qu'une image sera terminée d'être construite, dans chaque catégorie de projets
+apparaîtra un pictogramme constitué d'une grande croix bleu permettant aux utilisateurs d'y créer
+des projets.*
+
 ## Arrêt complet du logiciel
 
 Pour demander l'arrêt complet des containers, un script "[down.sh](../../blob/main/docker-buildroot/down.sh)"
