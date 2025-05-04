@@ -96,7 +96,7 @@ Les autres membres du groupe (dont le créateur), vous voient désormais dans la
 
 **Remarque** : *Les enseignants n’ont pas besoin de votre approbation pour faire partir de votre groupe.*
 
-### Bloc de d'action
+### Bloc d'action
 
 Dans ce quatrième bloc, situé à droite dans la fenêtre sous le **bloc de choix de version**, une fois membre, on y trouvera les boutons permettant de supprimer le projet, de démarrer ou d’arrêter la machine virtuelle faisant tourner Buildroot dans le cadre de notre projet et enfin de visualiser le terminal de pilotage de Buildroot.
 
