@@ -41,7 +41,7 @@ class MySettings {
       tmp+=' ('+db.defconfs.find((el) => el.id == image.defconf).defconfig;
       tmp+=' - Toolchain '+db.versions.find((el) => el.id == toolchain.version).title;
       tmp+=')'
-      option.innerHTML=tmp;
+      option.innerText=tmp;
       this.#myselect.appendChild(option);
     }
   }

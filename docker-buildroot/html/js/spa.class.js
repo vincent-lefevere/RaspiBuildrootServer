@@ -24,9 +24,11 @@ class MySPA {
     this.#flagloadversion=0;
     var clientId = 'br-'+(Date.now()%100000+Math.random());
     var me=this;
-    this.#mqttc=new Paho.MQTT.Client(location.hostname, 443, clientId);
-    this.#mqttc.onMessageArrived = function(message) { me._onMessageArrived(message); };
-    this.#mqttc.connect({useSSL: true , onSuccess: function() { me._onSuccess();} });
+    if (location.hostname!='') {
+      this.#mqttc=new Paho.MQTT.Client(location.hostname, 443, clientId);
+      this.#mqttc.onMessageArrived = function(message) { me._onMessageArrived(message); };
+      this.#mqttc.connect({useSSL: true , onSuccess: function() { me._onSuccess();} });      
+    }
     this.loadversion();
   }
 

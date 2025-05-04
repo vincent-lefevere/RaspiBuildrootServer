@@ -24,7 +24,7 @@ class MyAdmin {
     for (var i=0; i<db.defconfs.length; i++) {
       var option=document.createElement('option');
       option.setAttribute('value',db.defconfs[i].id);
-      option.innerHTML=db.defconfs[i].defconfig;
+      option.innerText=db.defconfs[i].defconfig;
       this.#defconfs.appendChild(option);
     }
     var now=db.images.find((el) => el.now == true);
@@ -38,7 +38,7 @@ class MyAdmin {
       option.setAttribute('value',toolchain.id);
       var defconfig=toolchain.defconfig;
       var version=toolchain.version;
-      option.innerHTML=this.#db.defconfs.find((el) => el.id==defconfig).defconfig+' (Toolchain : '+this.#db.versions.find((el) => el.id==version).title+')';
+      option.innerText=this.#db.defconfs.find((el) => el.id==defconfig).defconfig+' (Toolchain : '+this.#db.versions.find((el) => el.id==version).title+')';
       if (toolchain.install==false) { 
         option.setAttribute('disabled','');
         option.classList.add('compiling');
@@ -53,7 +53,7 @@ class MyAdmin {
       var speedup=db.speedups[i];
       var option=document.createElement('option');
       option.setAttribute('value',speedup.id);
-      option.innerHTML=speedup.title;
+      option.innerText=speedup.title;
       this.#speedups.appendChild(option);
     }
     this.refresh1();
@@ -81,7 +81,7 @@ class MyAdmin {
         option.classList.add(install.install?'compiled':'compiling');
         if (now!=undefined && id==now.defconfig && version.id==now.id) option.classList.add('now');
       }
-      option.innerHTML=version.title;
+      option.innerText=version.title;
       this.#versionsfortc.appendChild(option);
     }
   }
@@ -102,7 +102,7 @@ class MyAdmin {
       this.#versions.removeAttribute('disabled');
       var option=document.createElement('option');
       option.setAttribute('value',version.id);
-      option.innerHTML=version.title;
+      option.innerText=version.title;
       var image=this.#db.images.find((el) => el.version==version.id && el.toolchain == id);
       if (image!=undefined) {
         option.setAttribute('disabled','');

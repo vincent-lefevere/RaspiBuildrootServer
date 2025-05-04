@@ -41,8 +41,8 @@ class MyPrj {
     var prj;
     this.#db.projects.forEach(function(el) { if (el.id==idprj) prj=el; });
     var tmp=document.getElementById('template_project').firstElementChild.cloneNode(true);
-    tmp.getElementsByClassName('tag_idprj')[0].innerHTML=idprj;
-    tmp.getElementsByClassName('tag_title')[0].innerHTML=prj.title;
+    tmp.getElementsByClassName('tag_idprj')[0].innerText=idprj;
+    tmp.getElementsByClassName('tag_title')[0].innerText=prj.title;
     var html='';
     for (var i=0; i<prj.users.length; i++) {
       var el=prj.users[i];
@@ -74,7 +74,7 @@ class MyPrj {
       if (id==seldpt) tmp.children[2].checked=true;
       id='dpt'+id;
       var lbl=tmp.getElementsByClassName('tag_dpt_title')[0];
-      lbl.innerHTML=list[i].title;
+      lbl.innerText=list[i].title;
       lbl.setAttribute('for',id);
       tmp.children[2].setAttribute('id',id);
       tmp.children[1].firstElementChild.style.visibility=list[i].projects.length==0?'':'hidden';
@@ -97,7 +97,7 @@ class MyPrj {
   }
 
   changelogin() {
-    document.getElementById('name').innerHTML=this.#auth.getname();
+    document.getElementById('name').innerText=this.#auth.getname();
     this.#mydiv.className=this.#auth.getprof()?'prof':'stud';
   }
 
