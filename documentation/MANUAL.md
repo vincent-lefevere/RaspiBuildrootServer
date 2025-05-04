@@ -52,10 +52,68 @@ désormais le projet dans la liste de la catégorie "**Travaux Pratiques**" tand
 vous le retrouvez à la fois dans cette liste (encadré par un liseré rouge) et dans
 la liste de vos projets.
 
-3. Pour pouvez, à présent, sélectionner le projet sur lequel vous souhaitez travailler.
+3. Vous pouvez, à présent, sélectionner le projet sur lequel vous souhaitez travailler.
 
+## Accès aux réglages du projet
 
+La fenêtre de réglages du projet qui s'ouvre quand on sélectionne un projet se
+décompose en 5 blocs (4 blocs permaments et un 5ème bloc pour afficher l'historique
+du git interne au serveur).
 
+### Bloc d'identification du projet
 
+Ce bloc est situé en haut à gauche de la fenêtre. Et on retrouve, dans ce bloc :
+- le numéro du projet,
+- le titre que l’on peut modifier en éditant le champ de saisie
+
+    *La sortie du curseur du champ de saisie tient lieu de validation*
+
+- et une case à cocher.
+
+    *Celle-ci permet de verrouiller l’accès de ce projet aux collègues étudiants qui n’en sont pas membres, en le faisant disparaître de la liste de sa catégorie.
+    Les enseignants verront toujours le projet dans la liste de sa catégorie et pourront toujours y accéder.*
+
+**Remarque** : *Bien évidemment, les modifications que vous pourriez faire, via ce bloc, ne seront pas prises en compte si vous n’êtes pas membres du projet.*
+
+### Bloc de choix de version de Buildroot
+
+Comme il est possible, pour l'enseignant d'installer plusieurs versions de Buildroot
+compilées avec des cibles matériel différentes, ce bloc situé en haut à droite de la
+fenêtre nous offre la possibilité de choisir la version de Buildroot avec laquelle on
+veut travailler actuellement sur le projet.
+
+**Remarque** : *Quand la machine virtuelle aura été démarrer, l'image utilisée dépendra de ce choix et la liste déroulante se transformera en un simple champ d'affichage informant sur la version utilisée. Pour changer de version, il suffira, alors, d'éteindre la machine virtuelle et de profiter de la transformation inverse du champ d'affichage en liste de choix.*
+
+### Bloc de gestion des membres
+
+Dans ce troisième bloc, situé en dessous du premier bloc à gauche dans le fenêtre, on trouve la liste des membres du projet dans laquelle apparait en première ligne votre login (ou votre courriel de connexion si vous préférez). Les pictogrammes devant chaque login vont permettre la gestion des autres membres (ceux qui n’ont pas créé le projet et souhaitent y participer). 
+
+#### Devenir membre d’un projet
+
+Dans la liste des membres du projet, votre adresse électronique apparait en premier en caractères normaux (indiquant que vous n’avez pas encore accès) avec le pictogramme, de demande d’accès, ![add](../docker-buildroot/html/img/add.png) sur lequel vous allez pouvoir cliquer.
+
+Les autres membres du groupe (dont le créateur), vous voient désormais dans la liste des membres. Le pictogramme d’accès ![valid](../docker-buildroot/html/img/valid.png) leur permet de vous donner l’autorisation d’entrer et le pictogramme de suppression ![supr](../docker-buildroot/html/img/supr.png) de vous en refuser l’accès en vous supprimant de la liste).
+
+**Remarque** : *Les enseignants n’ont pas besoin de votre approbation pour faire partir de votre groupe.*
+
+### Bloc de d'action
+
+Dans ce quatrième bloc, situé à droite dans la fenêtre sous le **bloc de choix de version**, une fois membre, on y trouvera les boutons permettant de supprimer le projet, de démarrer ou d’arrêter la machine virtuelle faisant tourner Buildroot dans le cadre de notre projet et enfin de visualiser le terminal de pilotage de Buildroot.
+
+#### Lancement de la machine virtuelle
+
+Pour allumer le serveur de compilation associé au projet, on appuie sur le bouton suivant :
+
+![startvm](img_fr/startvm.png)
+
+Une Machine Virtuelle disponible (qui est indépendante de votre numéro de projet et qui peut donc changer à chaque fois que l’on effectue un nouveau démarrage) charge la configuration précédemment sauvegardée pour ce projet.
+
+**Remarque** : *Un message en caractère gras indique le numéro de port sftp qu’il faudra utiliser pour récupérer l’image compilée ou y déposer de nouveaux packages métiers.*
+
+#### Accès à la machine virtuelle
+
+On va ensuite accéder au terminal de pilotage de Buildroot en appuyant sur le bouton suivant :
+ 
+![viewvm](img_fr/viewvm.png)
 
 
