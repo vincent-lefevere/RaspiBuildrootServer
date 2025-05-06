@@ -51,7 +51,9 @@ class MySPA {
       if (xhr.readyState !== XMLHttpRequest.DONE) return;
       if (xhr.status !== 200) return;
       me.#proj.buildlist(JSON.parse(xhr.responseText));
-      if (me.#settings.show()==undefined) me.#proj.show();
+      // if (me.#settings.update()==undefined) 
+      // me.#proj.show();
+      me.#settings.update()
     });
     xhr.send();
   }
@@ -169,6 +171,7 @@ class MySPA {
   }
 
   lock(el) { this.#backend.lock(this.#proj.getidprj(),el.checked); }
+  expert(el) { this.#backend.expert(this.#proj.getidprj(),el.checked); }
   renPrj(el) { this.#backend.renPrj(this.#proj.getidprj(),el.value); }
   choiceImage(el) { this.#backend.choiceImage(this.#proj.getidprj(),el.value); }
 

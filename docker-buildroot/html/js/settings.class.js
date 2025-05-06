@@ -5,7 +5,9 @@ class MySettings {
   #myinput;
   #idspan;
   #titlefield;
-  #lock
+  #lock;
+  #expert_prof;
+  #expert_student;
   #tpluser;
   #users;
   #myselect;
@@ -21,6 +23,8 @@ class MySettings {
     this.#idspan=document.getElementById('settings_id');
     this.#titlefield=document.getElementById('settings_title');
     this.#lock=document.getElementById('settings_lock');
+    this.#expert_prof=document.getElementById('settings_expert_prof');
+    this.#expert_student=document.getElementById('settings_expert_student');
     this.#tpluser=document.getElementById('template_member');
     this.#users=document.getElementById('settings_members');
     this.#myselect=document.getElementById('settings_versions');
@@ -46,11 +50,13 @@ class MySettings {
     }
   }
 
-  show() {
+  update() {
     var db=this.#proj.getmydb();
     if (db==undefined) return this.unshow();
     this.#idspan.innerHTML=db.id;
     this.#lock.checked=db.lock;
+    this.#expert_prof.checked=db.expert;
+    this.#expert_student.style.visibility=db.expert?'visible':'hidden';
     this.#titlefield.value=db.title;
     this.#titlefield.setAttribute('readonly','');
     this.#mydiv.className=(db.power!==false)?'on':'off';
@@ -87,7 +93,6 @@ class MySettings {
       this.#titlefield.removeAttribute('readonly');
     }
     document.getElementById('settings_sftp').innerHTML=2200+db.power;
-    this.#myinput.checked=true;
     this.#mygitlog.innerHTML='';
     this.#mygitlog.style.display='none';
     if (db.history!=undefined) {
@@ -108,6 +113,12 @@ class MySettings {
       }
     }
     return true;
+  }
+
+  show() {
+    var ret=this.update();
+    if (ret) this.#myinput.checked=true;
+    return ret;
   }
 
   unshow() { this.#myinput.checked=false; }

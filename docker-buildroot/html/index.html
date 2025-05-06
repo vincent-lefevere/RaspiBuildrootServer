@@ -78,6 +78,15 @@
             <span class="en">Compilation version:</span>
             <input id="settings_version" type="text" value="" readonly />
           </p>
+          <p class="prof">
+            <span class="fr">Accès expert au projet</span>
+            <span class="en" style="display: none;">Expert access to the project</span>
+            <input id="settings_expert_prof" type="checkbox" onchange="spa.expert(this);">
+          </p>
+          <p id="settings_expert_student" class="student">
+            <span class="fr">Accès expert accordé pour ce projet</span>
+            <span class="en" style="display: none;">Expert access granted for this project</span>
+          </p>
         </div>
         <div style="height: 182px;">
           <p class="fr">Liste des membres du projet</p><p class="en">List of project members</p>
@@ -109,7 +118,8 @@
           <input class="color" type="button" value="make graph-depends" onclick="spa.sendcmd('graph-depends');"/><br/>
           <input class="color" type="button" value="make <PACKAGE>-build" onclick="spa.sendcmd('build');"/><br/>
           <input class="color" type="button" value="make <PACKAGE>-dirclean" onclick="spa.sendcmd('dirclean');"/><br/>
-          <input class="color" type="button" value="make clean" onclick="spa.sendcmd('clean');"/>
+          <input class="color" type="button" value="make clean" onclick="spa.sendcmd('clean');"/><hr class="expert"/>
+          <input class="color expert" type="button" value="bash" onclick="spa.sendcmd('bash');"/>
         </div>
       </main>
 

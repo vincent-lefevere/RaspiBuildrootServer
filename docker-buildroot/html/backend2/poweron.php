@@ -8,7 +8,7 @@
   return $val1 <=> $val2;
  }
 
- function init($vm,$p,$version) {
+ function init($vm,$p,$version,$expert) {
   $email=$_SESSION['login'];
   $name=$_SESSION['name'];
   system("mkdir -p /data/vm-{$vm}/external ; git clone --branch prj{$p} git://git/projets.git /data/vm-{$vm}/external",$retval);
@@ -72,6 +72,10 @@ networks:
 
 EOT;
   file_put_contents("/data/vm-{$vm}/vm.yml", $tmp);
+  $bashcmd='';
+  if ($expert) $bashcmd=<<<EOT
+  <cmd name="bash" login="buildroot">export TERM=xterm ; cd /home/buildroot/output ; export BR2_EXTERNAL=/home/buildroot/external ; bash</cmd>
+EOT;
   $tmp=<<<EOT
 <?xml version="1.0" encoding="utf8" standalone="yes" ?>
 <!DOCTYPE conf [
@@ -112,6 +116,7 @@ EOT;
   <cmd name="build" login="buildroot">cd /home/buildroot/output ; echo "enter package to build" ; read pkg ; make \${pkg}-build</cmd>
   <cmd name="dirclean" login="buildroot">cd /home/buildroot/output ; echo "enter package to clean" ; read pkg ; make \${pkg}-dirclean</cmd>
   <cmd name="clean" login="buildroot">cd /home/buildroot/output ; make clean</cmd>
+  {$bashcmd}
 </conf>
 
 EOT;
@@ -180,10 +185,10 @@ EOT;
   exec("sudo /usr/bin/docker compose -p docker-buildroot -f /data/vm-{$vm}/vm.yml exec -T -w /home/buildroot/output -u buildroot vm-{$vm} make manip_defconfig BR2_EXTERNAL=/home/buildroot/external");
  }
 
- function poweron($vm,$p,$version) {
+ function poweron($vm,$p,$version,$expert) {
   if (file_exists("/data/vm-{$vm}/vm.yml")) {
    exec("sudo /usr/bin/docker compose -p docker-buildroot -f /data/vm-{$vm}/vm.yml start vm-{$vm}");
-  } else init($vm,$p,$version);
+  } else init($vm,$p,$version,$expert);
  }
 
  session_start();
@@ -200,9 +205,9 @@ EOT;
   $result=$mysqli->query("SELECT 1 FROM act WHERE id={$p} AND token IS NOT NULL AND email='".$_SESSION['login']."'");
   $val=$result->fetch_assoc();
   if ($val) {
-   $val=$mysqli->query("SELECT image FROM projects WHERE id={$p}")->fetch_assoc();
-   poweron($vm,$p,(int) $val['image']);
-   $mysqli->query("UPDATE projects SET power={$vm} WHERE id={$p}");
+   $val=$mysqli->query("SELECT image, expert FROM projects WHERE id={$p}")->fetch_assoc();
+   poweron($vm,$p,(int) $val['image'],$val['expert']);
+   $mysqli->query("UPDATE projects SET power={$vm}, allow=expert WHERE id={$p}");
    send_mqtt_msg("/all");
    $mysqli->query("UNLOCK TABLES");
    frontend($p);

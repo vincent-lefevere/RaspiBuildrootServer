@@ -6,10 +6,12 @@ class MyTerminal {
   #proj;
   #last;
   #myinput;
+  #myright;
 
   constructor(proj) {
     this.#proj=proj;
     this.#myinput=document.getElementById('buildrootDisplay');
+    this.#myright=document.getElementById('right');
     this.#term=new Terminal();
     var me=this;
     this.#term.onData(function(event) { me.onData(event); });
@@ -22,11 +24,13 @@ class MyTerminal {
 
   display() {
     var db=this.#proj.getmydb();
+    if (db.allow) this.#myright.classList.add('expert');
+    else this.#myright.classList.remove('expert');
     document.cookie="token="+db.token;
     this.#myinput.checked=true;
     var current=this.#proj.getidprj();
     if (this.#last!=current) {
-      if (this.#ws != undefined) this.#ws.close();
+      if (this.#ws!=undefined) this.#ws.close();
       this.#term.clear();
     }
     this.#last=current;

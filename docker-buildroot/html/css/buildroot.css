@@ -164,6 +164,8 @@ main { width: calc(100% - 10px); position: absolute; }
 #settings.off.prof > div:nth-child(4) > .poweroff, #settings.on.prof > div:nth-child(4) > .poweron {display: block; }
 #settings > div > p > input[type=button] { width: 100%; }
 #settings > div > p { margin-block-start: 0.5em; margin-block-end: 0.5em; }
+#settings > div > .prof, #settings.prof > div > .student { display: none; }
+#settings > div > .student, #settings.prof > div > .prof { display: block; }
 
 #settings > div#gitlog { width: calc(100% - 50px); display: none; }
 #settings.in > div#gitlog { display: block; }
@@ -172,6 +174,7 @@ main { width: calc(100% - 10px); position: absolute; }
 #gitlog > div > pre { padding-left: 40px; padding-top: 18px; }
 
 #settings_versions, #settings_version { width: calc(100% - 10px); }
+#settings_expert_student { font-weight: bold; }
 
 #settings_members {
     overflow-y: scroll;
@@ -323,6 +326,9 @@ label.mtlg img {
 #right.green > input.color {
   color: green;
 }
+
+#right > .expert { display: none; }
+#right.expert > .expert { display: block; }
 
 /* ********************************************************************** *
  * Fin du block main#buildroot                                            *

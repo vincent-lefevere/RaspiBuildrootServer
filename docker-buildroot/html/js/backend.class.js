@@ -90,6 +90,12 @@ class MyBackend {
   form.append('projet',idprj);
   this.#updateprj(form,'backend2/lock.php',this.#spa);
  }
+ expert(idprj,expert) {
+  var form = new FormData();
+  form.append('expert',expert);
+  form.append('projet',idprj);
+  this.#updateprj(form,'backend2/expert.php',this.#spa);
+ }
  renPrj(idprj,title){
   var form = new FormData();
   form.append('title',title);

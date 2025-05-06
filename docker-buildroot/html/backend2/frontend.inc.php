@@ -61,14 +61,16 @@ function frontend($p) {
   $title=str_replace(array('"'),array('\"'),$val['title']);
   list($users,$token)=get_users($id);
   $version=($val['image']==null)?'null':(int)$val['image'];
+  $expert=$val['expert'];
+  $allow=$val['allow'];
   $lock=$val['pub'];
   $power=$val['off'];
   if ($power==false) {
    $docker=$val['power'];
    $history=history($id,$docker);
-   $projects.='{"id":'.$id.',"history":['.$history.'],"token":"'.$token.'","title":"'.$title.'","users":['.$users.'],"version":'.$version.($lock?',"lock":true,"power":':',"lock":false,"power":').$docker.'},';
+   $projects.='{"id":'.$id.',"history":['.$history.'],"token":"'.$token.'","title":"'.$title.'","users":['.$users.'],"version":'.$version.($expert?',"expert":true':',"expert":false').($allow?',"allow":true':',"allow":false').($lock?',"lock":true,"power":':',"lock":false,"power":').$docker.'},';
   } else {
-   $projects.='{"id":'.$id.',"history":[],"token":"'.$token.'","title":"'.$title.'","users":['.$users.'],"version":'.$version.($lock?',"lock":true,"power":false},':',"lock":false,"power":false},');
+   $projects.='{"id":'.$id.',"history":[],"token":"'.$token.'","title":"'.$title.'","users":['.$users.'],"version":'.$version.($expert?',"expert":true':',"expert":false').($allow?',"allow":true':',"allow":false').($lock?',"lock":true,"power":false},':',"lock":false,"power":false},');
   }
  }
  $projects=substr($projects,0,-1);
