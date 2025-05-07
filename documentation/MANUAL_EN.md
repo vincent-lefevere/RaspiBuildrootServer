@@ -113,16 +113,39 @@ and wish to participate).
 
 #### Devenir membre d’un projet
 
+- **Example** : **student1@institution.uk** having created project number 1 sees
+  the frame like this.
+  ![bloc 3 figure a](img_en/set_cad3a.png)
+
 In the list of project members, your email address appears first in normal font
 (indicating that you don't yet have access) with the
 ![add](../docker-buildroot/html/img/add.png) access request pictogram that you
 can click on.
+
+- **Example** : **student2@institution.uk** wants to be part of project number 1
+  and therefore clicks on the access request pictogram when he sees the frame
+  like this.
+
+  ![bloc 3 figure b](img_en/set_cad3b.png)
+
+  Once you have made the request, the frame display will look like this.
+
+  ![bloc 3 figure c](img_en/set_cad3c.png)
 
 The other members of the group (including the creator) will now see you in the
 list of members. The ![valid](../docker-buildroot/html/img/valid.png) access icon
 allows them to give you permission to enter and the
 ![supr](../docker-buildroot/html/img/supr.png) removal icon allows them to deny
 you access by removing you from the list).
+
+- **Example** : **student1@institution.uk** va pouvoir décider s'il valide 
+  ou refuse la demande de participation de **student2@institution.uk**.
+
+  ![bloc 3 figure d](img_en/set_cad3d.png)
+
+  Après validation, l'affichage pour **student2@institution.uk** devient le suivant.
+
+  ![bloc 3 figure e](img_en/set_cad3e.png)
 
 **Note** : *Teachers do not need your approval to join your group.*
 
@@ -145,7 +168,7 @@ can therefore change each time you restart) loads the configuration previously
 saved for this project.
 
 **Note** : *A message in bold indicates the sftp port number to be used
-to retrieve the compiled image or upload new business packages.*
+to retrieve the compiled image or to upload new business packages.*
 
 #### Virtual machine access
 

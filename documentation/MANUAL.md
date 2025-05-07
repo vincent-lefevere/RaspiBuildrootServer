@@ -141,7 +141,7 @@ Pour allumer le serveur de compilation associé au projet, on appuie sur le bout
 
 Une Machine Virtuelle disponible (qui est indépendante de votre numéro de projet et qui peut donc changer à chaque fois que l’on effectue un nouveau démarrage) charge la configuration précédemment sauvegardée pour ce projet.
 
-**Remarque** : *Un message en caractère gras indique le numéro de port sftp qu’il faudra utiliser pour récupérer l’image compilée ou y déposer de nouveaux packages métiers.*
+**Remarque** : *Un message en caractère gras indique le numéro de port sftp qu’il faudra utiliser pour récupérer l’image compilée ou pour y déposer de nouveaux packages métiers.*
 
 #### Accès à la machine virtuelle
 
