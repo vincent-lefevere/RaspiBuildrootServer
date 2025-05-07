@@ -70,10 +70,14 @@ Ce bloc est situé en haut à gauche de la fenêtre. Et on retrouve, dans ce blo
 
 - et une case à cocher.
 
-    *Celle-ci permet de verrouiller l’accès de ce projet aux collègues étudiants qui n’en sont pas membres, en le faisant disparaître de la liste de sa catégorie.
+    *Celle-ci permet de verrouiller l’accès de ce projet aux collègues étudiants
+    qui n’en sont pas membres, en le faisant disparaître de la liste de sa catégorie.
     Les enseignants verront toujours le projet dans la liste de sa catégorie et pourront toujours y accéder.*
 
-**Remarque** : *Bien évidemment, les modifications que vous pourriez faire, via ce bloc, ne seront pas prises en compte si vous n’êtes pas membres du projet.*
+![bloc 1](img_fr/set_cad1.png)
+
+**Remarque** : *Bien évidemment, les modifications que vous pourriez faire,
+via ce bloc, ne seront pas prises en compte si vous n’êtes pas membres du projet.*
 
 ### Bloc de choix de version de Buildroot
 
@@ -82,7 +86,17 @@ compilées avec des cibles matériel différentes, ce bloc situé en haut à dro
 fenêtre nous offre la possibilité de choisir la version de Buildroot avec laquelle on
 veut travailler actuellement sur le projet.
 
-**Remarque** : *Quand la machine virtuelle aura été démarrer, l'image utilisée dépendra de ce choix et la liste déroulante se transformera en un simple champ d'affichage informant sur la version utilisée. Pour changer de version, il suffira, alors, d'éteindre la machine virtuelle et de profiter de la transformation inverse du champ d'affichage en liste de choix.*
+**Remarque** : *Quand la machine virtuelle aura été démarrer, l'image utilisée dépendra
+de ce choix et la liste déroulante se transformera en un simple champ d'affichage
+informant sur la version utilisée.
+Pour changer de version, il suffira, alors, d'éteindre la machine virtuelle et de profiter
+de la transformation inverse du champ d'affichage en liste de choix.*
+
+![bloc 2](img_fr/set_cad2.png)
+
+Ce cadre présente également, pour l'enseignant la possibilité de donner le droit "expert" pour l'utilisation de toutes les commandes bash depuis ce projet.
+
+Pour un étudiant, le message et la case à cocher, qui suit, ne figurent pas dans ce cadre. Dans le cas ou un enseignant aurait donné le droit "expert" au projet, un message en gras l'indiquerait dans ce cadre. Pour la plupart des utilisations, le droit "expert" n'est pas nécessaire.
 
 ### Bloc de gestion des membres
 
@@ -90,9 +104,28 @@ Dans ce troisième bloc, situé en dessous du premier bloc à gauche dans le fen
 
 #### Devenir membre d’un projet
 
+- **Exemple** : **etudiant1@institut.fr** ayant créé le projet n°1 voit le cadre comme ceci.
+  ![bloc 3 figure a](img_fr/set_cad3a.png)
+
 Dans la liste des membres du projet, votre adresse électronique apparait en premier en caractères normaux (indiquant que vous n’avez pas encore accès) avec le pictogramme, de demande d’accès, ![add](../docker-buildroot/html/img/add.png) sur lequel vous allez pouvoir cliquer.
 
+- **Exemple** : **etudiant2@institut.fr** souhaite faire partir du projet n°1 et donc clique sur le pictogramme de demande d'accès alors qu'il voit le cadre comme ceci.
+
+  ![bloc 3 figure b](img_fr/set_cad3b.png)
+
+  Après avoir fait la demande, l'affichage du cadre devient alors le suivant.
+
+  ![bloc 3 figure c](img_fr/set_cad3c.png)
+
 Les autres membres du groupe (dont le créateur), vous voient désormais dans la liste des membres. Le pictogramme d’accès ![valid](../docker-buildroot/html/img/valid.png) leur permet de vous donner l’autorisation d’entrer et le pictogramme de suppression ![supr](../docker-buildroot/html/img/supr.png) de vous en refuser l’accès en vous supprimant de la liste).
+
+- **Exemple** : **etudiant1@institut.fr** va pouvoir décider s'il valide ou refuse la demande de participation de **etudiant2@institut.fr**.
+
+  ![bloc 3 figure d](img_fr/set_cad3d.png)
+
+  Après validation, l'affichage pour **etudiant2@institut.fr** devient le suivant.
+
+  ![bloc 3 figure e](img_fr/set_cad3e.png)
 
 **Remarque** : *Les enseignants n’ont pas besoin de votre approbation pour faire partir de votre groupe.*
 

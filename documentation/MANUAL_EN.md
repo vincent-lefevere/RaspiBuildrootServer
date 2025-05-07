@@ -3,7 +3,7 @@
 ## Preliminary assumption
 
 - Let's assume that the server has been installed by the administrator of the educational
-institution under the name: "**buildroot.institution.uk**".".
+institution under the name: "**buildroot.institution.uk**".
 
 - Let's assume that the accounts created (and used for the purposes of this user manual) are:
 **student1@institution.uk**, **student2@institution.uk**, **student3@institution.uk**
@@ -75,6 +75,8 @@ This block is located at the top left of the window. This block contains :
     Teachers will still see the project in the list of its category and
     will still be able to access it.*
 
+![bloc 1](img_en/set_cad1.png)
+
 **Note**: *Obviously, any changes you make via this block will not be taken
 into account if you are not a member of the project.*
 
@@ -90,6 +92,16 @@ depend on this choice and the drop-down list will be transformed into a
 simple display field showing the version used. To change version, simply
 switch off the virtual machine and take advantage of the inverse transformation
 of the display field into a list of choices.*
+
+![bloc 2](img_en/set_cad2.png)
+
+This framework also gives teachers the option of giving "expert" rights
+to use all bash commands from this project.
+
+For a student, the message and the box to be ticked, which follows,
+do not appear in this box. If a teacher has given the project "expert" rights,
+a message in bold will indicate this in this box.
+For most uses, the "expert" right is not necessary.
 
 ### Member management block
 
