@@ -109,6 +109,17 @@ Une fois, validé, le traitement du fichier commence tout de suite : Les nouveau
 les comptes existant ayant un mot de passe vide sont supprimés enfin le type et les Prénom/Nom des comptes existant
 sont mis à jour.
 
+**Remarque** : *Dans le répertoire [documentation/exemple_fr](../../tree/main/documentation/exemple_fr)
+se trouve un fichier d'exemple de création de 4 comptes (1 compte enseignant et 3 comptes étudiant).
+Ce fichier s'appelle [list.csv](../../blob/main/documentation/exemple_fr/list.csv)*
+
+| professeur | email de login          | mot de passe  | nom/prénom              |
+| ---------- |:------------------------|:--------------|:------------------------|
+| non        | etudiant1@institut.fr   | etudiant1     | Etudiant Français n°1   |
+| non        | etudiant2@institut.fr   | etudiant2     | Etudiant Français n°2   |
+| non        | etudiant3@institut.fr   | etudiant3     | Etudiant Français n°3   |
+| oui        | professeur1@institut.fr | professeur1   | Professeur Français n°1 |
+
 ### Téléchargement du logiciel Buildroot
 
 La seconde rubrique, au milieu à gauche de la fenêtre, offre un accès pour récupérer

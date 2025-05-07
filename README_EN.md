@@ -110,6 +110,16 @@ Once the file has been validated, processing begins immediately:
 new accounts are created, existing accounts with empty passwords are deleted
 and the type and the first names/surnames of existing accounts are updated.
 
+**Note** : *The [documentation/exemple_en] directory (../../tree/main/documentation/exemple_en) contains an example file for creating 4 accounts (1 teacher account and 3 student accounts).
+This file is called [list.csv](../.../blob/main/documentation/example_en/list.csv)*
+
+| teacher | login email             | password  | surname/first name  |
+| ------- |:------------------------|:----------|:--------------------|
+| no      | student1@institution.uk | student1  | English Student n°1 |
+| no      | student2@institution.uk | student2  | English Student n°2 |
+| no      | student3@institution.uk | student3  | English Student n°3 |
+| yes     | teacher1@institution.uk | teacher1  | English Teahcer n°1 |
+
 ### Download Buildroot software
 
 The second section, in the middle left of the window, provides access to retrieve the buildroot
