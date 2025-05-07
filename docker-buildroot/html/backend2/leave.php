@@ -8,16 +8,20 @@
  $mysqli = new mysqli(BDDSERVEUR,BDDLOGIN,BDDPASSWD,BDDBASE);
  $p=(int) $_POST['projet'];
  if ($_SESSION['prof'] || $email==$_SESSION['login'])
-  $mysqli->query("DELETE FROM act WHERE id=$p AND email='$email'");
+  $mysqli->query("DELETE FROM act WHERE id={$p} AND email='{$email}'");
  else {
-  $result=$mysqli->query("SELECT 1 FROM act WHERE id=$p AND token IS NOT NULL AND email='".$_SESSION['login']."'");
+  $login=$_SESSION['login'];
+  $result=$mysqli->query("SELECT 1 FROM act WHERE id={$p} AND token IS NOT NULL AND email='{$login}'");
   $val=$result->fetch_assoc();
-  if ($val) $mysqli->query("DELETE FROM act WHERE id=$p AND email='$email'");
+  if ($val) $mysqli->query("DELETE FROM act WHERE id={$p} AND email='{$email}'");
   else die('false');
  }
- $result=$mysqli->query("SELECT count(email) AS n FROM act WHERE id=$p AND token IS NOT NULL");
+ $result=$mysqli->query("SELECT count(email) AS n FROM act WHERE id={$p} AND token IS NOT NULL");
  $val=$result->fetch_assoc();
- if ($val['n']==0) $mysqli->query("DELETE FROM act WHERE id=$p");
+ if ($val['n']==0) { 
+   $mysqli->query("DELETE FROM act WHERE id={$p}");
+   $mysqli->query("UPDATE projects SET pub=0, expert=0 WHERE id={$p}");
+ }
  frontend($p);
  send_mqtt_msg('/all');
 ?>

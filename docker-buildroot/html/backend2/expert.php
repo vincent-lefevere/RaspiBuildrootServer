@@ -7,7 +7,9 @@
  $mysqli = new mysqli(BDDSERVEUR,BDDLOGIN,BDDPASSWD,BDDBASE);
  $id=(int) $_POST['projet'];
  $expert=($_POST['expert']=='true')?1:0;
- $mysqli->query("UPDATE projects SET expert=$expert WHERE id=$id");
+ $login=$_SESSION['login'];
+ if ($mysqli->query("SELECT 1 FROM act WHERE id={$id} AND token IS NOT NULL AND email='{$login}'")->fetch_assoc())
+  $mysqli->query("UPDATE projects SET expert={$expert} WHERE id={$id}");
  send_mqtt_msg("/all");
  frontend(0);
 ?>
