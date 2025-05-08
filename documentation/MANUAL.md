@@ -72,7 +72,8 @@ Ce bloc est situé en haut à gauche de la fenêtre. Et on retrouve, dans ce blo
 
     *Celle-ci permet de verrouiller l’accès de ce projet aux collègues étudiants
     qui n’en sont pas membres, en le faisant disparaître de la liste de sa catégorie.
-    Les enseignants verront toujours le projet dans la liste de sa catégorie et pourront toujours y accéder.*
+    Les enseignants verront toujours le projet dans la liste de sa catégorie
+    et pourront toujours y accéder.*
 
 ![bloc 1](img_fr/set_cad1.png)
 
@@ -94,22 +95,35 @@ de la transformation inverse du champ d'affichage en liste de choix.*
 
 ![bloc 2](img_fr/set_cad2.png)
 
-Ce cadre présente également, pour l'enseignant la possibilité de donner le droit "expert" pour l'utilisation de toutes les commandes bash depuis ce projet.
+Ce cadre présente également, pour l'enseignant la possibilité de donner le droit
+"expert" pour l'utilisation de toutes les commandes bash depuis ce projet.
 
-Pour un étudiant, le message et la case à cocher, qui suit, ne figurent pas dans ce cadre. Dans le cas ou un enseignant aurait donné le droit "expert" au projet, un message en gras l'indiquerait dans ce cadre. Pour la plupart des utilisations, le droit "expert" n'est pas nécessaire.
+Pour un étudiant, le message et la case à cocher, qui suit, ne figurent pas
+dans ce cadre. Dans le cas ou un enseignant aurait donné le droit "expert"
+au projet, un message en gras l'indiquerait dans ce cadre.
+Pour la plupart des utilisations, le droit "expert" n'est pas nécessaire.
 
 ### Bloc de gestion des membres
 
-Dans ce troisième bloc, situé en dessous du premier bloc à gauche dans le fenêtre, on trouve la liste des membres du projet dans laquelle apparait en première ligne votre login (ou votre courriel de connexion si vous préférez). Les pictogrammes devant chaque login vont permettre la gestion des autres membres (ceux qui n’ont pas créé le projet et souhaitent y participer). 
+Dans ce troisième bloc, situé en dessous du premier bloc à gauche dans le fenêtre,
+on trouve la liste des membres du projet dans laquelle apparait en première ligne
+votre login (ou votre courriel de connexion si vous préférez).
+Les pictogrammes devant chaque login vont permettre la gestion des autres membres
+(ceux qui n’ont pas créé le projet et souhaitent y participer). 
 
 #### Devenir membre d’un projet
 
 - **Exemple** : **etudiant1@institut.fr** ayant créé le projet n°1 voit le cadre comme ceci.
   ![bloc 3 figure a](img_fr/set_cad3a.png)
 
-Dans la liste des membres du projet, votre adresse électronique apparait en premier en caractères normaux (indiquant que vous n’avez pas encore accès) avec le pictogramme, de demande d’accès, ![add](../docker-buildroot/html/img/add.png) sur lequel vous allez pouvoir cliquer.
+Dans la liste des membres du projet, votre adresse électronique apparait
+en premier en caractères normaux (indiquant que vous n’avez pas encore accès)
+avec le pictogramme, de demande d’accès, ![add](../docker-buildroot/html/img/add.png)
+sur lequel vous allez pouvoir cliquer.
 
-- **Exemple** : **etudiant2@institut.fr** souhaite faire partir du projet n°1 et donc clique sur le pictogramme de demande d'accès alors qu'il voit le cadre comme ceci.
+- **Exemple** : **etudiant2@institut.fr** souhaite faire partir du projet n°1
+et donc clique sur le pictogramme de demande d'accès alors qu'il voit le cadre
+comme ceci.
 
   ![bloc 3 figure b](img_fr/set_cad3b.png)
 
@@ -117,9 +131,14 @@ Dans la liste des membres du projet, votre adresse électronique apparait en pre
 
   ![bloc 3 figure c](img_fr/set_cad3c.png)
 
-Les autres membres du groupe (dont le créateur), vous voient désormais dans la liste des membres. Le pictogramme d’accès ![valid](../docker-buildroot/html/img/valid.png) leur permet de vous donner l’autorisation d’entrer et le pictogramme de suppression ![supr](../docker-buildroot/html/img/supr.png) de vous en refuser l’accès en vous supprimant de la liste).
+Les autres membres du groupe (dont le créateur), vous voient désormais dans
+la liste des membres. Le pictogramme d’accès ![valid](../docker-buildroot/html/img/valid.png)
+leur permet de vous donner l’autorisation d’entrer et le pictogramme de
+suppression ![supr](../docker-buildroot/html/img/supr.png) de vous en
+refuser l’accès en vous supprimant de la liste).
 
-- **Exemple** : **etudiant1@institut.fr** va pouvoir décider s'il valide ou refuse la demande de participation de **etudiant2@institut.fr**.
+- **Exemple** : **etudiant1@institut.fr** va pouvoir décider s'il valide
+ou refuse la demande de participation de **etudiant2@institut.fr**.
 
   ![bloc 3 figure d](img_fr/set_cad3d.png)
 
@@ -127,11 +146,15 @@ Les autres membres du groupe (dont le créateur), vous voient désormais dans la
 
   ![bloc 3 figure e](img_fr/set_cad3e.png)
 
-**Remarque** : *Les enseignants n’ont pas besoin de votre approbation pour faire partir de votre groupe.*
+**Remarque** : *Les enseignants n’ont pas besoin de votre approbation
+pour faire partir de votre groupe.*
 
 ### Bloc d'action
 
-Dans ce quatrième bloc, situé à droite dans la fenêtre sous le **bloc de choix de version**, une fois membre, on y trouvera les boutons permettant de supprimer le projet, de démarrer ou d’arrêter la machine virtuelle faisant tourner Buildroot dans le cadre de notre projet et enfin de visualiser le terminal de pilotage de Buildroot.
+Dans ce quatrième bloc, situé à droite dans la fenêtre sous le **bloc de choix de version**,
+une fois membre, on y trouvera les boutons permettant de supprimer le projet, de démarrer
+ou d’arrêter la machine virtuelle faisant tourner Buildroot dans le cadre de notre projet
+et enfin de visualiser le terminal de pilotage de Buildroot.
 
 #### Lancement de la machine virtuelle
 
@@ -139,14 +162,56 @@ Pour allumer le serveur de compilation associé au projet, on appuie sur le bout
 
 ![startvm](img_fr/startvm.png)
 
-Une Machine Virtuelle disponible (qui est indépendante de votre numéro de projet et qui peut donc changer à chaque fois que l’on effectue un nouveau démarrage) charge la configuration précédemment sauvegardée pour ce projet.
+Une Machine Virtuelle disponible (qui est indépendante de votre numéro de projet et
+qui peut donc changer à chaque fois que l’on effectue un nouveau démarrage) charge
+la configuration précédemment sauvegardée pour ce projet.
 
-**Remarque** : *Un message en caractère gras indique le numéro de port sftp qu’il faudra utiliser pour récupérer l’image compilée ou pour y déposer de nouveaux packages métiers.*
+**Remarque** : *Un message en caractère gras indique le numéro de port sftp qu’il
+faudra utiliser pour récupérer l’image compilée ou pour y déposer de nouveaux packages
+métiers.*
 
 #### Accès à la machine virtuelle
 
 On va ensuite accéder au terminal de pilotage de Buildroot en appuyant sur le bouton suivant :
  
 ![viewvm](img_fr/viewvm.png)
+
+Une nouvelle fenêtre (la fenêtre du terminal) se substitue à la fenêtre de paramétrage du projet.
+
+Cette fenêtre peut, à tout moment, être refermée (en cliquant sur la croix en haut à droite)
+pour revenir à la fenêtre de paramétrage du projet.
+
+## Utilisation du terminal de la machine virtuelle
+
+Dans la fenêtre du terminal, on trouve, en partie droite, des boutons permettant de lancer
+dans un shell les commandes de Buildroot les plus importantes et en partie gauche le terminal
+permettant de visualiser, ou d’interagir avec, l’exécution de la commande.
+
+![term](img_fr/term.png)
+
+### Exemple d'utilisation : make menuconfig
+
+Pour accéder au system de configuration, on utilise communément la commande "**make menuconfig**"
+de "buildroot". Vous avez accès à cette commande via le bouton de même nom de l’interface.
+
+Après quelques secondes (pendant lesquelles la commande de compilation défile à l’écran),
+le menu apparait dans le terminal à gauche de l’interface web.
+
+![menuconfig](img_fr/menuconfig.png)
+
+Pour utiliser le menu, cliquez dans le terminal (le curseur s’active) et utilisez les flèches
+du clavier et la touche "entrée" comme pour l'utilisation classique de buildroot.
+
+**Remarque** : *Quand vous exécutez une commande, les boutons de commandes passent
+en rouge et repasseront en vert quand la commande sera terminée. Vos binômes de
+projet pourront voir et interagir avec la commande (comme vous le faîtes) en
+utilisant le bouton "**actualiser le terminal**".*
+ 
+Ils commenceront par voir, en accéléré, l’historique de tous les affichages que
+vous avez eu dans votre terminal avant d’arriver à l’affichage synchrone avec la
+commande exécutée. Vous pouvez également utiliser ce bouton après une déconnexion
+alors qu’une commande était en cours d’exécution. Vous reprenez ainsi l’exécution
+de cette commande (si elle n’est pas terminée) ou vous visualisez simplement le
+résultat de la dernière commande exécutée par buildroot.
 
 

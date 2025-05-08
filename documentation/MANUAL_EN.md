@@ -176,4 +176,43 @@ Next, press the following button to access the Buildroot control terminal:
  
 ![viewvm](img_en/viewvm.png)
 
+A new window (the terminal window) replaces the project settings window.
+
+This window can be closed at any time (by clicking on the cross at the top right)
+to return to the project settings window.
+
+## Using the virtual machine terminal
+
+In the terminal window, on the right-hand side are buttons for launching
+the most important Buildroot commands in a shell and on the left-hand side
+is the terminal for viewing, or interacting with, the execution of the command.
+
+![term](img_en/term.png)
+
+### Example of use : make menuconfig
+
+To access the configuration system, we commonly use the "make menuconfig" command
+from "buildroot". You can access this command via the button of the same name on
+the interface.
+
+After a few seconds (during which the compilation command scrolls across the screen),
+the menu appears in the terminal on the left of the web interface.
+
+![menuconfig](img_en/menuconfig.png)
+
+To use the menu, click in the terminal (the cursor will be activated) and
+use the arrows on the keyboard and the "enter" key, as you would for traditional
+use of buildroot.
+
+**Note**: *When you execute a command, the command buttons turn red and will turn
+green again when the command is complete. Your project partners will be able
+to see and interact with the command (as you do) by using the "**refresh terminal**"
+button.*
+
+They will start by seeing, in fast motion, the history of all the displays you have
+had in your terminal before arriving at the display synchronous with the command
+being executed. You can also use this button after logging out while a command is
+running. You can then resume execution of the command (if it has not finished) or
+simply view the result of the last command executed by buildroot.
+
 
