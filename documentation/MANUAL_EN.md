@@ -205,10 +205,10 @@ use the arrows on the keyboard and the "enter" key, as you would for traditional
 use of buildroot.
 
 **Note**: *When you execute a command, the command buttons turn red and will turn
-green again when the command is complete. Your project partners will be able
-to see and interact with the command (as you do) by using the "**refresh terminal**"
-button.*
+green again when the command is complete.*
 
+Your project partners will be able to see and interact with the command (as you do)
+by using the "**refresh terminal**" button.
 They will start by seeing, in fast motion, the history of all the displays you have
 had in your terminal before arriving at the display synchronous with the command
 being executed. You can also use this button after logging out while a command is

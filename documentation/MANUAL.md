@@ -203,10 +203,10 @@ Pour utiliser le menu, cliquez dans le terminal (le curseur s’active) et utili
 du clavier et la touche "entrée" comme pour l'utilisation classique de buildroot.
 
 **Remarque** : *Quand vous exécutez une commande, les boutons de commandes passent
-en rouge et repasseront en vert quand la commande sera terminée. Vos binômes de
-projet pourront voir et interagir avec la commande (comme vous le faîtes) en
-utilisant le bouton "**actualiser le terminal**".*
- 
+en rouge et repasseront en vert quand la commande sera terminée.*
+
+Vos binômes de projet pourront voir et interagir avec la commande (comme vous le faîtes)
+en utilisant le bouton "**actualiser le terminal**".
 Ils commenceront par voir, en accéléré, l’historique de tous les affichages que
 vous avez eu dans votre terminal avant d’arriver à l’affichage synchrone avec la
 commande exécutée. Vous pouvez également utiliser ce bouton après une déconnexion
