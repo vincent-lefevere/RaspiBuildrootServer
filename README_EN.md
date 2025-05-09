@@ -20,6 +20,19 @@ The software is intended to be installed on a virtual machine (or dedicated serv
 The software has been tested on a minimal installation of [Debian](https://www.debian.org) 12,  
 with [Docker](https://www.docker.com) installed and configured using a provided script (see next section).
 
+## List of dependencies
+
+| Produits  | comment    |
+|-----------|------------|
+| [Docker](https://www.docker.com) | downloaded |
+| [Debian](https://www.debian.org) | downloaded docker image |
+| [Apache](https://httpd.apache.org/) | downloaded docker image |
+| [php](https://www.php.net) | downloaded docker image |
+| [mariadb](https://mariadb.org/) | downloaded docker image |
+| [telegraf](https://www.influxdata.com/time-series-platform/telegraf/) | downloaded |
+| [wsssh](https://github.com/vincent-lefevere/wsssh) | downloaded |
+| [xterm.js](https://xtermjs.org/) | directly included : [xterm.js](../../blob/main/docker-buildroot/html/js/xterm.js) [xterm.css](../../blob/main/docker-buildroot/html/css/xterm.css) |
+
 ## Prerequisite Installation
 
 This server requires [Docker](https://www.docker.com) to be installed beforehand,  
