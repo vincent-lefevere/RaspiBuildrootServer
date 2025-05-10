@@ -18,6 +18,7 @@ ssh-keygen -q -N ""  -t rsa -b 4096 -f conf/proftpd/custom/ssh_host_rsa_key
 test -d /var/tmp/.buildroot-ccache && rm -R /var/tmp/.buildroot-ccache
 mkdir /var/tmp/.buildroot-ccache
 chmod 777 /var/tmp/.buildroot-ccache
+mkdir data/brdl
 chown www-data data data/brdl
 cat <<EOF
 
