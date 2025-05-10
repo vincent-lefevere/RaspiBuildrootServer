@@ -214,4 +214,115 @@ alors qu’une commande était en cours d’exécution. Vous reprenez ainsi l’
 de cette commande (si elle n’est pas terminée) ou vous visualisez simplement le
 résultat de la dernière commande exécutée par buildroot.
 
+### Les commandes accessibles de Buildroot
+
+Outre la commande **make menuconfig** déjà sitée dans l'exemple, les principales
+commandes de Buildroot qui ont été rendues accessibles d'une simple clic de bouton
+sont :
+
+- **make manip_defconfig**
+
+  Cette commande sert à recharger une configuration au format **defconfig**
+  sauvegardée dans le fichier "**manip_defconfig**" du répertoire "**external/configs**".
+
+  **Remarque** : cette commande est automatiquement exécutée lors de l'allumage
+  de la machine virtuelle.
+
+- **make savedefconfig**
+
+  Cette commande originale de Buildroot sert normalement à générer une sauvegarde
+  au format **defconfig** dans le fichier paramètré par la variable d'environnement
+  **BR2_DEFCONFIG**. Ici la variable d'environnement est pré-configurée de telle
+  façon que la sauvegarde ait lieu dans le fichier "**manip_defconfig**" du répertoire
+  "**external/configs**".
+
+  **Remarque** : cette commande est automatiquement exécutée lors de l'extinction
+  de la machine virtuelle afin de préserver la configuration en même temps que
+  l'on sauvegarde l'arborescence "**external**" dans le git local.
+
+- **make linux-menuconfig**
+
+- **make**
+
+- **du -s -m target**
+
+  Cette commande n'est pas une commande de Buildroot mais une commande linux
+  qui indique la place prise par l'arborescence **output/target**
+  qui contient tout ce qui doit être transféré en dernière phase de compilation
+  vers la partition de type ext2.
+  Le résultat de la commande donne une bonne indication pour déterminer la valeur
+  à mettre dans la variable d'environnement **BR2_TARGET_ROOTFS_EXT2_SIZE**.
+
+- **make graph-depends**
+
+  Cette commande originale de Buildroot sert à générer le graph de dépendance des packages. 
+
+Les deux boutons suivant servent respectivement à constuire un package et
+à effacer un package via une combinaison de commande Linux et Buildroot.
+
+- **make \<PACKAGE\>-build**
+
+  La commande Linux commande par demander le nom du package, puis lance la commande
+  Buildroot de fabrication du package indiqué.
+
+  **Exemple** : *Pour générer un package nommé par exemple "python-paho-mqtt", on saisit,
+  après avoir cliqué sur le bouton, dans le terminal "python-paho-mqtt" (que l'on valide
+  par la touche entrée) et la commande **make python-paho-mqtt-build** est lancée.*
+
+- **make \<PACKAGE\>-dirclean**
+
+  **Exemple** : *Pour effacer un package nommé par exemple "python-paho-mqtt", on saisit,
+  après avoir cliqué sur le bouton, dans le terminal "python-paho-mqtt" (que l'on valide
+  par la touche entrée) et la commande **make python-paho-mqtt-dirclean** est lancée.*
+
+## Accès sftp au contenu de la machine virtuelle
+
+Sous Windows via un outil tel que **FileZilla** ou **Winscp** (ou tout autre logiciel
+équivalent), on va pouvoir accéder à une partie restrinte des fichiers de la machine
+virtuelle. Via sftp, on peut accéder à une racine virtuelle contenant 2 répertoires :
+
+- **/output**
+
+  C'est le répertoire depuis lequel les commandes Buildroot sont lancé.
+  L'accès à ce répertoire a volontairement été restreint en lecture seule.
+  Il va permettre notamment d'y récupérer le fichier **sdcard.img** depuis
+  le sous répertoire **/output/images** afin de le transférer sur une carte µSD,
+  via le logiciel **Raspberry Pi Imager** par exemple.
+
+- **/external**
+
+  C'est le répertoire des éléments externes à Buildroot.
+  On y trouve plusieurs sous répertoires :
+
+  - **/external/configs**
+
+    C'est le répertoire des configurations additionnelles. 
+
+  - **/external/custom-rootfs**
+
+    C'est le répertoire qui est automatiquement configuré (via la variable
+    d'environnement **BR2_ROOTFS_OVERLAY**) pour être utilisé par Buildroot
+    comme répertoire overlay pour la construction du système de fichier racine.
+
+    **Exemple** : *Plutôt que de modifier un fichier **/output/target/etc/wpa_supplicant.conf**, 
+    on créera un répertoire **/external/custom-rootfs/etc** et on y placera la
+    version modifiée du fichier **wpa_supplicant.conf**.*
+
+  - **/external/packages**
+
+    C'est le répertoire prévu pour y placer ses packages métier.
+
+    **Remarque** : *On n'oubliera pas de modifier le fichier **/external/Config.in**
+    pour y inclure le chemin d'accès, vers chaque package métier que l'on ajoute,
+    via une ligne semblable à celle ci-dessous* :
+
+    ```config
+    source "$BR2_EXTERNAL_DEFAULT_PATH/packages/…nom…/Config.in"
+    ```
+
+    On remplace "…nom…" par le nom du répertoire contenant le package situé
+    dans "**external/packages**".
+    La variable d'environnement **BR2_EXTERNAL_DEFAULT_PATH** ayant été automatiquement
+    positionnée avec le bon chemin vers le répertoire **external** de la racine virtuelle
+    visible par sftp.
 

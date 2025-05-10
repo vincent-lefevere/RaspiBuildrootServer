@@ -215,4 +215,111 @@ being executed. You can also use this button after logging out while a command i
 running. You can then resume execution of the command (if it has not finished) or
 simply view the result of the last command executed by buildroot.
 
+### Accessible Buildroot commands
+
+In addition to the **make menuconfig** command already in the example, the main
+Buildroot commands that have been made accessible at the click of a button are:
+
+- **make manip_defconfig**
+
+  This command is used to reload a configuration in **defconfig** format saved
+  in the "**manip_defconfig**" file in the "**external/configs**" directory.
+
+  **Note**: this command is automatically executed when the virtual machine is turned on.
+
+- **make savedefconfig**
+
+  This original Buildroot command is normally used to generate a **defconfig** backup
+  in the file set by the **BR2_DEFCONFIG** environment variable. Here the environment
+  variable is pre-configured so that the backup takes place in the "**manip_defconfig**"
+  file in the "**external/configs**" directory.
+
+  **Note**: this command is automatically executed when the virtual machine is
+  shut down in order to preserve the configuration at the same time as the "**external**"
+  tree is saved in the local git.
+
+- **make linux-menuconfig**
+
+- **make**
+
+- **du -s -m target**
+
+  This command is not a Buildroot command but a Linux command which indicates
+  the place taken by the **output/target** tree which contains everything that
+  needs to be transferred to the ext2 partition in the last phase of compilation.
+  The result of the command gives a good indication of the value to set in the
+  **BR2_TARGET_ROOTFS_EXT2_SIZE** environment variable.
+
+- **make graph-depends**
+
+  This original Buildroot command is used to generate the package dependency graph.
+
+The next two buttons are used respectively to build a package and delete a package
+using a combination of Linux and Buildroot commands.
+
+- **make \<PACKAGE\>-build**
+
+  The Linux command first asks for the name of the package, then runs the Buildroot
+  command to build the specified package.
+
+  **Example** : *To generate a package named "python-paho-mqtt", for example, after
+  clicking on the button, enter "python-paho-mqtt" in the terminal (which you confirm
+  by pressing the enter key) and the **make python-paho-mqtt-build** command is run.*.
+
+- **make \<PACKAGE\>-dirclean**
+
+  **Example** : *To delete a package named "python-paho-mqtt", for example, after
+  clicking on the button, enter "python-paho-mqtt" in the terminal (which you confirm
+  by pressing the enter key) and the **make python-paho-mqtt-dirclean** command is issued.*.
+
+## sftp access to virtual machine content
+
+Under Windows, using a tool such as **FileZilla** or **Winscp** (or any other equivalent
+software), you can access a restricted part of the virtual machine's files. Using sftp,
+you can access a virtual root containing 2 directories:
+
+- **/output**
+
+  This is the directory from which Buildroot commands are launched.
+  Access to this directory has deliberately been restricted to read-only.
+  In particular, it will allow you to retrieve the **sdcard.img** file
+  from the **/output/images** sub-directory in order to transfer it to
+  a µSD card, using the **Raspberry Pi Imager** software for example.
+
+- **/external**
+
+  This is the directory for items external to Buildroot.
+  It contains several sub-directories:
+
+  - **/external/configs**
+
+    This is the directory for additional configurations.
+
+  - **/external/custom-rootfs**
+
+    This is the directory which is automatically configured (via the
+    **BR2_ROOTFS_OVERLAY** environment variable) to be used by Buildroot
+    as an overlay directory for building the root file system.
+
+    **Example** : *Instead of modifying a **/output/target/etc/wpa_supplicant.conf**
+    file, create a **/external/custom-rootfs/etc** directory and put the modified
+    version of the **wpa_supplicant.conf** file in it*.
+
+  - **/external/packages**
+
+    This is the directory in which business packages are stored.
+
+    **Note**: *Don't forget to modify the **/external/Config.in** file to include
+    the access path to each business package you add, using a line similar
+    to the one below*:
+
+    ```config
+    source "$BR2_EXTERNAL_DEFAULT_PATH/packages/…name…/Config.in"
+    ```
+
+    Replace "…name…" with the name of the directory containing the package
+    located in "**external/packages**".
+    The **BR2_EXTERNAL_DEFAULT_PATH** environment variable having been automatically
+    set with the correct path to the **external** directory of the virtual root
+    visible by sftp.
 

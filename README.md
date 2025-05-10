@@ -24,15 +24,17 @@ laquelle [Docker](https://www.docker.com) sera installé et paramétré via un s
 
 ## Liste des dépendances
 
-| Produits  | comment    |
-|-----------|------------|
+| Produits  | Comment  |
+|-----------|----------|
 | [Docker](https://www.docker.com) | téléchargé |
 | [Debian](https://www.debian.org) | image docker téléchargée |
 | [Apache](https://httpd.apache.org/) | image docker téléchargée |
 | [php](https://www.php.net) | image docker téléchargée |
 | [mariadb](https://mariadb.org/) | image docker téléchargée |
+| [git](https://git-scm.com/) | téléchargé |
 | [mosquitto](https://mosquitto.org/) | téléchargé |
 | [telegraf](https://www.influxdata.com/time-series-platform/telegraf/) | téléchargé |
+| [proftpd](http://www.proftpd.org/) | téléchargé |
 | [wsssh](https://github.com/vincent-lefevere/wsssh) | téléchargé |
 | [xterm.js](https://xtermjs.org/) | directement inclus : [xterm.js](../../blob/main/docker-buildroot/html/js/xterm.js) [xterm.css](../../blob/main/docker-buildroot/html/css/xterm.css) |
 
