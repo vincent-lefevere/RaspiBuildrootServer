@@ -1,6 +1,7 @@
 <?php
  require_once('config.inc.php');
  require_once('frontend.inc.php');
+ require_once('path.inc.php');
 
  function mycmp($item1,$item2) {
   $val1=explode("=",$item1)[0];
@@ -46,6 +47,7 @@
   } else file_put_contents($name, $version);
   $ip=10+$vm;
   $port=2200+$vm;
+  $path=PATH_ROOT_INSTALL;
   $tmp=<<<EOT
 services:
   vm-{$vm}:
@@ -58,10 +60,10 @@ services:
       web_net:
         ipv4_address: 172.31.255.{$ip}
     volumes:
-      - /root/install/docker-buildroot/data/vm-{$vm}/conf.xml:/etc/wsssh/conf.xml
-      - /root/install/docker-buildroot/conf/proftpd/custom:/etc/proftpd/custom
-      - /root/install/docker-buildroot/data/vm-{$vm}/external:/home/buildroot/external
-      - /root/install/docker-buildroot/data/vm-{$vm}/mysql.conf:/etc/proftpd/conf.d/mysql.conf
+      - {$path}/data/vm-{$vm}/conf.xml:/etc/wsssh/conf.xml
+      - {$path}/conf/proftpd/custom:/etc/proftpd/custom
+      - {$path}/data/vm-{$vm}/external:/home/buildroot/external
+      - {$path}/data/vm-{$vm}/mysql.conf:/etc/proftpd/conf.d/mysql.conf
       - /var/tmp/.buildroot-ccache:/home/.buildroot-ccache
 networks:
   web_net:
