@@ -22,7 +22,7 @@ mkdir data/brdl
 chown www-data data data/brdl
 cat <<EOF >html/backend2/path.inc.php
 <?php
-define(PATH_ROOT_INSTALL,'`pwd`');
+define('PATH_ROOT_INSTALL','`pwd`');
 ?>
 EOF
 cat <<EOF
