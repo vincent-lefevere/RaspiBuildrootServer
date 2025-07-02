@@ -22,9 +22,9 @@
   else $previous=$version;
   if ($previous!=$version) {
     $mysqli = new mysqli(BDDSERVEUR,BDDLOGIN,BDDPASSWD,BDDBASE);
-    $val=$mysqli->query("SELECT versions.title, defconfs.defconfig FROM defconfs INNER JOIN (images INNER JOIN versions ON images.version=versions.id) ON defconfs.id=images.defconf WHERE images.id={$version}")->fetch_assoc();
+    $val=$mysqli->query("SELECT versions.title, defconfs.defconfig FROM defconfs INNER JOIN (prop INNER JOIN (images INNER JOIN versions ON images.version=versions.id) ON prop.idtoolchain=images.toolchain) ON defconfs.id=prop.iddefconf WHERE images.id={$version}")->fetch_assoc();
     $versionlib=$val['defconfig'].' on '.$val['title'];
-    $val=$mysqli->query("SELECT versions.title, defconfs.defconfig FROM defconfs INNER JOIN (images INNER JOIN versions ON images.version=versions.id) ON defconfs.id=images.defconf WHERE images.id={$previous}")->fetch_assoc();
+    $val=$mysqli->query("SELECT versions.title, defconfs.defconfig FROM defconfs INNER JOIN (prop INNER JOIN (images INNER JOIN versions ON images.version=versions.id) ON prop.idtoolchain=images.toolchain) ON defconfs.id=prop.iddefconf WHERE images.id={$previous}")->fetch_assoc();
     $previouslib=$val['defconfig'].' on '.$val['title'];
     $mysqli->close();
     $dcname="/data/vm-{$vm}/external/configs/manip_defconfig";
