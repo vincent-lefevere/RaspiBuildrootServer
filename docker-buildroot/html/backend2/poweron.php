@@ -18,7 +18,7 @@
    exec("tar -C /data/vm-{$vm}/external -xvzpf /data/external.tar.gz");
    exec("cd /data/vm-{$vm}/external ; git config user.email {$email} ; git config user.name \"{$name}\" ; git add --all ; git commit --all -m 'create project' ; git branch -c prj{$p} ; git switch prj{$p} ; git push origin prj{$p}");
   } else exec("cd /data/vm-{$vm}/external ; mkdir -p board configs custom-rootfs packages");
-  if (file_exists($name="/data/vm-{$vm}/external/configs/.idhardwareversion")) $previous=(int) file_get_contents($name);
+  if (file_exists($fname="/data/vm-{$vm}/external/configs/.idhardwareversion")) $previous=(int) file_get_contents($fname);
   else $previous=$version;
   if ($previous!=$version) {
     $mysqli = new mysqli(BDDSERVEUR,BDDLOGIN,BDDPASSWD,BDDBASE);
@@ -42,9 +42,9 @@
     $def2=array_udiff($def2,$mod,'mycmp');              // def2 <-- def_version ~ mod
     $fend=implode("\n",$tmp)."\n\n".implode("\n",$def2)."\n\n".implode("\n",$mod)."\n\n";
     file_put_contents($dcname,$fend);
-    file_put_contents($name, $version);
-    exec("cd /data/vm-{$vm}/external ; git config user.email {$email} ; git config user.name {$email} ; git add --all ; git commit --all -m 'convert from {$previouslib} to {$versionlib}' ; git push origin prj{$p}");
-  } else file_put_contents($name, $version);
+    file_put_contents($fname, $version);
+    exec("cd /data/vm-{$vm}/external ; git config user.email {$email} ; git config user.name \"{$name}\" ; git add --all ; git commit --all -m 'convert from {$previouslib} to {$versionlib}' ; git push origin prj{$p}");
+  } else file_put_contents($fname, $version);
   $ip=10+$vm;
   $port=2200+$vm;
   $path=PATH_ROOT_INSTALL;
