@@ -51,7 +51,8 @@ class MyPrj {
     }
     tmp.getElementsByClassName('tag_mail')[0].innerHTML=html;
     if (prj.power!==false) tmp.classList.add('on');
-    return(tmp);
+    if (prj.lock) tmp.classList.add('lock');
+	return(tmp);
   }
 
   #updateProjects(list) {

@@ -144,6 +144,7 @@ main { width: calc(100% - 10px); position: absolute; }
 #projects div.dpt > p:hover, #projects div.my > p:hover { background-color:#eaffdf; box-shadow:5px 5px 5px #005500; color:#ff0000; }
 #projects div.separation { clear:both; }
 #projects div > p.addprj { background-image: url(../img/add.png); background-size: cover; }
+#projects div > p.lock { background-image: url(../img/lock.png); background-repeat: no-repeat; background-position-x: 5px; background-position-y: 5px; }
 
 /* ********************************************************************** *
  * Fin du block main#project                                              *
