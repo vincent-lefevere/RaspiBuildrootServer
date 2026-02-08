@@ -95,7 +95,7 @@
         <div style="height: 182px;">
           <p class="poweroff"><input class="fr" type="button" value="Supprimer le projet" onclick="spa.supPrj();"><input class="en" type="button" value="Delete project" onclick="spa.supPrj();"></p>
           <p class="poweroff"><input class="fr" type="button" value="Démarrer Machine Virtuelle" onclick="spa.startVM();"><input class="en" type="button" value="Start Virtual Machine" onclick="spa.startVM();"></p>
-          <p class="poweron"><input class="fr" type="button" value="Arrêter Machine Virtuelle" onclick="spa.stopVM();"><input class="en" type="button" value="Stop Virtual Machine"></p>
+          <p class="poweron"><input class="fr" type="button" value="Arrêter Machine Virtuelle" onclick="spa.stopVM();"><input class="en" type="button" value="Stop Virtual Machine" onclick="spa.stopVM();"></p>
           <p class="poweron"><input class="fr" type="button" value="Visualiser Machine Virtuelle" onclick="spa.displayVM();"><input class="en" type="button" value="Display Virtual Machine" onclick="spa.displayVM();"></p>
           <p class="poweron"><b><span class="fr">Accès aux fichiers par sftp sur le port n°</span><span class="en">Access to files via sftp on port n°</span> <span id="settings_sftp"></span></b></p>
         </div>
@@ -172,8 +172,11 @@
         </div>
       </div>
     </div>
-    <footer class="en"><strong>RaspiBuildrootServer</strong> : Server <a href="https://buildroot.org" target="_blank">Buildroot</a> generating images for <a href="https://www.raspberrypi.com" target="_blank">Raspberry Pi</a> by <a href="mailto:vincent.lefevere@junia.com">Vincent Lefévère</a> of <a href="https://www.junia.com" target="_blank">Junia</a> <span style="display:inline-block; transform: rotate(180deg);">&copy;</span> april 2025 (GNU licence)</footer>
-    <footer class="fr"><strong>RaspiBuildrootServer</strong> : Serveur <a href="https://buildroot.org" target="_blank">Buildroot</a> générant des images pour <a href="https://www.raspberrypi.com" target="_blank">Raspberry Pi</a> par <a href="mailto:vincent.lefevere@junia.com">Vincent Lefévère</a> de <a href="https://www.junia.com" target="_blank">Junia</a> <span style="display:inline-block; transform: rotate(180deg);">&copy;</span> avril 2025 (licence GNU)</footer>
+    <footer>
+      <p class="jauge"><span id="jauge"><span class="fr">VM utilisées : </span><span class="en">VM used: </span><progress id="jauge1" max="30" value="0"></progress> <span id="jauge2">0</span>/30</span></p>
+      <p class="scroll"><span class="en"><strong>RaspiBuildrootServer</strong> : Server <a href="https://buildroot.org" target="_blank">Buildroot</a> generating images for <a href="https://www.raspberrypi.com" target="_blank">Raspberry Pi</a> by <a href="mailto:vincent.lefevere@junia.com">Vincent Lefévère</a> of <a href="https://www.junia.com" target="_blank">Junia</a> <span style="display:inline-block; transform: rotate(180deg);">&copy;</span> february 2026 (GNU licence)</span>
+      <span class="fr"><strong>RaspiBuildrootServer</strong> : Serveur <a href="https://buildroot.org" target="_blank">Buildroot</a> générant des images pour <a href="https://www.raspberrypi.com" target="_blank">Raspberry Pi</a> par <a href="mailto:vincent.lefevere@junia.com">Vincent Lefévère</a> de <a href="https://www.junia.com" target="_blank">Junia</a> <span style="display:inline-block; transform: rotate(180deg);">&copy;</span> février 2026 (licence GNU)</span><p>
+    </footer>
     <footer style="display:none;">
       <div id="template_project">
         <p onclick="spa.selectPrj(this);"><span class="fr">projet n°</span><span class="en">project n°</span> <span class="tag_idprj"></span><br/><span class="tag_title"></span><br/><br/><span class="tag_mail"></span></p>

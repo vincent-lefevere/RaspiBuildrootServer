@@ -111,7 +111,7 @@ if you prefer) on the first line. The pictograms in front of each login will
 allow you to manage the other members (those who have not created the project
 and wish to participate).
 
-#### Devenir membre d’un projet
+#### Becoming a member of a project
 
 - **Example** : **student1@institution.uk** having created project number 1 sees
   the frame like this.
@@ -138,12 +138,11 @@ allows them to give you permission to enter and the
 ![supr](../docker-buildroot/html/img/supr.png) removal icon allows them to deny
 you access by removing you from the list).
 
-- **Example** : **student1@institution.uk** va pouvoir décider s'il valide 
-  ou refuse la demande de participation de **student2@institution.uk**.
+- **Example** : **student1@institution.uk** will be able to decide whether to approve or reject **student2@institution.uk**'s request to participate.
 
   ![bloc 3 figure d](img_en/set_cad3d.png)
 
-  Après validation, l'affichage pour **student2@institution.uk** devient le suivant.
+  After validation, the display for **student2@institution.uk** becomes as follows.
 
   ![bloc 3 figure e](img_en/set_cad3e.png)
 
@@ -157,6 +156,18 @@ deleting the project, starting or stopping the virtual machine running Buildroot
 for our project and finally displaying the Buildroot control terminal.
 
 #### Launching the virtual machine
+
+The gauge at the bottom of the navigation window, just above the scrolling message
+specifying the copyleft, indicates the number of virtual machines already turned on
+relative to the maximum quota of 30 virtual machines turned on at the same time.
+The red part on the left represents the number of VMs already turned on, while the
+green part on the right represents the number of VMs still available to be turned on.
+The red section on the left represents the number of VMs already running, while
+the green section on the right represents the number of VMs still available to be started.
+For greater precision, and for colour-blind users, the number of VMs switched on is shown
+on the right of the gauge.
+
+![gauge](img_en/gauge.png)
 
 To switch on the compilation server associated with the project,
 press the following button:

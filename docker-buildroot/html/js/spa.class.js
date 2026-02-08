@@ -8,6 +8,9 @@ class MySPA {
   #backend;
   #graph;
 
+  #jauge1;
+  #jauge2;
+
   #mqttc;
   #flagloadversion;
 
@@ -22,6 +25,10 @@ class MySPA {
     this.#graph= new MyGraph();
     this.#lang.langue();
     this.#flagloadversion=0;
+
+    this.#jauge1=document.getElementById("jauge1");
+    this.#jauge2=document.getElementById("jauge2");
+    
     var clientId = 'br-'+(Date.now()%100000+Math.random());
     var me=this;
     if (location.hostname!='') {
@@ -43,6 +50,15 @@ class MySPA {
     } else this.#flagloadversion=2;
   }  
 
+  #updatejauge(nbvm) {
+    if (nbvm==undefined) return;
+    nbvm=parseInt(nbvm);
+    if (nbvm==NaN) return;
+    if (nbvm<0) nbvm=0;
+    if (nbvm>30) nbvm=30;
+    this.#jauge1.value=this.#jauge2.innerText=nbvm;
+  }
+
   #loaddb() {
     var xhr= new XMLHttpRequest();
     xhr.open('GET','backend2/db.php', true);
@@ -50,10 +66,10 @@ class MySPA {
     xhr.addEventListener('readystatechange', function() { 
       if (xhr.readyState !== XMLHttpRequest.DONE) return;
       if (xhr.status !== 200) return;
-      me.#proj.buildlist(JSON.parse(xhr.responseText));
-      // if (me.#settings.update()==undefined) 
-      // me.#proj.show();
-      me.#settings.update()
+      var db=JSON.parse(xhr.responseText);
+      me.#proj.buildlist(db);
+      me.#updatejauge(db.nbvm);
+      me.#settings.update();
     });
     xhr.send();
   }
@@ -99,6 +115,7 @@ class MySPA {
 
   callbacklogin(db) {
     this.#proj.buildlist(db);
+    this.#updatejauge(db.nbvm);
     this.#proj.changelogin();
   }
 

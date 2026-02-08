@@ -53,6 +53,9 @@ function frontend($p) {
  global $vm;
 
  $login=$_SESSION['login'];
+ $result=$mysqli->query("SELECT count(id) AS nbvm FROM projects WHERE power IS NOT NULL");
+ $val=$result->fetch_assoc();
+ $nbvm=$val['nbvm'];
  $projects='';
  if ($_SESSION['prof']) $result=$mysqli->query("SELECT *, (power IS NULL) AS off FROM projects");
   else $result=$mysqli->query("SELECT projects.*, (projects.power IS NULL) AS off FROM projects INNER JOIN act ON projects.id=act.id WHERE email='$login' UNION SELECT *, (power IS NULL) AS off FROM projects WHERE NOT pub ORDER BY id");
@@ -91,6 +94,7 @@ function frontend($p) {
 ?>{
 	"name":"<?php echo $_SESSION['name']; ?>",
 	"prof":<?php echo ($_SESSION['prof'])?'true':'false'; ?>,
+   "nbvm":<?php echo $nbvm; ?>,
 	"projects":[<?php echo $projects; ?>],
 	"myprj":[<?php echo $myprj; ?>],
 	"dpts":[<?php echo $dpts; ?>]

@@ -158,6 +158,14 @@ et enfin de visualiser le terminal de pilotage de Buildroot.
 
 #### Lancement de la machine virtuelle
 
+La jauge, en bas de la fenêtre de navigation et juste au dessus du message défillant et
+précisant le copyleft, indique le nombre de machines virtuelles déjà allumer par rapport
+au quota maximum de 30 machines virtuelles allumées en même temps.
+La partie rouge à gauche représente le nombre de VM déjà allumée tandis que la parti verte
+à droite représente le nombre de VM encore disponible pour être allumée.
+
+![jauge](img_fr/jauge.png)
+
 Pour allumer le serveur de compilation associé au projet, on appuie sur le bouton suivant :
 
 ![startvm](img_fr/startvm.png)

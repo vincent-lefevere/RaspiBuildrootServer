@@ -15,9 +15,9 @@ body > div {
   position: fixed;
   width: 100%;
   top: 105px;
-  bottom: 20px;
+  bottom: 40px;
   left: 0px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 header {
@@ -64,16 +64,43 @@ header > div.raspberry {
 }
 
 footer {
-  height: 20px;
+  height: 40px;
   position: fixed;
-  width: max-content;
   background-color: white;
   bottom: 0px;
+  width: 100%;
+}
+footer > p { padding: 0px; margin: 0px; }
+footer > p.jauge {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+footer > p.jauge progress {
+  width: calc(100% - 9em);
+  height: 8px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: green;
+  vertical-align: middle;
+}
+footer > p.jauge progress::-webkit-progress-bar {
+  background-color: green;
+}
+footer > p.jauge progress::-webkit-progress-value {
+  background-color: red;
+}
+
+footer > p.scroll {
+  height: 20px;
+  position: fixed;
+  bottom: 0px;
+  width: max-content;
   animation-duration: 240s;
   animation-name: scrolling;
   animation-iteration-count: infinite;
   transition: none;
- }
+}
 
 @keyframes scrolling {
   0%  { left: max(950px, 100%); }
@@ -144,7 +171,10 @@ main { width: calc(100% - 10px); position: absolute; }
 #projects div.dpt > p:hover, #projects div.my > p:hover { background-color:#eaffdf; box-shadow:5px 5px 5px #005500; color:#ff0000; }
 #projects div.separation { clear:both; }
 #projects div > p.addprj { background-image: url(../img/add.png); background-size: cover; }
-#projects div > p.lock { background-image: url(../img/lock.png); background-repeat: no-repeat; background-position-x: 5px; background-position-y: 5px; }
+#projects div > p.lock { background-image: url(../img/lock.png); }
+#projects div > p.expert { background-image: url(../img/expert.png); }
+#projects div > p.lock.expert { background-image: url(../img/lock-expert.png); }
+#projects div > p.lock, #projects div > p.expert { background-repeat: no-repeat; background-position-x: 5px; background-position-y: 5px; }
 
 /* ********************************************************************** *
  * Fin du block main#project                                              *
