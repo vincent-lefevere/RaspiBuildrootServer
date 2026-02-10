@@ -222,7 +222,22 @@ catégorie en cliquant sur la croix bleue. Un popup demande alors le titre de la
 apparaîtra un pictogramme constitué d'une grande croix bleu permettant aux utilisateurs d'y créer
 des projets.*
 
-## Arrêt complet du logiciel
+## Redémarrage et arrêt du serveur
+
+### Redémarrage du serveur
+
+Pour redémarrer, si nécessaire, le serveur, il suffit d'utiliser la commande linux "**reboot**".
+Après le redémarrage, on retrouvera la configuration et l'ensemble des projets dans leurs états.
+Bien évidemment les commandes, en cours dans les différents machines virtuelles d'exécution de
+buildroot, auront été arrêtées et devront être relancées par les utilisateurs si nécessaire.
+
+### Arrêt du serveur
+
+Pour arrêter le serveur, il suffit d'utiliser la commande linux "**halt**". Lors du prochain
+redémarrage, on retrouvera la configuration et l'ensemble des projets dans leurs états comme si
+on avait utilisé la commande "**reboot**".
+
+### Arrêt complet du logiciel
 
 Pour demander l'arrêt complet des containers, un script "[down.sh](../../blob/main/docker-buildroot/down.sh)"
 est fourni.
@@ -234,4 +249,3 @@ est fourni.
 **Remarque** : Les containers base de données (utilisant "[Mariadb](https://mariadb.org)" et
 "[Git](https://git-scm.com/)") étant arrêtés, et comme il n'y a pas de persistance des données de mise
 en place, l'intégralité de la configuration et des données utilisateurs sont alors perdues.
-
