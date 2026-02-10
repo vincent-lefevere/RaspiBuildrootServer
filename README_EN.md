@@ -220,7 +220,23 @@ on the blue cross. A popup asks for the title of the category to be created.
 **Note** : *As soon as an image is finished being built, a pictogram of a large blue cross will
 appear in each project category, enabling users to create projects there.*
 
-## Full Shutdown of the Software
+## Restarting and shutting down the server
+
+### Restarting the server
+
+To restart the server, if necessary, simply use the Linux command "**reboot**".
+After restarting, the configuration and all projects will be restored to their previous states.
+Of course, any commands running in the various virtual machines executing
+buildroot will have been stopped and will need to be restarted by users if necessary.
+
+### Shutting down the server
+
+To shut down the server, simply use the Linux command "**halt**". The next time you restart,
+you will find the configuration and all projects in their states as if you had used
+the "**reboot**" command.
+
+
+### Full Shutdown of the Software
 
 To completely stop the containers, a script named  
 "[down.sh](../../blob/main/docker-buildroot/down.sh)" is provided.
