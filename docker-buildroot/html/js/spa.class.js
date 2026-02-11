@@ -169,14 +169,17 @@ class MySPA {
  
   updatedpt(db) {
     this.#proj.buildlist(db);
-
   }
-  supDpt(el) { this.#backend.supDpt(this.#proj.supDpt(el)); }
+  supDpt(el, message) {
+    if (confirm(message)==false) return;
+    this.#backend.supDpt(this.#proj.supDpt(el));
+  }
   addDpt() {
     var title=window.prompt('Titre du nouveau département');
     if (title!='' && title!=null) this.#backend.addDpt(title);
   }
-  supPrj() {
+  supPrj(message) {
+    if (confirm(message)==false) return;
     this.#backend.supPrj(this.#proj.getidprj());
     this.#settings.unshow();
     this.#proj.show();

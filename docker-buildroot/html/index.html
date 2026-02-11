@@ -93,7 +93,7 @@
           <form id="settings_members"></form>        
         </div>
         <div style="height: 182px;">
-          <p class="poweroff"><input class="fr" type="button" value="Supprimer le projet" onclick="spa.supPrj();"><input class="en" type="button" value="Delete project" onclick="spa.supPrj();"></p>
+          <p class="poweroff"><input class="fr" type="button" value="Supprimer le projet" onclick="spa.supPrj('Confirmer la suppression du projet.');"><input class="en" type="button" value="Delete project" onclick="spa.supPrj('Confirm deletion of the project.');"></p>
           <p class="poweroff"><input class="fr" type="button" value="Démarrer Machine Virtuelle" onclick="spa.startVM();"><input class="en" type="button" value="Start Virtual Machine" onclick="spa.startVM();"></p>
           <p class="poweron"><input class="fr" type="button" value="Arrêter Machine Virtuelle" onclick="spa.stopVM();"><input class="en" type="button" value="Stop Virtual Machine" onclick="spa.stopVM();"></p>
           <p class="poweron"><input class="fr" type="button" value="Visualiser Machine Virtuelle" onclick="spa.displayVM();"><input class="en" type="button" value="Display Virtual Machine" onclick="spa.displayVM();"></p>
@@ -184,7 +184,8 @@
       <div id="template_department">
         <input type="hidden"/>        
         <h2>
-          <button class="supr prof" onclick="spa.supDpt(this);"></button>
+          <button class="supr prof fr" onclick="spa.supDpt(this,'Confirmation de suppression de la catégorie de projets');"></button>
+          <button class="supr prof en" onclick="spa.supDpt(this,'Confirmation of project category deletion');"></button>
           <label class="tag_dpt_title"></label>
         </h2>
         <input class="dpt" type="radio" name="seldpt">

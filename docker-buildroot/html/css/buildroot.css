@@ -15,7 +15,7 @@ body > div {
   position: fixed;
   width: 100%;
   top: 105px;
-  bottom: 40px;
+  bottom: 46px;
   left: 0px;
   overflow-y: auto;
 }
@@ -292,7 +292,7 @@ label.mtlg img {
 #mtlg {
   z-index: 10;
   position: fixed;
-  height: calc(100% - 124px);
+  height: calc(100% - 162px);
   top: 104px;
   width: calc(100% - 20px);
   border: solid 10px white;
