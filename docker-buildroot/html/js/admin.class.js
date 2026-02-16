@@ -5,6 +5,11 @@ class MyAdmin {
   #versionsfortc;
   #toolchains;
   #speedups;
+  #speedup;
+  #images;
+  #image;
+  #buttonCreateTC;
+  #buttonCreateIMG;
   #db;
 
   constructor() {
@@ -13,10 +18,16 @@ class MyAdmin {
     this.#versions=document.getElementById('admin_versions');
     this.#versionsfortc=document.getElementById('admin_versions_for_tc');
     this.#speedups=document.getElementById('speedup_list');
+    this.#speedup=document.getElementById('speedup_title');
+    this.#images=document.getElementById('tag_img');
+    this.#image=document.getElementById('template_image');
     this.#toolchains=document.getElementById('admin_toolchains');
+    this.#buttonCreateTC=document.getElementById('buttonCreateTC');
+    this.#buttonCreateIMG=document.getElementById('buttonCreateIMG');
   }
 
   init(db) {
+    if (db==undefined) db={versions:[],toolchains:[],defconfs:[],speedups:[],images:[]};
     this.#db=db;
     this.#defconfs.innerHTML='';
     if (db.defconfs.length==0) this.#defconfs.setAttribute('disabled','');
@@ -32,6 +43,7 @@ class MyAdmin {
     this.#toolchains.innerHTML='';
     if (db.toolchains.length==0) this.#toolchains.setAttribute('disabled','');
     else this.#toolchains.removeAttribute('disabled');
+    var flag=false;
     for (var i=0; i<db.toolchains.length; i++) {
       var toolchain=db.toolchains[i];
       var option=document.createElement('option');
@@ -43,9 +55,17 @@ class MyAdmin {
         option.setAttribute('disabled','');
         option.classList.add('compiling');
         if (now!=undefined && now.id==toolchain.id) option.classList.add('now');
-      } else option.classList.add('compiled');
+      } else {
+        option.classList.add('compiled');
+        flag=true;
+      }
       this.#toolchains.appendChild(option);
     }
+    
+    var tab=Array.from(this.#buttonCreateIMG.children);
+    if (flag) tab.forEach((el) => el.removeAttribute('disabled'));
+    else tab.forEach((el) => el.setAttribute('disabled',''));
+
     this.#speedups.innerHTML='';
     if (db.speedups.length==0) this.#speedups.setAttribute('disabled','');
     else this.#speedups.removeAttribute('disabled');
@@ -58,39 +78,55 @@ class MyAdmin {
     }
     this.refresh1();
     this.refresh2();
+    this.refresh3();
+    this.refresh4();
+    this.refresh5();
+    this.refresh6();
+  }
+
+  #hideSuprOrNot(node,flag) {
+    Array.from(node.getElementsByClassName('supr')).forEach((el) => el.style.visibility=(flag?'hidden':''));
   }
 
   refresh1() {
     this.#versionsfortc.innerHTML='';
-    if (this.#db.versions.length==0) this.#versionsfortc.setAttribute('disabled','');
-    else this.#versionsfortc.removeAttribute('disabled');
+    var flag=this.#db.versions.length!=0;
+    this.#hideSuprOrNot(this.#versionsfortc.parentNode,flag);
+    if (flag) this.#versionsfortc.removeAttribute('disabled');
+    else this.#versionsfortc.setAttribute('disabled','');
     var id=this.#defconfs.selectedOptions[0];
-    if (this.#db.versions.length==0 || id==undefined) return;
-    id=id.value;
+    // if (this.#db.versions.length==0 || id==undefined) return;
+    id=(id==undefined)?'':id.value;
     var now=this.#db.images.find((el) => el.now == true);
     now=(now!=undefined)?undefined:this.#db.toolchains.find((el) => el.install == false);
-    for (var i=0;i<this.#db.versions.length; i++) {
-      var version=this.#db.versions[i];
-      var install=this.#db.toolchains.find((el) => el.defconfig==id && el.version==version.id);
-      var option=document.createElement('option');
-      option.setAttribute('value',version.id);
-      if (version.defconfs.find((el) => el == id) == undefined)
-        option.setAttribute('disabled','');
-      else if (install!=undefined) {
-        option.setAttribute('disabled','');
-        option.classList.add(install.install?'compiled':'compiling');
-        if (now!=undefined && id==now.defconfig && version.id==now.id) option.classList.add('now');
+    if (flag) {
+      flag=false;
+      for (var i=0; i<this.#db.versions.length; i++) { 
+        var version=this.#db.versions[i];
+        var install=this.#db.toolchains.find((el) => el.defconfig==id && el.version==version.id);
+        var option=document.createElement('option');
+        option.setAttribute('value',version.id);
+        if (version.defconfs.find((el) => el == id) == undefined) {
+          option.setAttribute('disabled','');
+        } else if (install!=undefined) {
+          option.setAttribute('disabled','');
+          option.classList.add(install.install?'compiled':'compiling');
+          if (now!=undefined && id==now.defconfig && version.id==now.id) option.classList.add('now');
+        } else flag=true;
+        option.innerText=version.title;
+        this.#versionsfortc.appendChild(option);
       }
-      option.innerText=version.title;
-      this.#versionsfortc.appendChild(option);
     }
+    var tab=Array.from(this.#buttonCreateTC.children);
+    if (flag) tab.forEach((el) => el.removeAttribute('disabled'));
+    else tab.forEach((el) => el.setAttribute('disabled',''));
   }
 
   refresh2() {
     this.#versions.innerHTML='';
     this.#versions.setAttribute('disabled','');
     var id=this.#toolchains.selectedOptions[0];
-    if (this.#db.versions.length==0 || id==undefined) return;
+    if (this.#db.versions.length==0 || id==undefined) return this.#hideSuprOrNot(this.#toolchains.parentNode,true);
     id=id.value;
     var now=this.#db.images.find((el) => el.now == true);
     var toolchain=this.#db.toolchains.find((el) => el.id==id)
@@ -111,6 +147,50 @@ class MyAdmin {
       }
       if (defver==version.id) option.setAttribute('selected','');
       this.#versions.appendChild(option);
+    }
+    this.#hideSuprOrNot(this.#toolchains.parentNode,this.#db.images.find((el) => el.toolchain==id)!=undefined);
+  }
+
+  refresh3() {
+    this.#hideSuprOrNot(this.#speedups.parentNode,this.#speedups.value<3);
+  }
+
+  refresh4() {
+    var flag=false;
+    var title=this.#speedup.value.trim();
+    if (title.length==0) flag=true;
+    else flag=this.#db.speedups.find((element) => element.title == title)!=undefined;
+    Array.from(this.#speedup.parentNode.parentNode.lastElementChild.children).forEach((el) => el.disabled=flag);
+  }
+
+  refresh5() {
+    var idversion=this.#versionsfortc.value;
+    var flag=(idversion=='') || (this.#db.toolchains.find((el) => el.version==idversion)!=undefined) || (this.#db.images.find((el) => el.version==idversion)!=undefined) ;
+    this.#hideSuprOrNot(this.#versionsfortc.parentNode,flag);
+  }
+
+  refresh6() {
+    while (this.#images.children.length>1) this.#images.removeChild(this.#images.lastChild);
+    var one=false;
+    var li=this.#db.images.find((el) => el.install)
+    if (li!=undefined && li.length==1) one=true;
+    for (var i=0; i<this.#db.images.length; i++) {
+      var image=this.#db.images[i];
+      var toolchain=this.#db.toolchains.find((el) => el.id==image.toolchain);
+      var div=this.#image.cloneNode(true);
+      div.removeAttribute('id');
+      var tmp='Buildroot '+this.#db.versions.find((el) => el.id == image.version).title;
+      tmp+=' ('+this.#db.defconfs.find((el) => el.id == image.defconf).defconfig;
+      tmp+=' - Toolchain '+this.#db.versions.find((el) => el.id == toolchain.version).title;
+      tmp+=')'
+      div.children[0].value=image.id;
+      div.children[1].value=tmp;
+      if (! image.install) { 
+        div.children[1].disabled=true;
+        div.children[2].style.visibility='hidden';
+      }
+      if (one) div.children[2].style.visibility='hidden';
+      this.#images.appendChild(div);
     }
   }
 

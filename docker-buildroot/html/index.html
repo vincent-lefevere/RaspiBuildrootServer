@@ -80,12 +80,12 @@
           </p>
           <p class="prof">
             <span class="fr">Accès expert au projet</span>
-            <span class="en" style="display: none;">Expert access to the project</span>
+            <span class="en">Expert access to the project</span>
             <input id="settings_expert_prof" type="checkbox" onchange="spa.expert(this);">
           </p>
           <p id="settings_expert_student" class="student">
             <span class="fr">Accès expert accordé pour ce projet</span>
-            <span class="en" style="display: none;">Expert access granted for this project</span>
+            <span class="en">Expert access granted for this project</span>
           </p>
         </div>
         <div style="height: 182px;">
@@ -127,34 +127,38 @@
       <main id="admin">
         <img src="img/status.png" width="20px" onclick="spa.metshow();"/>
         <span onclick="spa.adminBack();">X</span>
-        <table><tr><td colspan="3">
+        <table><tr><td>
           <form>
-            <p><span class="fr">Sélectionnez le fichier csv des utilisateurs à modifier</span><span class="en">Select the csv file of users to be modified</span> <input type="file" id="admin_csv" onchange="spa.loadusers(this);"/></p>
+            <p><span class="fr">Sélectionnez le fichier csv des utilisateurs à modifier</span><span class="en">Select the csv file of users to be modified</span></p><p><input type="file" id="admin_csv" onchange="spa.loadusers(this);"/></p>
           </form>
-        </td></tr><tr class="separation"></tr><tr><td>
+        </td><td class="separation"></td><td>
           <form onsubmit="return(false);">
             <p><span class="fr">Renseignez le numéro de la version à installer :</span><span class="en">Enter the number of the version to be installed:</span> <input id="admin_version" type="text" value=""/></p>
             <p><input class="fr" type="submit" value="Ajouter la version indiquée" onclick="spa.adminAdd();" /><input class="en" type="submit" value="Add the indicated version" onclick="spa.adminAdd();" /></p>
             <p id="admin_errorAdd" class="error"><span class="fr">Ajout impossible, car la version existe déjà dans le système !</span><span class="en">Impossible to add, as the version already exists in the system!</span></p>
           </form>
-        </td><td class="separation"></td><td>
-          <form onsubmit="return(false);">
-            <p><span class="fr">Choisissez un matériel cible :</span><span class="en">Choose a hardware target:</span> <select id="admin_defconfs" onchange="spa.adminRefresh1();"></select></p>
-            <p><span class="fr">Choisissez la version de toolchain à compiler :</span><span class="en">Choose the version of toolchain to make:</span> <select id="admin_versions_for_tc"></select></p>
-            <p><input class="fr" type="submit" value="Lancer la création de la toolchain" onclick="spa.adminCompileTC();" /><input class="en" type="submit" value="Start creating the toolchain" onclick="spa.adminCompileTC();" /></p>
-          </form>
         </td></tr><tr class="separation"></tr><tr><td>
           <form onsubmit="return(false);">
-            <p><span class="fr">Choisissez un matériel cible et sa toolchain :</span><span class="en">Choose a hardware target ans its toolchain:</span> <select id="admin_toolchains" onchange="spa.adminRefresh2();"></select></p>
-            <p><span class="fr">Choisissez la version de buildroot :</span><span class="en">Choose the version of buildroot:</span> <select id="admin_versions"></select></p>
-            <p><span class="fr">Choisissez une liste de précompilation :</span><span class="en" style="display: none;">Select a pre-compilation list:</span> <select id="speedup_list"></select></p>
-            <p><input class="fr" type="submit" value="Lancer la création de l'image pour les Machines Virtuelles" onclick="spa.adminCompile();" /><input class="en" type="submit" value="Start creating the image for Virtual Machines" onclick="spa.adminCompile();" /></p>
+            <p><span class="fr">Choisissez un matériel cible :</span><span class="en">Choose a hardware target:</span> <select id="admin_defconfs" onchange="spa.adminRefresh1();"></select></p>
+            <p><span class="fr">Choisissez la version de toolchain à compiler :</span><span class="en">Choose the version of toolchain to make:</span> <select id="admin_versions_for_tc" onchange="spa.adminRefresh5();"></select> <button class="supr fr" type="button" onclick="spa.adminRm('Confirmation de suppression de version de Buildroot');"></button><button class="supr en" type="button" onclick="spa.adminRm('Confirmation of Buildroot version deletion');"></button></p>
+            <p id="buttonCreateTC"><input class="fr" type="submit" value="Lancer la création de la toolchain" onclick="spa.adminCompileTC();" /><input class="en" type="submit" value="Start creating the toolchain" onclick="spa.adminCompileTC();" /></p>
           </form>
         </td><td class="separation"></td><td>
           <form onsubmit="return(false);">
-            <p><span class="fr">Titre de la liste :</span><span class="en" style="display: none;">Title of the list:</span> <input type="text" id="speedup_title"></p>
-            <p><span class="fr">Listez les packages à pré-compiler :</span><span class="en" style="display: none;">List packages to be pre-compiled:</span><br><textarea style="width: 100%; resize:vertical;" rows="2" id="speedup_pkgs"></textarea></p>
-            <p><input class="fr" type="submit" value="Création de la liste de pré-compilation" onclick="spa.speedupAdd();"><input class="en" type="submit" value="Creating the pre-compilation list" onclick="spa.speedupAdd();" style="display: none;"></p>
+            <p><span class="fr">Titre de la liste :</span><span class="en">Title of the list:</span> <input type="text" id="speedup_title" onkeyup="spa.speedupRefresh();"></p>
+            <p><span class="fr">Listez les packages à pré-compiler :</span><span class="en">List packages to be pre-compiled:</span><br><textarea style="width: 100%; resize:vertical;" rows="2" id="speedup_pkgs"></textarea></p>
+            <p><input class="fr" type="submit" value="Création de la liste de pré-compilation" onclick="spa.speedupAdd();"><input class="en" type="submit" value="Creating the pre-compilation list" onclick="spa.speedupAdd();"></p>
+          </form>            
+        </td></tr><tr class="separation"></tr><tr><td>
+          <form onsubmit="return(false);">
+            <p><span class="fr">Choisissez un matériel cible et sa toolchain :</span><span class="en">Choose a hardware target ans its toolchain:</span> <select id="admin_toolchains" onchange="spa.adminRefresh2();"></select> <button class="supr fr" type="button" onclick="spa.adminRmTC('Confirmation de suppression d\'une toolchain');"></button><button class="supr en" type="button" onclick="spa.adminRmTC('Confirmation of deletion of a toolchain');"></button></p>
+            <p><span class="fr">Choisissez la version de buildroot :</span><span class="en">Choose the version of buildroot:</span> <select id="admin_versions"></select></p>
+            <p><span class="fr">Choisissez une liste de précompilation :</span><span class="en">Select a pre-compilation list:</span> <select id="speedup_list" onchange="spa.adminRefresh3();"></select> <button class="supr fr" type="button" onclick="spa.speedupRm('Confirmation de suppression d\'une liste de pré-compilation');"></button><button class="supr en" type="button" onclick="spa.speedupRm('Confirmation of deletion of a pre-compilation list');"></button></p>
+            <p id="buttonCreateIMG"><input class="fr" type="submit" value="Lancer la création de l'image pour les Machines Virtuelles" onclick="spa.adminCompile();" /><input class="en" type="submit" value="Start creating the image for Virtual Machines" onclick="spa.adminCompile();" /></p>
+          </form>
+        </td><td class="separation"></td><td>
+          <form id="tag_img" onsubmit="return(false);">
+            <p><span class="fr">Liste des images générées pour les Machines Virtuelles :</span><span class="en">List of images generated for Virtual Machines:</span></p>
           </form>
         </td></tr></table>
       </main>
@@ -202,6 +206,9 @@
       <div id="template_gitlog">
         <input type="hidden" value=""/>
         <img src="img/rollback.png" width="20px" onclick="spa.rollback(this);" />
+      </div>
+      <div id="template_image">
+        <input type="hidden"><input type="text" readonly /><span><button class="supr fr" type="button" onclick="spa.adminRmImg(this,'Confirmation de suppression d\'une image de Machine Virtuelle');"></button><button class="supr en" type="button" onclick="spa.adminRmImg(this,'Confirmation of deletion of a Virtual Machine image');"></button></span>
       </div>
     </footer>
   </body>

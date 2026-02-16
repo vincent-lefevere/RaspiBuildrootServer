@@ -1,0 +1,22 @@
+# host packages
+host-cmake
+host-fakeroot
+host-makedevs
+host-e2fsprogs
+host-python-cffi
+host-python-pythran
+host-flex
+host-openssl
+host-swig
+host-dosfstools
+host-genimage
+host-mtools
+host-patchelf
+host-skeleton
+host-pkgcong
+host-zlib
+
+# target packages
+lapack , PACKAGE_LAPACK
+openblas , PACKAGE_OPENBLAS
+python-scipy , PACKAGE_PYTHON_SCIPY

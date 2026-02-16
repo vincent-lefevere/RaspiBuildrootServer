@@ -96,14 +96,14 @@ accès administrateur initial.
 ## Paramètrage du logiciel
 
 Pour accéder à la fenêtre de paramètrage, vous cliquez sur l'icone ![de la roue](../../blob/main/docker-buildroot/html/img/config.png)
-située devant "**Bonjour FIRST ADMIN**". Cette fenêtre offre 5 rubriques de paramètrage.
+située devant "**Bonjour FIRST ADMIN**". Cette fenêtre offre 6 rubriques de paramètrage.
 
-**Remarque** : La 5ème et dernière rubrique (en bas à droite) n'est pas fonctionnelle dans cette
-version du logiciel.
+![fenêtre de paramètrage](../../blob/main/documentation/img_fr/conf_rubs.png)
 
 ### Gestion des utilisateurs
 
-La première rubrique, en haut de la fenêtre sur toute la largeur, offre un accès de téléchargement d'un fichier ".csv" contenant la liste des utilisateurs à créer, à modifier, ou à détruire.
+La première rubrique, en haut à gauche de la fenêtre, offre un accès de téléchargement
+d'un fichier ".csv" contenant la liste des utilisateurs à créer, à modifier, ou à détruire.
 
 ![rubrique gestion des utilisateurs](../../blob/main/documentation/img_fr/conf_rub1.png)
 
@@ -138,7 +138,7 @@ Ce fichier s'appelle [list.csv](../../blob/main/documentation/exemple_fr/list.cs
 
 ### Téléchargement du logiciel Buildroot
 
-La seconde rubrique, au milieu à gauche de la fenêtre, offre un accès pour récupérer
+La seconde rubrique, en haut à droite de la fenêtre, offre un accès pour récupérer
 depuis [le site officiel](https://buildroot.org/downloads/), via l'accès internet,
 la version de Buildroot que nous voulons utiliser.
 
@@ -150,13 +150,19 @@ Une fois téléchargé avec succès, on voit la version apparaître dans la list
 
 ### Génération du toolchain
 
-La troisième rubrique, au milieu à droite de la fenêtre, permet la génération de la toolchain
+La troisième rubrique, au milieu à gauche de la fenêtre, permet la génération de la toolchain
 (ou chaine de compilation) en choisissant dans la première liste déroulante le modèle de Raspberry Pi
 que l'on souhaite utiliser.
 Le contenu de cette liste de choix est automatiquement construite à partir des modèles de Raspberry Pi
 disponibles en fonction des versions de Buildroot que l'on a téléchargées.
+
 La liste de choix suivante permet de sélectionner une version de Buildroot compatible avec le type de
 Raspberry Pi sélectionné.
+
+**Remarque** : quand un pictogramme ![de suppression](../../blob/main/docker-buildroot/html/img/del.png)
+figure à droite de cette liste de choix, on peut cliquer dessus pour demander la suppression de la version
+de buildroot sélectionnée. Si le pictogramme est absent, cela signifie qu'une toolchain l'utilise et
+qu'il faudra d'abord la supprimer.
 
 ![rubrique génération du toolchain](../../blob/main/documentation/img_fr/conf_rub3.png)
 
@@ -166,12 +172,36 @@ Les toolchains en attente apparaissent, dans la liste de choix des toolchains de
 sur fond orange, celle qui est en cours de génération sur fond orange et vert clignotant.
 Enfin celles qui sont terminées sur fond vert.
 
+### Création de nouvelles listes d'accélération
+
+La quatrième rubrique, au milieu à droite de la fenêtre, permet la création de nouvelles listes
+de d'accélération qui seront ensuite intégrables lors de la génération d'image Buildroot précompilée.
+
+![rubrique création de liste d'accélération](../../blob/main/documentation/img_fr/conf_rub5.png)
+
+Le champs de libellé "Titre de la liste" sert à indiquer le nom que l'on donne à la nouvelle liste.
+
+**Remarque** : le nom que l'on donne à la une nouvelle liste doit être différent des noms précédemment utilisés.
+
+La zone de texte libellée "Listez les packages à précompiler" sert à indiquer la liste des packages. Vous trouverez un exemple
+qui correspond à la définition de la liste prédéfinie nommée "**GrovePi in Python**" dans le fichier
+[speedup.txt](../../blob/main/documentation/exemple_fr/speedup.txt)
+
+On place un package par ligne de la liste en distinguant ceux, dont le nom commence par "host-"
+qui sont juste intégrés à la machine virtuelle de compilation, de ceux qui seront compilés pour la cible.
+Pour ces derniers, le nom du package doit être suivi du nom de la variable d'environnement, utilisée
+par Buildroot, séparés par une virgule. 
+
 ### Génération de l'image Buildroot précompilée
 
-La quatrième rubrique en bas à gauche de la fenêtre, permet la génération d'une image précompilée de Buildroot,
+La cinquième rubrique, en bas à gauche de la fenêtre, permet la génération d'une image précompilée de Buildroot,
 en choisissant :
 
 - premièrement la toolchain qui sera utilisée pour compiler,
+
+**Remarque** : quand un pictogramme ![de suppression](../../blob/main/docker-buildroot/html/img/del.png)
+figure à droite de cette liste de choix, on peut cliquer dessus pour demander la suppression de la toolchain sélectionnée.
+Si le pictogramme est absent, cela signifie qu'une image Buildroot précompilée l'utilise et qu'il faudra d'abord la supprimer.
 
 - deuxièmement la version de Buildroot (qui par défaut sera la même que celle utilisée pour générer la toolchain),
 
@@ -185,16 +215,28 @@ Le logiciel est pourvu de 2 listes prédéfinies de packages :
 - "**GrovePi in Python**" : une liste de packages permettant d'accélérer la compilation des packages
 (et de leurs dépendances) lors de l'usage du HAT GrovePi en Python.
 
+**Remarque** : Le pictogramme ![de suppression](../../blob/main/docker-buildroot/html/img/del.png)
+est disponible pour détruire une liste ajoutée quand celle-ci est sélectionnée.
+
 ![rubrique génération de l'image précompilée](../../blob/main/documentation/img_fr/conf_rub4.png)
 
 Pour valider ses choix et demander la génération de l'image précompilée, on clique sur le bouton
 "**Lancer la création de l'image pour les Machines Virtuelles**".
 
+**Remarque** : le bouton est désactivé quand les choix correspondent à une image déjà générée ou en cours de génération.
+
 Pendant la génération d'une image précompilée, le logo Buildroot en haut à gauche de la page web clignotte.
 On peut en profiter pour demander la génération d'une autre image mais celle-ci sera mise
 en file d'attente avec les demandes de génération des toolchains.
+
 **Remarque** : La génération d'une toolchain est prioritaire sur la génération d'une image pour sortir
 de cette file d'attente.
+
+### Liste des images générées
+
+La sixième rubrique, en bas à gauche de la fenêtre, montre la liste des images pour les Machines Virtuelles.
+Le pictogramme ![delete](../../blob/main/docker-buildroot/html/img/del.png) à droite de chaque libellé
+d'image permet de demander sa destruction.
 
 ### Ressortir de la fenêtre de paramétrage
 
@@ -239,13 +281,9 @@ on avait utilisé la commande "**reboot**".
 
 ### Arrêt complet du logiciel
 
-Pour demander l'arrêt complet des containers, un script "[down.sh](../../blob/main/docker-buildroot/down.sh)"
-est fourni.
+Pour demander l'arrêt complet des containers (et la destruction des données mémorisées),
+un script "[down.sh](../../blob/main/docker-buildroot/down.sh)" est fourni.
 
 ```bash
 ./down.sh
 ```
-
-**Remarque** : Les containers base de données (utilisant "[Mariadb](https://mariadb.org)" et
-"[Git](https://git-scm.com/)") étant arrêtés, et comme il n'y a pas de persistance des données de mise
-en place, l'intégralité de la configuration et des données utilisateurs sont alors perdues.

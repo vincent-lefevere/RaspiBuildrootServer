@@ -134,8 +134,10 @@ class MySPA {
     this.#proj.show();
   }
 
-  adminRefresh1() { this.#admin.refresh1(); }
+  adminRefresh1() { this.#admin.refresh1(); this.#admin.refresh5(); }
   adminRefresh2() { this.#admin.refresh2(); }
+  adminRefresh3() { this.#admin.refresh3(); }
+  adminRefresh5() { this.#admin.refresh5(); }
 
   sendcmd(cmd) { this.#term.sendcmd(cmd); }
 
@@ -203,20 +205,42 @@ class MySPA {
     var title=this.#admin.checkAdd();
     if (title!=false) this.#backend.adminAdd(title);
   }
-
+  adminRm(message) {
+    if (confirm(message)==false) return;
+    var tab=this.#admin.checkCompileTC();
+    if (tab!=false) this.#backend.adminRm(tab[0]);
+  }
   adminCompileTC() {
     var tab=this.#admin.checkCompileTC();
     if (tab!=false) this.#backend.adminCompileTC(tab[0],tab[1]);
   }
-
+  adminRmTC(message) {
+    if (confirm(message)==false) return;
+    var val=document.getElementById('admin_toolchains').value;
+    this.#backend.adminRmTC(val)
+  }
   adminCompile() {
     var tab=this.#admin.checkCompile();
     if (tab!=false) this.#backend.adminCompile(tab[0],tab[1],tab[2]);
   }
-
-
   admin_show_error() {
     this.#admin.show_error();
+  }
+
+  speedupRefresh() {
+    this.#admin.refresh4();
+  }
+  speedupAdd() {
+   this.#backend.adminSpeedAdd(document.getElementById('speedup_title').value,document.getElementById('speedup_pkgs').value);
+  }
+  speedupRm(message) {
+    if (confirm(message)==false) return;
+    this.#backend.adminSpeedRm(document.getElementById('speedup_list').value);
+  }
+
+  adminRmImg(el,message) {
+    if (confirm(message)==false) return;
+    this.#backend.adminRmImg(el.parentNode.parentNode.children[0].value);
   }
 
   metshow() {

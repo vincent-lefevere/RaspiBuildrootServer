@@ -96,16 +96,15 @@ be set to "FIRST ADMIN" (which can be changed later if you wish).
 ## Software configuration
 
 To access the settings window, click on the icon ![of the wheel](../../blob/main/docker-buildroot/html/img/config.png)
-in front of "**Hello FIRST ADMIN**". This window offers 5 parameter settings.
+in front of "**Hello FIRST ADMIN**". This window offers 6 parameter settings.
 
-**Note** : The 5th and last section (bottom right) is not functional
-in this version of the software.
+![settings window](../../blob/main/documentation/img_en/conf_rubs.png)
 
 ### User management
 
-The first heading at the top of the full-width window provides access
+The first section, at the top left of the window, provides access
 to download a ".csv" file containing the list of users to be created,
-modified or deleted.
+modified, or deleted.
 
 ![user management section](../../blob/main/documentation/img_en/conf_rub1.png)
 
@@ -138,9 +137,9 @@ This file is called [list.csv](../.../blob/main/documentation/example_en/list.cs
 
 ### Download Buildroot software
 
-The second section, in the middle left of the window, provides access to retrieve the buildroot
-version we want to use from [the official site](https://buildroot.org/downloads/),
-via Internet access.
+The second section, at the top right of the window, provides access to download
+from [the official website](https://buildroot.org/downloads/), via the internet,
+the version of Buildroot that we want to use.
 
 ![Buildroot download section](../../blob/main/documentation/img_en/conf_rub2.png)
 
@@ -150,13 +149,19 @@ Once successfully downloaded, the version will appear in the list of choices in 
 
 ### Toolchain generation
 
-The third section, in the middle right of the window, is used to generate the toolchain
-(or compilation chain) by choosing the Raspberry Pi model you wish to use from the first
+The third section, in the middle left of the window, allows you to generate the toolchain
+(or compilation chain) by selecting the Raspberry Pi model you wish to use from the first
 drop-down list.
 The contents of this drop-down list are automatically constructed from the Raspberry Pi
 models available for the versions of Buildroot you have downloaded.
+
 The following list allows you to select a version of Buildroot compatible with the type
 of Raspberry Pi selected.
+
+**Note**: When a ![delete](../../blob/main/docker-buildroot/html/img/del.png) icon appears
+to the right of this list of options, you can click on
+it to request the deletion of the selected buildroot version. If the icon is not present,
+it means that a toolchain is using it and that you must first delete that toolchain.
 
 ![toolchain generation section](../../blob/main/documentation/img_en/conf_rub3.png)
 
@@ -166,12 +171,36 @@ Queued toolchains appear on an orange background in the list of toolchain choice
 and the toolchain currently being generated appears on a flashing orange and green background.
 Finally, those that have been completed are highlighted in green.
 
+### Creating new speedup lists
+
+The fourth section, in the middle right of the window, allows you to create new acceleration lists
+that can then be integrated when generating a precompiled Buildroot image.
+
+![acceleration list creation section](../../blob/main/documentation/img_en/conf_rub5.png)
+
+The "List title" field is used to specify the name given to the new list.
+
+Note: The name given to a new list must be different from names previously used.
+
+The text box labelled "List packages to precompile" is used to specify the list of packages.
+You will find an example corresponding to the definition of the predefined list named
+"**GrovePi in Python**" in the file [speedup.txt](../../blob/main/documentation/example_en/speedup.txt)
+
+Place one package per line in the list, distinguishing between those whose names begin with "host-",
+which are just integrated into the compilation virtual machine, and those that will be compiled for the target.
+For the latter, the package name must be followed by the name of the environment variable used by Buildroot,
+separated by a comma.
+
 ### Generating the precompiled Buildroot image
 
-The fourth section, at the bottom left of the window, allows you to generate a precompiled image of Buildroot,
+The fifth section, at the bottom left of the window, allows you to generate a precompiled Buildroot image
 by choosing:
 
 - firstly the toolchain which will be used to compile,
+
+**Note**: when a ![delete](../../blob/main/docker-buildroot/html/img/del.png) icon appears to the right of this list of choices, you can click on it to request
+the deletion of the selected toolchain. If the icon is not present, this means that a precompiled Buildroot
+image is using it and that you will first need to delete that image.
 
 - secondly, the Buildroot version (which by default will be the same as the one used to generate the toolchain),
 
@@ -184,16 +213,26 @@ The software comes with 2 predefined lists of packages:
 - "**GrovePi in Python**": a list of packages to speed up compilation of packages (and their dependencies)
 when using GrovePi HAT in Python.
 
+**Note**: The ![delete](../../blob/main/docker-buildroot/html/img/del.png) icon is available to delete an added list when it is selected.
+
 ![pre-copiled image generation section](../../blob/main/documentation/img_en/conf_rub4.png)
 
 To confirm your choices and request generation of the precompiled image, click on the button:
 "**Start creating the image for Virtual Machines**".
+
+**Note**: The button is disabled when the selections match an image that has already been generated
+or is currently being generated.
 
 While a precompiled image is being generated, the Buildroot logo at the top left of the web page flashes.
 You can take advantage of this to request the generation of another image, but this will be queued
 with the toolchain generation requests.
 
 **Note**: Generating a toolchain takes priority over generating an image to get out of this queue.
+
+### List of generated images
+
+The sixth section, at the bottom left of the window, shows the list of images for Virtual Machines.
+The ![delete](../../blob/main/docker-buildroot/html/img/del.png) icon to the right of each image label allows you to request the destruction of that image.
 
 ### Exit the settings window
 
@@ -235,16 +274,11 @@ To shut down the server, simply use the Linux command "**halt**". The next time 
 you will find the configuration and all projects in their states as if you had used
 the "**reboot**" command.
 
-
 ### Full Shutdown of the Software
 
-To completely stop the containers, a script named  
-"[down.sh](../../blob/main/docker-buildroot/down.sh)" is provided.
+Pour demander l'arrêt complet des containers (et la destruction des données mémorisées),
+un script "[down.sh](../../blob/main/docker-buildroot/down.sh)" est fourni.
 
 ```bash
 ./down.sh
 ```
-
-**Note**: The database containers (using [MariaDB](https://mariadb.org) and  
-[Git](https://git-scm.com/)) will be stopped. Since no data persistence mechanism is set up,  
-all configuration and user data will be lost upon shutdown.

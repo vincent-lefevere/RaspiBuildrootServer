@@ -30,6 +30,9 @@ class MyBackend {
       if (xhttp.responseText!='false') spa.updatedpt(JSON.parse(xhttp.responseText));
     }
   });
+  xhttp.addEventListener('error', function() {
+    document.body.className='';
+  });
   xhttp.send(form);
   document.body.className='wait';
  }
@@ -68,6 +71,9 @@ class MyBackend {
       if (xhttp.status === 200 && xhttp.responseText!='false') spa.updateprj(JSON.parse(xhttp.responseText));
     }
   });
+  xhttp.addEventListener('error', function() {
+    document.body.className='';
+  });  
   xhttp.send(form);
   document.body.className='wait';
  }
@@ -126,36 +132,61 @@ class MyBackend {
   document.getElementById('gitlog').style.display='none';
  }
  
+ #adminBackend(url,form,on_success,on_error) {
+  var xhttp= new XMLHttpRequest();
+  xhttp.open('POST',url, true);
+  xhttp.addEventListener('readystatechange', function() {
+    if (xhttp.readyState === XMLHttpRequest.DONE) {
+      document.body.className='';
+      if (xhttp.status === 200) {
+        if (xhttp.responseText!='false') on_success();
+        else on_error();
+      }
+    }
+  }.bind(this.#spa));
+  xhttp.addEventListener('error', function() {
+    document.body.className='';
+  });
+  xhttp.send(form);
+  document.body.className='wait';
+ }
+
  adminAdd(title) {
   var form = new FormData();
   form.append('title',title);
-  var xhttp= new XMLHttpRequest();
-  xhttp.open('POST','backend2/bradd.php', true);
-  xhttp.addEventListener('readystatechange', function() {
-    if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
-      document.body.className='';
-      if (xhttp.responseText=='true') this.loadversion();
-      else this.admin_show_error();
-    }
-  }.bind(this.#spa));
-  xhttp.send(form);
-  document.body.className='wait';
+  this.#adminBackend('backend2/bradd.php',form,this.#spa.loadversion.bind(this.#spa),this.#spa.admin_show_error.bind(this.#spa));
+ }
+
+ adminRm(id) {
+  var form = new FormData();
+  form.append('id',id);
+  this.#adminBackend('backend2/brrm.php',form,this.#spa.loadversion.bind(this.#spa),function() {});
  }
 
  adminCompileTC(version,defconf) {
   var form = new FormData();
   form.append('version',version);
   form.append('defconf',defconf);
-  var xhttp= new XMLHttpRequest();
-  xhttp.open('POST','backend2/brtc.php', true);
-  xhttp.addEventListener('readystatechange', function() {
-    if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
-      document.body.className='';
-      if (xhttp.responseText=='true') this.loadversion();
-    }
-  }.bind(this.#spa));
-  xhttp.send(form);
-  document.body.className='wait';
+  this.#adminBackend('backend2/brtc.php',form,this.#spa.loadversion.bind(this.#spa),function() {});
+ }
+
+ adminRmTC(id) {
+  var form = new FormData();
+  form.append('id',id);
+  this.#adminBackend('backend2/tcrm.php',form,this.#spa.loadversion.bind(this.#spa),function() {});
+ }
+
+ adminSpeedAdd(title, packages) {
+  var form = new FormData();
+  form.append('title',title);
+  form.append('packages',packages);
+  this.#adminBackend('backend2/spadd.php',form,this.#spa.loadversion.bind(this.#spa),function() {});
+ }
+
+ adminSpeedRm(id) {
+  var form = new FormData();
+  form.append('id',id);
+  this.#adminBackend('backend2/sprm.php',form,this.#spa.loadversion.bind(this.#spa),function() {});
  }
 
  adminCompile(version,toolchain,speedup) {
@@ -163,15 +194,12 @@ class MyBackend {
   form.append('version',version);
   form.append('toolchain',toolchain);
   form.append('speedup',speedup);
-  var xhttp= new XMLHttpRequest();
-  xhttp.open('POST','backend2/brimg.php', true);
-  xhttp.addEventListener('readystatechange', function() {
-    if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
-      document.body.className='';
-      if (xhttp.responseText=='true') this.loadversion();
-    }
-  }.bind(this.#spa));
-  xhttp.send(form);
-  document.body.className='wait';
+  this.#adminBackend('backend2/brimg.php',form,this.#spa.loadversion.bind(this.#spa),function() {});
+ }
+
+ adminRmImg(id) {
+  var form = new FormData();
+  form.append('id',id);
+  this.#adminBackend('backend2/brrmimg.php',form,this.#spa.loadversion.bind(this.#spa),function() {});
  }
 }
