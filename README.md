@@ -4,8 +4,8 @@ pour l'apprentissage de l'outil en utilisant une cible matériel de type [Raspbe
 
 Cela permet à des apprenants de travailler en groupe (*30 groupes maximum actifs en même temps*)
 sur des projets en diminuant les temps de compilation à supporter pendant les travaux pratiques
-via une optimisation du paramètrage. La précompilation commune pour tous les projets de la chaîne
-de développement (toolchain) et d'un certain nombre de packages, permet également d'offir un
+via une optimisation du paramétrage. La précompilation commune pour tous les projets de la chaîne
+de développement (toolchain) et d'un certain nombre de packages, permet également d'offrir un
 temps de génération des images réduites pour chaque groupe.
 
 ## Configuration matériel et logiciel requise
@@ -14,7 +14,7 @@ Le logiciel est prévu pour être installé dans une machine virtuelle (ou un se
 avec :
 - un minimum de mémoire centrale de 8 Giga,
 - un minimum de disque dur de 40 Giga,
-- un minimum de 1 coeur de calcul pour deux groupes de travaux pratiques utilisant simultannément le serveur.
+- un minimum de 1 cœures de calcul pour deux groupes de travaux pratiques utilisant simultanément le serveur.
 - une carte réseau Ethernet pour que le logiciel dispose d'un accès internet et pour que les utilisateurs 
 puissent avoir accès au logiciel en https sur le port 443 et en sftp sur les ports de 2201 à 2230.
 
@@ -93,12 +93,12 @@ accès administrateur initial.
 **Remarque** : Le champ nom/prénom associé à ce compte sera initialisé avec la valeur "FIRST ADMIN"
 (que l'on pourra changer par la suite si on le désire).
 
-## Paramètrage du logiciel
+## Paramétrage du logiciel
 
-Pour accéder à la fenêtre de paramètrage, vous cliquez sur l'icone ![de la roue](../../blob/main/docker-buildroot/html/img/config.png)
+Pour accéder à la fenêtre de paramétrage, vous cliquez sur l'icone ![de la roue](../../blob/main/docker-buildroot/html/img/config.png)
 située devant "**Bonjour FIRST ADMIN**". Cette fenêtre offre 6 rubriques de paramètrage.
 
-![fenêtre de paramètrage](../../blob/main/documentation/img_fr/conf_rubs.png)
+![fenêtre de paramétrage](../../blob/main/documentation/img_fr/conf_rubs.png)
 
 ### Gestion des utilisateurs
 
@@ -122,7 +122,7 @@ sous un format chiffré). Si le mot de passe est vide, le compte est supprimé
 
 En cliquant sur le bouton "choisir un fichier", on sélectionne sur son ordinateur le fichier ".csv" à traiter.
 Une fois, validé, le traitement du fichier commence tout de suite : Les nouveaux comptes sont créés,
-les comptes existant ayant un mot de passe vide sont supprimés enfin le type et les Prénom/Nom des comptes existant
+les comptes existants ayant un mot de passe vide sont supprimés enfin le type et les Prénom/Nom des comptes existants
 sont mis à jour.
 
 **Remarque** : *Dans le répertoire [documentation/exemple_fr](../../tree/main/documentation/exemple_fr)
@@ -153,7 +153,7 @@ Une fois téléchargé avec succès, on voit la version apparaître dans la list
 La troisième rubrique, au milieu à gauche de la fenêtre, permet la génération de la toolchain
 (ou chaine de compilation) en choisissant dans la première liste déroulante le modèle de Raspberry Pi
 que l'on souhaite utiliser.
-Le contenu de cette liste de choix est automatiquement construite à partir des modèles de Raspberry Pi
+Le contenu de cette liste de choix est automatiquement construit à partir des modèles de Raspberry Pi
 disponibles en fonction des versions de Buildroot que l'on a téléchargées.
 
 La liste de choix suivante permet de sélectionner une version de Buildroot compatible avec le type de
@@ -166,7 +166,7 @@ qu'il faudra d'abord la supprimer.
 
 ![rubrique génération du toolchain](../../blob/main/documentation/img_fr/conf_rub3.png)
 
-Pendant la génération d'une toolchain, le logo Buildroot en haut à gauche de la page web clignotte.
+Pendant la génération d'une toolchain, le logo Buildroot en haut à gauche de la page web clignote.
 On peut en profiter pour demander la génération d'une autre toolchain mais celle-ci sera mise en file d'attente.
 Les toolchains en attente apparaissent, dans la liste de choix des toolchains de la rubrique suivante,
 sur fond orange, celle qui est en cours de génération sur fond orange et vert clignotant.
@@ -179,13 +179,13 @@ de d'accélération qui seront ensuite intégrables lors de la génération d'im
 
 ![rubrique création de liste d'accélération](../../blob/main/documentation/img_fr/conf_rub5.png)
 
-Le champs de libellé "Titre de la liste" sert à indiquer le nom que l'on donne à la nouvelle liste.
+Le champ de libellé "Titre de la liste" sert à indiquer le nom que l'on donne à la nouvelle liste.
 
 **Remarque** : le nom que l'on donne à la une nouvelle liste doit être différent des noms précédemment utilisés.
 
-La zone de texte libellée "Listez les packages à précompiler" sert à indiquer la liste des packages. Vous trouverez un exemple
-qui correspond à la définition de la liste prédéfinie nommée "**GrovePi in Python**" dans le fichier
-[speedup.txt](../../blob/main/documentation/exemple_fr/speedup.txt)
+La zone de texte libellée "Listez les packages à précompiler" sert à indiquer la liste des packages.
+Vous trouverez un exemple qui correspond à la définition de la liste prédéfinie nommée "**GrovePi in Python**"
+dans le fichier [speedup.txt](../../blob/main/documentation/exemple_fr/speedup.txt)
 
 On place un package par ligne de la liste en distinguant ceux, dont le nom commence par "host-"
 qui sont juste intégrés à la machine virtuelle de compilation, de ceux qui seront compilés pour la cible.
@@ -225,7 +225,7 @@ Pour valider ses choix et demander la génération de l'image précompilée, on 
 
 **Remarque** : le bouton est désactivé quand les choix correspondent à une image déjà générée ou en cours de génération.
 
-Pendant la génération d'une image précompilée, le logo Buildroot en haut à gauche de la page web clignotte.
+Pendant la génération d'une image précompilée, le logo Buildroot en haut à gauche de la page web clignote.
 On peut en profiter pour demander la génération d'une autre image mais celle-ci sera mise
 en file d'attente avec les demandes de génération des toolchains.
 
@@ -243,8 +243,8 @@ d'image permet de demander sa destruction.
 Il est possible de visualiser l'utilisation de la mémoire, du swap et de la CPU du serveur
 si on le souhaite pendant la génération d'une toolchain ou d'une image. Il suffit de cliquer
 sur le pictogramme ![de performance](../../blob/main/docker-buildroot/html/img/status.png)
-situé en haut à gauche de la fenêtre de paramètrage, la fenêtre de performance s'ouvre alors
-et présente 5 courbes de performance. Les informations utilent sont situées dans les 3 courbes
+situé en haut à gauche de la fenêtre de paramétrage, la fenêtre de performance s'ouvre alors
+et présente 5 courbes de performance. Les informations utiles sont situées dans les 3 courbes
 du bas (Les 2 courbes du haut étant réservées pour la visualisation de l'utilisation mémoire
 et CPU relative à projet sélectionné)
 
@@ -266,7 +266,7 @@ de fermeture située en haut à droite de la fenêtre et ainsi retourner dans la
 
 La fenêtre principale gérant les projets par catégorie commence par présenter, en haut, un bandeau
 regroupant les projets auxquels vous participez (quelque soit la catégorie dans laquelle ils ont
-été créés) comme une liste de raccourcies.
+été créés) comme une liste de raccourcis.
 
 En dessous, on trouve les bandeaux des différentes catégories qui ont été créés par les enseignants.
 Si on clique sur le titre de la catégorie dans son bandeau, la catégorie sélectionnée s'ouvre tandis
