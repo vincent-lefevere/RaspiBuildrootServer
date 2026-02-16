@@ -161,8 +161,10 @@ et enfin de visualiser le terminal de pilotage de Buildroot.
 La jauge, en bas de la fenêtre de navigation et juste au dessus du message défillant et
 précisant le copyleft, indique le nombre de machines virtuelles déjà allumer par rapport
 au quota maximum de 30 machines virtuelles allumées en même temps.
-La partie rouge à gauche représente le nombre de VM déjà allumée tandis que la parti verte
-à droite représente le nombre de VM encore disponible pour être allumée.
+La partie rouge à gauche représente le nombre de VM déjà allumées tandis que la parti verte
+à droite représente le nombre de VM encore disponibles pour être allumées.
+Pour plus de précision, et pour les daltoniens, le nombre de VM allumées est rappelé
+à droite de la jauge.
 
 ![jauge](img_fr/jauge.png)
 
@@ -291,7 +293,7 @@ virtuelle. Via sftp, on peut accéder à une racine virtuelle contenant 2 réper
 
 - **/output**
 
-  C'est le répertoire depuis lequel les commandes Buildroot sont lancé.
+  C'est le répertoire depuis lequel les commandes Buildroot sont lancées.
   L'accès à ce répertoire a volontairement été restreint en lecture seule.
   Il va permettre notamment d'y récupérer le fichier **sdcard.img** depuis
   le sous répertoire **/output/images** afin de le transférer sur une carte µSD,

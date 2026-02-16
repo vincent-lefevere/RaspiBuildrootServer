@@ -158,7 +158,7 @@ models available for the versions of Buildroot you have downloaded.
 The following list allows you to select a version of Buildroot compatible with the type
 of Raspberry Pi selected.
 
-**Note**: When a ![delete](../../blob/main/docker-buildroot/html/img/del.png) icon appears
+**Note**: When a ![delete](../../blob/main/docker-buildroot/html/img/supr.png) icon appears
 to the right of this list of options, you can click on
 it to request the deletion of the selected buildroot version. If the icon is not present,
 it means that a toolchain is using it and that you must first delete that toolchain.
@@ -198,7 +198,7 @@ by choosing:
 
 - firstly the toolchain which will be used to compile,
 
-**Note**: when a ![delete](../../blob/main/docker-buildroot/html/img/del.png) icon appears to the right of this list of choices, you can click on it to request
+**Note**: when a ![delete](../../blob/main/docker-buildroot/html/img/supr.png) icon appears to the right of this list of choices, you can click on it to request
 the deletion of the selected toolchain. If the icon is not present, this means that a precompiled Buildroot
 image is using it and that you will first need to delete that image.
 
@@ -213,7 +213,7 @@ The software comes with 2 predefined lists of packages:
 - "**GrovePi in Python**": a list of packages to speed up compilation of packages (and their dependencies)
 when using GrovePi HAT in Python.
 
-**Note**: The ![delete](../../blob/main/docker-buildroot/html/img/del.png) icon is available to delete an added list when it is selected.
+**Note**: The ![delete](../../blob/main/docker-buildroot/html/img/supr.png) icon is available to delete an added list when it is selected.
 
 ![pre-copiled image generation section](../../blob/main/documentation/img_en/conf_rub4.png)
 
@@ -232,7 +232,24 @@ with the toolchain generation requests.
 ### List of generated images
 
 The sixth section, at the bottom left of the window, shows the list of images for Virtual Machines.
-The ![delete](../../blob/main/docker-buildroot/html/img/del.png) icon to the right of each image label allows you to request the destruction of that image.
+The ![delete](../../blob/main/docker-buildroot/html/img/supr.png) icon to the right of each image label
+allows you to request the destruction of that image.
+
+### Server performance visualisation
+
+It is possible to view the server's memory, swap and CPU usage
+if desired during the generation of a toolchain or image. Simply click on the performance icon
+located at the top left of the settings window, and the performance window will open,
+displaying five performance curves. The useful information is located in the three curves at the bottom
+(the two curves at the top are reserved for viewing memory and CPU usage for the selected project).
+The three curves at the bottom show the memory, swap and CPU usage of the server.
+The top two curves show the memory and CPU usage of the selected project.
+
+![performance window](../../blob/main/documentation/img_fr/win_perf.png)
+
+**Note**: The pictogram will also be visible from the windows relating to a project,
+and in this case the two upper curves will display information specific to that project.
+As with each window, the cross in the top right-hand corner allows you to return to the previous window.
 
 ### Exit the settings window
 

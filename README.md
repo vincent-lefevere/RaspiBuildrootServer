@@ -159,7 +159,7 @@ disponibles en fonction des versions de Buildroot que l'on a téléchargées.
 La liste de choix suivante permet de sélectionner une version de Buildroot compatible avec le type de
 Raspberry Pi sélectionné.
 
-**Remarque** : quand un pictogramme ![de suppression](../../blob/main/docker-buildroot/html/img/del.png)
+**Remarque** : quand un pictogramme ![de suppression](../../blob/main/docker-buildroot/html/img/supr.png)
 figure à droite de cette liste de choix, on peut cliquer dessus pour demander la suppression de la version
 de buildroot sélectionnée. Si le pictogramme est absent, cela signifie qu'une toolchain l'utilise et
 qu'il faudra d'abord la supprimer.
@@ -199,7 +199,7 @@ en choisissant :
 
 - premièrement la toolchain qui sera utilisée pour compiler,
 
-**Remarque** : quand un pictogramme ![de suppression](../../blob/main/docker-buildroot/html/img/del.png)
+**Remarque** : quand un pictogramme ![de suppression](../../blob/main/docker-buildroot/html/img/supr.png)
 figure à droite de cette liste de choix, on peut cliquer dessus pour demander la suppression de la toolchain sélectionnée.
 Si le pictogramme est absent, cela signifie qu'une image Buildroot précompilée l'utilise et qu'il faudra d'abord la supprimer.
 
@@ -215,7 +215,7 @@ Le logiciel est pourvu de 2 listes prédéfinies de packages :
 - "**GrovePi in Python**" : une liste de packages permettant d'accélérer la compilation des packages
 (et de leurs dépendances) lors de l'usage du HAT GrovePi en Python.
 
-**Remarque** : Le pictogramme ![de suppression](../../blob/main/docker-buildroot/html/img/del.png)
+**Remarque** : Le pictogramme ![de suppression](../../blob/main/docker-buildroot/html/img/supr.png)
 est disponible pour détruire une liste ajoutée quand celle-ci est sélectionnée.
 
 ![rubrique génération de l'image précompilée](../../blob/main/documentation/img_fr/conf_rub4.png)
@@ -235,8 +235,25 @@ de cette file d'attente.
 ### Liste des images générées
 
 La sixième rubrique, en bas à gauche de la fenêtre, montre la liste des images pour les Machines Virtuelles.
-Le pictogramme ![delete](../../blob/main/docker-buildroot/html/img/del.png) à droite de chaque libellé
+Le pictogramme ![delete](../../blob/main/docker-buildroot/html/img/supr.png) à droite de chaque libellé
 d'image permet de demander sa destruction.
+
+### Visualisation des performances du serveur
+
+Il est possible de visualiser l'utilisation de la mémoire, du swap et de la CPU du serveur
+si on le souhaite pendant la génération d'une toolchain ou d'une image. Il suffit de cliquer
+sur le pictogramme ![de performance](../../blob/main/docker-buildroot/html/img/status.png)
+situé en haut à gauche de la fenêtre de paramètrage, la fenêtre de performance s'ouvre alors
+et présente 5 courbes de performance. Les informations utilent sont situées dans les 3 courbes
+du bas (Les 2 courbes du haut étant réservées pour la visualisation de l'utilisation mémoire
+et CPU relative à projet sélectionné)
+
+![fenêtre de performance](../../blob/main/documentation/img_fr/win_perf.png)
+
+**Remarque** : Le pictogramme sera également visible depuis les fenêtres relatives à un projet
+et dans ce cas les deux courbes du haut présentent les informations relatives spécifiquement
+à ce projet). Comme pour chaque fenêtre la croix en haut à droite permet de retourner à 
+la fenêtre précédente.
 
 ### Ressortir de la fenêtre de paramétrage
 
