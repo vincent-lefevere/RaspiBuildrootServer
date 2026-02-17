@@ -20,12 +20,12 @@ et son mot de passe initial associé que l'enseignant vous a communiqués.
 
 **Remarque** : *Il est fortement conseillé de changer tout de suite son mot de passe.*
 
-Pour cela, on saisi dans les deux champs " **mot de passe**" en bas du bloc jaune.
+Pour cela, on saisit dans les deux champs " **mot de passe**" en bas du bloc jaune.
 Si les deux mots de passe sont bien identiques le bouton "**connexion**" va se désactiver
 tandis que le bouton "**changer**" va s'activer.
 On peut alors cliquer sur ce dernier pour changer le mot de passe de connexion.
 Si le mot de passe d'origine était bien le bon, le nouveau mot de passe se met automatiquement
-dans le premier champ de saisie du mot de passe au dessus du bouton "**connexion**".
+dans le premier champ de saisie du mot de passe au-dessus du bouton "**connexion**".
 
 ![Connexion](img_fr/login.png)
 
@@ -57,7 +57,7 @@ la liste de vos projets.
 ## Accès aux réglages du projet
 
 La fenêtre de réglages du projet qui s'ouvre quand on sélectionne un projet se
-décompose en 5 blocs (4 blocs permaments et un 5ème bloc pour afficher l'historique
+décompose en 5 blocs (4 blocs permanents et un 5ème bloc pour afficher l'historique
 du git interne au serveur).
 
 ### Bloc d'identification du projet
@@ -105,7 +105,7 @@ Pour la plupart des utilisations, le droit "expert" n'est pas nécessaire.
 
 ### Bloc de gestion des membres
 
-Dans ce troisième bloc, situé en dessous du premier bloc à gauche dans le fenêtre,
+Dans ce troisième bloc, situé en dessous du premier bloc à gauche dans la fenêtre,
 on trouve la liste des membres du projet dans laquelle apparait en première ligne
 votre login (ou votre courriel de connexion si vous préférez).
 Les pictogrammes devant chaque login vont permettre la gestion des autres membres
@@ -121,7 +121,7 @@ en premier en caractères normaux (indiquant que vous n’avez pas encore accès
 avec le pictogramme, de demande d’accès, ![add](../docker-buildroot/html/img/add.png)
 sur lequel vous allez pouvoir cliquer.
 
-- **Exemple** : **etudiant2@institut.fr** souhaite faire partir du projet n°1
+- **Exemple** : **etudiant2@institut.fr** souhaite faire partie du projet n°1
 et donc clique sur le pictogramme de demande d'accès alors qu'il voit le cadre
 comme ceci.
 
@@ -147,7 +147,7 @@ ou refuse la demande de participation de **etudiant2@institut.fr**.
   ![bloc 3 figure e](img_fr/set_cad3e.png)
 
 **Remarque** : *Les enseignants n’ont pas besoin de votre approbation
-pour faire partir de votre groupe.*
+pour faire partie de votre groupe.*
 
 ### Bloc d'action
 
@@ -158,17 +158,17 @@ et enfin de visualiser le terminal de pilotage de Buildroot.
 
 #### Lancement de la machine virtuelle
 
-La jauge, en bas de la fenêtre de navigation et juste au dessus du message défillant et
-précisant le copyleft, indique le nombre de machines virtuelles déjà allumer par rapport
+La jauge, en bas de la fenêtre de navigation et juste au-dessus du message défilant et
+précisant le copyleft, indique le nombre de machines virtuelles déjà allumée par rapport
 au quota maximum de 30 machines virtuelles allumées en même temps.
-La partie rouge à gauche représente le nombre de VM déjà allumées tandis que la parti verte
+La partie rouge à gauche représente le nombre de VM déjà allumées tandis que la partie verte
 à droite représente le nombre de VM encore disponibles pour être allumées.
 Pour plus de précision, et pour les daltoniens, le nombre de VM allumées est rappelé
 à droite de la jauge.
 
 ![jauge](img_fr/jauge.png)
 
-Pour allumer le serveur de compilation associé au projet, on appuie sur le bouton suivant :
+Pour démarrer le serveur de compilation associé au projet, on appuie sur le bouton suivant :
 
 ![startvm](img_fr/startvm.png)
 
@@ -191,6 +191,16 @@ Une nouvelle fenêtre (la fenêtre du terminal) se substitue à la fenêtre de p
 Cette fenêtre peut, à tout moment, être refermée (en cliquant sur la croix en haut à droite)
 pour revenir à la fenêtre de paramétrage du projet.
 
+### Bloc git
+
+Le 5ème bloc
+
+
+
+
+
+
+
 ## Utilisation du terminal de la machine virtuelle
 
 Dans la fenêtre du terminal, on trouve, en partie droite, des boutons permettant de lancer
@@ -201,7 +211,7 @@ permettant de visualiser, ou d’interagir avec, l’exécution de la commande.
 
 ### Exemple d'utilisation : make menuconfig
 
-Pour accéder au system de configuration, on utilise communément la commande "**make menuconfig**"
+Pour accéder au système de configuration, on utilise communément la commande "**make menuconfig**"
 de "buildroot". Vous avez accès à cette commande via le bouton de même nom de l’interface.
 
 Après quelques secondes (pendant lesquelles la commande de compilation défile à l’écran),
@@ -226,7 +236,7 @@ résultat de la dernière commande exécutée par buildroot.
 
 ### Les commandes accessibles de Buildroot
 
-Outre la commande **make menuconfig** déjà sitée dans l'exemple, les principales
+Outre la commande **make menuconfig** déjà citée dans l'exemple, les principales
 commandes de Buildroot qui ont été rendues accessibles d'une simple clic de bouton
 sont :
 
@@ -272,7 +282,7 @@ Les deux boutons suivant servent respectivement à constuire un package et
 
 - **make \<PACKAGE\>-build**
 
-  La commande Linux commande par demander le nom du package, puis lance la commande
+  La commande Linux commence par demander le nom du package, puis lance la commande
   Buildroot de fabrication du package indiqué.
 
   **Exemple** : *Pour générer un package nommé par exemple "python-paho-mqtt", on saisit,
@@ -288,7 +298,7 @@ Les deux boutons suivant servent respectivement à constuire un package et
 ## Accès sftp au contenu de la machine virtuelle
 
 Sous Windows via un outil tel que **FileZilla** ou **Winscp** (ou tout autre logiciel
-équivalent), on va pouvoir accéder à une partie restrinte des fichiers de la machine
+équivalent), on va pouvoir accéder à une partie restreinte des fichiers de la machine
 virtuelle. Via sftp, on peut accéder à une racine virtuelle contenant 2 répertoires :
 
 - **/output**
@@ -296,13 +306,13 @@ virtuelle. Via sftp, on peut accéder à une racine virtuelle contenant 2 réper
   C'est le répertoire depuis lequel les commandes Buildroot sont lancées.
   L'accès à ce répertoire a volontairement été restreint en lecture seule.
   Il va permettre notamment d'y récupérer le fichier **sdcard.img** depuis
-  le sous répertoire **/output/images** afin de le transférer sur une carte µSD,
+  le sous-répertoire **/output/images** afin de le transférer sur une carte µSD,
   via le logiciel **Raspberry Pi Imager** par exemple.
 
 - **/external**
 
   C'est le répertoire des éléments externes à Buildroot.
-  On y trouve plusieurs sous répertoires :
+  On y trouve plusieurs sous-répertoires :
 
   - **/external/configs**
 
@@ -312,7 +322,7 @@ virtuelle. Via sftp, on peut accéder à une racine virtuelle contenant 2 réper
 
     C'est le répertoire qui est automatiquement configuré (via la variable
     d'environnement **BR2_ROOTFS_OVERLAY**) pour être utilisé par Buildroot
-    comme répertoire overlay pour la construction du système de fichier racine.
+    comme répertoire overlay pour la construction du système de fichiers racine.
 
     **Exemple** : *Plutôt que de modifier un fichier **/output/target/etc/wpa_supplicant.conf**, 
     on créera un répertoire **/external/custom-rootfs/etc** et on y placera la
@@ -324,7 +334,7 @@ virtuelle. Via sftp, on peut accéder à une racine virtuelle contenant 2 réper
 
     **Remarque** : *On n'oubliera pas de modifier le fichier **/external/Config.in**
     pour y inclure le chemin d'accès, vers chaque package métier que l'on ajoute,
-    via une ligne semblable à celle ci-dessous* :
+    via une ligne semblable à celle-ci* :
 
     ```config
     source "$BR2_EXTERNAL_DEFAULT_PATH/packages/…nom…/Config.in"
