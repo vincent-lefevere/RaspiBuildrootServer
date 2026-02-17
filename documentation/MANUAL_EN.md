@@ -209,6 +209,8 @@ The ![rollback](../docker-buildroot/html/img/rollback.png) icon to the left of t
 of each stage allows you (by clicking on it) to return the project to the corresponding state
 (by deleting all subsequent stages, including current changes, from the history).
 
+**Note**: Shutting down and restarting the virtual machine following a change in the project status is done automatically and transparently (no change in the port number for sftp).
+
 ## Using the virtual machine terminal
 
 In the terminal window, on the right-hand side are buttons for launching

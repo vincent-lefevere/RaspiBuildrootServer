@@ -208,6 +208,10 @@ Le pictogramme ![rollback](../docker-buildroot/html/img/rollback.png) à gauche 
 de chaque étape permet (en cliquant dessus) de faire revenir le projet à l'état correspondant
 (en effaçant de l'historique toutes les étapes postérieures dont les modifications courantes).
 
+**remarque** : L'extinction et le redémarrage de la machine virtuelle suite au changement
+d'état du projet sont effectués automatiquement et de façon transparente (pas de changement
+du numéro de port pour le sftp).
+
 ## Utilisation du terminal de la machine virtuelle
 
 Dans la fenêtre du terminal, on trouve, en partie droite, des boutons permettant de lancer
