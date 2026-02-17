@@ -246,7 +246,7 @@ sur le pictogramme ![de performance](../../blob/main/docker-buildroot/html/img/s
 situé en haut à gauche de la fenêtre de paramétrage, la fenêtre de performance s'ouvre alors
 et présente 5 courbes de performance. Les informations utiles sont situées dans les 3 courbes
 du bas (Les 2 courbes du haut étant réservées pour la visualisation de l'utilisation mémoire
-et CPU relative à projet sélectionné)
+et CPU relative au projet sélectionné)
 
 ![fenêtre de performance](../../blob/main/documentation/img_fr/win_perf.png)
 
@@ -304,3 +304,9 @@ un script "[down.sh](../../blob/main/docker-buildroot/down.sh)" est fourni.
 ```bash
 ./down.sh
 ```
+
+## Autres documentations
+
+La version anglaise de cette documentation d'installation se trouve dans le fichier ["README_EN.md"](README_EN.md).
+
+Le manuel utilisateur se trouve dans [le répertoire "documentation" dans le fichier "MANUAL.md"](../../blob/main/documentation/MANUAL.md). La version anglaise du manuel utilisateur se trouve dans [le répertoire "documentation" dans le fichier "MANUAL_EN.md](../../blob/main/documentation/MANUAL_EN.md).
