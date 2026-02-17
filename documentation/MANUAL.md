@@ -193,13 +193,20 @@ pour revenir à la fenêtre de paramétrage du projet.
 
 ### Bloc git
 
-Le 5ème bloc
+Le 5ème bloc présente l'historique des modifications du projet telles que le serveur git interne
+les a tracées. Ce bloc apparait uniquement lorsque la machine virtuelle est démarrée
 
+L'exemple ci-dessous montre l'historique d'un projet avec deux étapes:
+- la création du projet
+- la précédente extinction de la machine virtuelle et sa sauvegarde associée.
 
+![set_cad4](img_en/set_cad4.png)
 
+Les différentes étapes sont affichées de haut en bas en allant de la plus récente à la plus ancienne.
 
-
-
+Le pictogramme ![rollback](../docker-buildroot/html/img/rollback.png) à gauche de la ligne de titre
+de chaque étape permet (en cliquant dessus) de faire revenir le projet à l'état correspondant
+(en effaçant de l'historique toutes les étapes postérieures dont les modifications courantes).
 
 ## Utilisation du terminal de la machine virtuelle
 

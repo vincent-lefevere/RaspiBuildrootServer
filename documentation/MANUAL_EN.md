@@ -192,6 +192,23 @@ A new window (the terminal window) replaces the project settings window.
 This window can be closed at any time (by clicking on the cross at the top right)
 to return to the project settings window.
 
+### Git block
+
+The fifth block shows the history of changes to the project as tracked by the internal Git server.
+This block only appears when the virtual machine is started.
+
+The example below shows the history of a project with two stages:
+- creation of the project
+- previous shutdown of the virtual machine and associated backup.
+
+![set_cad4](img_en/set_cad4.png)
+
+The different stages are displayed from top to bottom, from the most recent to the oldest.
+
+The ![rollback](../docker-buildroot/html/img/rollback.png) icon to the left of the title line
+of each stage allows you (by clicking on it) to return the project to the corresponding state
+(by deleting all subsequent stages, including current changes, from the history).
+
 ## Using the virtual machine terminal
 
 In the terminal window, on the right-hand side are buttons for launching
