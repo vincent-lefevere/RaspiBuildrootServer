@@ -24,4 +24,5 @@
  $mysqli->query("UNLOCK TABLES");
  frontend($p);
  send_mqtt_msg("/all");
+ send_mqtt_msg("/cnf");
 ?>

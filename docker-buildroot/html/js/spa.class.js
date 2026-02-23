@@ -176,19 +176,37 @@ class MySPA {
     if (confirm(message)==false) return;
     this.#backend.supDpt(this.#proj.supDpt(el));
   }
-  addDpt() {
-    var title=window.prompt('Titre du nouveau département');
+  addDpt(message) {
+    var title=window.prompt(message);
     if (title!='' && title!=null) this.#backend.addDpt(title);
   }
+  grpDpt(el) {
+    var id=this.#proj.grpDpt(el);
+    for (var i=0;i<el.children.length;i++) {
+      var selected=el.children[i].selected;
+      if (this.#proj.statGrpDpt(id,i,selected))
+        this.#backend.grpDpt(id,el.children[i].value,selected);
+    }
+  }
+  delexample(el, message) {
+    var id=this.#proj.grpDpt(el.parentNode);
+    if (confirm(message)!=false) this.#backend.loadexample(undefined,id);    
+  }
+  loadexample(el, message) {
+    var id=this.#proj.grpDpt(el.parentNode);
+    if (confirm(message)!=false) this.#backend.loadexample(el,id);
+    el.value='';
+  }
+
   supPrj(message) {
     if (confirm(message)==false) return;
     this.#backend.supPrj(this.#proj.getidprj());
     this.#settings.unshow();
     this.#proj.show();
   }
-  addPrj(el) {
+  addPrj(el, message) {
     var id=this.#proj.addPrj(el);
-    var title=window.prompt('Titre du nouveau projet');
+    var title=window.prompt(message);
     if (title!='' && title!=null) this.#backend.addPrj(id,title);
   }
 

@@ -48,6 +48,19 @@ function get_users($id) {
  return([$list,$token]);
 }
 
+function get_grps($id) {
+ global $mysqli;
+
+ $list='';
+ $result=$mysqli->query("SELECT grps.grp AS grp, (myaccess.grp IS NOT NULL) AS ok FROM (SELECT DISTINCT grp FROM users WHERE grp IS NOT NULL) AS grps LEFT JOIN (SELECT grp FROM access WHERE id=$id) AS myaccess ON grps.grp=myaccess.grp");
+ while ($val=$result->fetch_assoc()) {
+  if ($val['ok']==0) $list.='{"grp":"'.$val['grp'].'","ok":false},';
+  else $list.='{"grp":"'.$val['grp'].'","ok":true},';
+ }
+ $list=substr($list,0,-1);
+ return($list);
+}
+
 function frontend($p) {
  global $mysqli;
  global $vm;
@@ -58,7 +71,7 @@ function frontend($p) {
  $nbvm=$val['nbvm'];
  $projects='';
  if ($_SESSION['prof']) $result=$mysqli->query("SELECT *, (power IS NULL) AS off FROM projects");
-  else $result=$mysqli->query("SELECT projects.*, (projects.power IS NULL) AS off FROM projects INNER JOIN act ON projects.id=act.id WHERE email='$login' UNION SELECT *, (power IS NULL) AS off FROM projects WHERE NOT pub ORDER BY id");
+ else $result=$mysqli->query("SELECT projects.*, (projects.power IS NULL) AS off FROM projects INNER JOIN act ON projects.id=act.id WHERE email='$login' UNION SELECT *, (power IS NULL) AS off FROM projects WHERE NOT pub ORDER BY id");
  while ($val=$result->fetch_assoc()) {
   $id=$val['id'];
   $title=str_replace(array('"'),array('\"'),$val['title']);
@@ -78,17 +91,22 @@ function frontend($p) {
  }
  $projects=substr($projects,0,-1);
  $myprj='';
- $result=$mysqli->query("SELECT projects.id FROM projects INNER JOIN act ON projects.id=act.id WHERE email='$login' AND token IS NOT NULL");
+ $result=$mysqli->query("SELECT projects.id FROM projects INNER JOIN act ON projects.id=act.id WHERE email='{$login}' AND token IS NOT NULL");
  while ($val=$result->fetch_assoc()) $myprj.=$val['id'].',';
  $myprj=substr($myprj,0,-1);
 
  $dpts='';
- $result=$mysqli->query("SELECT id, title FROM departments");
+ if ($_SESSION['prof']) $result=$mysqli->query("SELECT id, title FROM departments");
+ else $result=$mysqli->query("SELECT departments.id, departments.title FROM departments INNER JOIN (access INNER JOIN users ON access.grp=users.grp) ON departments.id=access.id WHERE users.email='{$login}'");
  while ($val=$result->fetch_assoc()) {
   $id=$val['id'];
   $title=str_replace(array('"'),array('\"'),$val['title']);
+  $grps=get_grps($id);
   $list=get_projects($id);
-  $dpts.='{"id":'.$id.',"title":"'.$title.'","projects":['.$list.']},';
+  if ($_SESSION['prof'])
+   $dpts.='{"id":'.$id.',"title":"'.$title.'","grps":['.$grps.'],"projects":['.$list.']},';
+  else
+   $dpts.='{"id":'.$id.',"title":"'.$title.'","grps":[],"projects":['.$list.']},';
  }
  $dpts=substr($dpts,0,-1);
 ?>{

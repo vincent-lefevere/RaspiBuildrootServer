@@ -25,9 +25,11 @@ class MyBackend {
   var xhttp= new XMLHttpRequest();
   xhttp.open('POST',url, true);
   xhttp.addEventListener('readystatechange', function() {
-    if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
+    if (xhttp.readyState === XMLHttpRequest.DONE) {
       document.body.className='';
-      if (xhttp.responseText!='false') spa.updatedpt(JSON.parse(xhttp.responseText));
+      if (xhttp.status === 200) {
+        if (xhttp.responseText!='false') spa.updatedpt(JSON.parse(xhttp.responseText));
+      }
     }
   });
   xhttp.addEventListener('error', function() {
@@ -48,6 +50,32 @@ class MyBackend {
   form.append('title',title);
   this.#modDpt(form,'backend2/adddpt.php',this.#spa); 
  }
+
+ grpDpt(id,grp,flag) {
+  var form = new FormData();
+  form.append('id',id);
+  form.append('grp',grp);
+  form.append('flag',flag?'1':'0');
+  this.#modDpt(form,'backend2/grpdpt.php',this.#spa); 
+ }
+ loadexample(el,id) {
+  var form = new FormData();
+  if (el!=undefined) {
+   form.append('upload[file]',el.files[0]);
+   form.append('upload[name]',el.value);
+  }
+  form.append('id',id);
+  var xhttp= new XMLHttpRequest();
+  xhttp.open("POST","backend2/loadexample.php", true);
+  xhttp.addEventListener('readystatechange', function() {
+    if (xhttp.readyState === XMLHttpRequest.DONE) {
+      document.body.className='';
+    }
+  });
+  xhttp.send(form);
+  document.body.className='wait';
+ }
+
 
  supPrj(id) {
   var form = new FormData();

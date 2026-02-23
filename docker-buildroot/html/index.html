@@ -53,7 +53,8 @@
         <div class="separation"></div>
         <div id="tag_dpt"></div>
         <h2 class="prof">
-          <button class="add" onclick="spa.addDpt();"></button>
+          <button class="add fr" onclick="spa.addDpt('Titre du nouveau département');"></button>
+          <button class="add en" onclick="spa.addDpt('Title of the new department');"></button>
           <label><span class="fr">Créer une nouvelle catégorie de projets</span><span class="en">Create a new project category</span></label>
         </h2>
       </main>
@@ -187,14 +188,17 @@
       </div>
       <div id="template_department">
         <input type="hidden"/>        
+        <input class="dpt" type="radio" name="seldpt">
         <h2>
           <button class="supr prof fr" onclick="spa.supDpt(this,'Confirmation de suppression de la catégorie de projets');"></button>
           <button class="supr prof en" onclick="spa.supDpt(this,'Confirmation of project category deletion');"></button>
-          <label class="tag_dpt_title"></label>
+          <label class="tag_dpt_title"></label><hr class="prof option"/>
+          <span class="prof option fr">Sélectionnez le fichier prjbr.tar.gz à inclure : <input type="file" onchange="spa.loadexample(this,'Confirmation de dépose du fichier sélectionné');"/> ou demandez en la <input type="button" value="suppression"onclick="spa.delexample(this,'Confirmation de suppression de l\'exemple précédent');"/></span><span class="prof option en">Select the prjbr.tar.gz file to include: <input type="file" onchange="spa.loadexample(this,'Confirmation of selected file upload');"/> or request its <input type="button" value="removal" onclick="spa.delexample(this,'Confirmation of deletion of the previous example');"/></span><br class="prof option"/>
+          <span class="prof option fr">Sélectionnez les groupes ayant accès : </span><span class="prof option en">Select the groups with access: </span><select class="prof option tag_select_group" multiple size="1" onchange="spa.grpDpt(this)"></select>
         </h2>
-        <input class="dpt" type="radio" name="seldpt">
         <div class="dpt"></div>
-        <p class="addprj" onclick="spa.addPrj(this);"><span class="fr">créer nouveau projet</span><span class="en">create new project</span></p>
+        <p class="addprj fr" onclick="spa.addPrj(this,'Titre du nouveau projet');"><span>créer nouveau projet</span></p>
+        <p class="addprj en" onclick="spa.addPrj(this,'Title of the new project');"><span>create new project</span></p>
         <div class="separation"></div>
       </div>
       <div id="template_member">

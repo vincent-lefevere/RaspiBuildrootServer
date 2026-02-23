@@ -107,7 +107,7 @@ d'un fichier ".csv" contenant la liste des utilisateurs à créer, à modifier, 
 
 ![rubrique gestion des utilisateurs](../../blob/main/documentation/img_fr/conf_rub1.png)
 
-Le fichier ".csv" doit être codé en UTF-8 avec 4 colonnes (séparées par des points virgules) :
+Le fichier ".csv" doit être codé en UTF-8 avec 5 colonnes (séparées par des points virgules) :
 
 - En première colonne, mettre une valeur 0 (pour le compte d'un étudiant) ou 1 (pour le compte d'un professeur).
 
@@ -120,21 +120,27 @@ sous un format chiffré). Si le mot de passe est vide, le compte est supprimé
 
 - En quatrième colonne, mettre le Prénom et le Nom de l'utilisateur.
 
+- En cinquième colonne, mettre le nom (12 caractères maximum) du groupe auquel l'étudiant appartient
+(on peut ne rien mettre pour un professeur, car dans ce cas l'information ne sera pas utilisée).
+
 En cliquant sur le bouton "choisir un fichier", on sélectionne sur son ordinateur le fichier ".csv" à traiter.
-Une fois, validé, le traitement du fichier commence tout de suite : Les nouveaux comptes sont créés,
-les comptes existants ayant un mot de passe vide sont supprimés enfin le type et les Prénom/Nom des comptes existants
-sont mis à jour.
+Une fois, validé, le traitement du fichier commence tout de suite : 
+- Les nouveaux comptes sont créés,
+- Les comptes existants, ayant un mot de passe à la valeur "-", sont supprimés
+- Les autres comptes existants sont mis à jour avec les nouvelles valeurs de type, de Prénom/Nom et de groupe.
+(si un mot de passe non vide est indiqué, ce dernier sera également mise à jour,
+sinon on conserve le mot de passe actuel
 
 **Remarque** : *Dans le répertoire [documentation/exemple_fr](../../tree/main/documentation/exemple_fr)
 se trouve un fichier d'exemple de création de 4 comptes (1 compte enseignant et 3 comptes étudiant).
 Ce fichier s'appelle [list.csv](../../blob/main/documentation/exemple_fr/list.csv)*
 
-| professeur | email de login          | mot de passe  | nom/prénom              |
-| ---------- |:------------------------|:--------------|:------------------------|
-| non        | etudiant1@institut.fr   | etudiant1     | Etudiant Français n°1   |
-| non        | etudiant2@institut.fr   | etudiant2     | Etudiant Français n°2   |
-| non        | etudiant3@institut.fr   | etudiant3     | Etudiant Français n°3   |
-| oui        | professeur1@institut.fr | professeur1   | Professeur Français n°1 |
+| professeur | email de login          | mot de passe  | nom/prénom              |groupe   |
+| ---------- |:------------------------|:--------------|:------------------------|:--------|
+| non        | etudiant1@institut.fr   | etudiant1     | Etudiant Français n°1   | groupe1 |
+| non        | etudiant2@institut.fr   | etudiant2     | Etudiant Français n°2   | groupe1 |
+| non        | etudiant3@institut.fr   | etudiant3     | Etudiant Français n°3   | groupe2 |
+| oui        | professeur1@institut.fr | professeur1   | Professeur Français n°1 |         |
 
 ### Téléchargement du logiciel Buildroot
 
@@ -262,7 +268,9 @@ de projets dans lesquels les utilisateurs pourront ensuite y créer leur projet.
 Pour cela il faut d'abord quitter la fenêtre de **Paramétrage du logiciel** en cliquant sur la croix
 de fermeture située en haut à droite de la fenêtre et ainsi retourner dans la liste des projet.
 
-## Création des catégories de projets
+## Gestion des catégories de projets
+
+### Création des catégories de projets
 
 La fenêtre principale gérant les projets par catégorie commence par présenter, en haut, un bandeau
 regroupant les projets auxquels vous participez (quelque soit la catégorie dans laquelle ils ont
@@ -280,6 +288,18 @@ catégorie en cliquant sur la croix bleue. Un popup demande alors le titre de la
 **Remarque** : *Dès qu'une image sera terminée d'être construite, dans chaque catégorie de projets
 apparaîtra un pictogramme constitué d'une grande croix bleu permettant aux utilisateurs d'y créer
 des projets.*
+
+### Paramétrage des catégories de projets
+
+Sous le titre de la catégorie de projets apparait pour les professeurs :
+
+- Un fichier peut être déposé comme point de départ optionnel pour tous les nouveaux projets
+de la catégorie, via le premier bouton.
+
+- Une liste de sélection à choix multiples permet d'indiquer les groupes d'étudiants qui pourront
+y accéder.
+
+![paramétrage de catégorie](../../blob/main/documentation/img_fr/proj_rub2.png)
 
 ## Redémarrage et arrêt du serveur
 

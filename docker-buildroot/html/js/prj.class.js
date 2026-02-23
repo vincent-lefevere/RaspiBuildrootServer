@@ -73,13 +73,23 @@ class MyPrj {
       tmp.removeAttribute('id');
       div.appendChild(tmp);
       tmp.firstElementChild.value=id;
-      if (id==seldpt) tmp.children[2].checked=true;
+      if (id==seldpt) tmp.children[1].checked=true;
       id='dpt'+id;
       var lbl=tmp.getElementsByClassName('tag_dpt_title')[0];
       lbl.innerText=list[i].title;
       lbl.setAttribute('for',id);
-      tmp.children[2].setAttribute('id',id);
-      tmp.children[1].firstElementChild.style.visibility=list[i].projects.length==0?'':'hidden';
+      tmp.children[1].setAttribute('id',id);
+      var visibility=list[i].projects.length==0?'':'hidden'
+      Array.from(tmp.children[2].getElementsByClassName('supr')).forEach(function (el) {el.style.visibility=visibility;});
+      var options=tmp.getElementsByClassName('tag_select_group')[0];
+      var grps=list[i].grps;
+      for (var j = 0; j < grps.length; j++){
+       var option=document.createElement('option');
+       option.setAttribute('value',grps[j].grp);
+       option.innerText=grps[j].grp;
+       if (grps[j].ok) option.setAttribute('selected','selected');
+       options.appendChild(option);
+      }
       tmp=tmp.children[3];
       for (var j=0; j<list[i].projects.length; j++) tmp.appendChild(this.#buildProject(list[i].projects[j]));
     }
@@ -103,11 +113,23 @@ class MyPrj {
     this.#mydiv.className=this.#auth.getprof()?'prof':'stud';
   }
 
+  statGrpDpt(id,i,ok) {
+    var dpt;
+    this.#db.dpts.forEach(function(el) { if (el.id==id) dpt=el; });
+    var flag=dpt.grps[i].ok;
+    dpt.grps[i].ok=ok;
+    return(ok!=flag);
+  }
+
   addPrj(el) {
     return(el.parentNode.firstElementChild.value);
   }
 
   supDpt(el) {
+    return(el.parentNode.parentNode.firstElementChild.value);
+  }
+
+  grpDpt(el) {
     return(el.parentNode.parentNode.firstElementChild.value);
   }
 }

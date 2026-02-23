@@ -9,7 +9,7 @@
   return $val1 <=> $val2;
  }
 
- function init($vm,$p,$version,$expert) {
+ function init($vm,$p,$version,$expert,$iddep) {
   $email=$_SESSION['login'];
   $name=$_SESSION['name'];
   system("mkdir -p /data/vm-{$vm}/external ; git clone --branch prj{$p} git://git/projets.git /data/vm-{$vm}/external",$retval);
@@ -17,7 +17,10 @@
    exec("git clone --depth 1 git://git/projets.git /data/vm-{$vm}/external");
    exec("tar -C /data/vm-{$vm}/external -xvzpf /data/external.tar.gz");
    exec("cd /data/vm-{$vm}/external ; git config user.email {$email} ; git config user.name \"{$name}\" ; git add --all ; git commit --all -m 'create project' ; git branch -c prj{$p} ; git switch prj{$p} ; git push origin prj{$p}");
-  } else exec("cd /data/vm-{$vm}/external ; mkdir -p board configs custom-rootfs packages");
+  } else {
+    exec("cd /data/vm-{$vm}/external ; mkdir -p board configs custom-rootfs packages");
+    if (file_exists("/data/examples/prjbr-{$iddep}.tar.gz")) exec("tar -C /data/vm-{$vm}/external -xvzpf /data/examples/prjbr-{$iddep}.tar.gz");
+  }
   if (file_exists($fname="/data/vm-{$vm}/external/configs/.idhardwareversion")) $previous=(int) file_get_contents($fname);
   else $previous=$version;
   if ($previous!=$version) {
@@ -187,10 +190,10 @@ EOT;
   exec("sudo /usr/bin/docker compose -p docker-buildroot -f /data/vm-{$vm}/vm.yml exec -T -w /home/buildroot/output -u buildroot vm-{$vm} make manip_defconfig BR2_EXTERNAL=/home/buildroot/external");
  }
 
- function poweron($vm,$p,$version,$expert) {
+ function poweron($vm,$p,$version,$expert,$iddep) {
   if (file_exists("/data/vm-{$vm}/vm.yml")) {
    exec("sudo /usr/bin/docker compose -p docker-buildroot -f /data/vm-{$vm}/vm.yml start vm-{$vm}");
-  } else init($vm,$p,$version,$expert);
+  } else init($vm,$p,$version,$expert,$iddep);
  }
 
  session_start();
@@ -207,8 +210,8 @@ EOT;
   $result=$mysqli->query("SELECT 1 FROM act WHERE id={$p} AND token IS NOT NULL AND email='".$_SESSION['login']."'");
   $val=$result->fetch_assoc();
   if ($val) {
-   $val=$mysqli->query("SELECT image, expert FROM projects WHERE id={$p}")->fetch_assoc();
-   poweron($vm,$p,(int) $val['image'],$val['expert']);
+   $val=$mysqli->query("SELECT image, expert, iddep FROM projects WHERE id={$p}")->fetch_assoc();
+   poweron($vm,$p,(int) $val['image'],$val['expert'],$val['iddep']);
    $mysqli->query("UPDATE projects SET power={$vm}, allow=expert WHERE id={$p}");
    send_mqtt_msg("/all");
    $mysqli->query("UNLOCK TABLES");

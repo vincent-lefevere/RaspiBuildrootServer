@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS users (
   email varchar(320) PRIMARY KEY,
   pwd varchar(255) NOT NULL,
   prof bit(1) NOT NULL,
-  name varchar(300) NOT NULL
+  name varchar(300) NOT NULL,
+  grp varchar(12) NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
 END;
   $mysqli->query($query);
@@ -17,6 +18,14 @@ END;
 CREATE TABLE IF NOT EXISTS departments (
   id int(11) AUTO_INCREMENT PRIMARY KEY,
   title varchar(200) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
+END;
+  $mysqli->query($query);
+  $query=<<<END
+CREATE TABLE IF NOT EXISTS access (
+  id int(11),
+  grp varchar(12) NOT NULL,
+  PRIMARY KEY (id, grp)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
 END;
   $mysqli->query($query);

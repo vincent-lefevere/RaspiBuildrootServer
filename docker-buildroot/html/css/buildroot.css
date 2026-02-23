@@ -160,8 +160,10 @@ main { width: calc(100% - 10px); position: absolute; }
 #projects h2 button { width: 18px; height: 18px; background-size: cover; }
 #projects h2 button.supr { background-image: url(../img/supr.png); }
 #projects h2 button.add { background-image: url(../img/add.png); }
+#projects .option { font-size:12px; color: black; }
+#projects input.dpt:not(:checked) ~ h2 .option { display: none; }
 
-#projects input.dpt:checked + div.dpt { display: block; }
+#projects input.dpt:checked ~ div.dpt { display: block; }
 .install > #projects input.dpt:checked ~ p.addprj { display: block; }
 #projects div > p.addprj { width:170px; overflow: hidden; }
 #projects div > p { width:340px; overflow-y: scroll; overflow-x: hidden; cursor:pointer; }

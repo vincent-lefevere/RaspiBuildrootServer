@@ -108,7 +108,7 @@ modified, or deleted.
 
 ![user management section](../../blob/main/documentation/img_en/conf_rub1.png)
 
-The ".csv" file must be encoded in UTF-8 with 4 columns (separated by semicolons):
+The ".csv" file must be encoded in UTF-8 with 5 columns (separated by semicolons):
 
 - In the first column, enter a value of 0 (for a student account) or 1 (for a teacher account).
 
@@ -120,20 +120,26 @@ If the password is empty, the account is deleted (but you cannot delete your own
 
 - In the fourth column, enter the user's First Name and Last Name.
 
+- In the fifth column, enter the name (maximum 12 characters) of the group to which the student belongs
+(you can leave this blank for a teacher, as in this case the information will not be used).
+
 Click on the "Choose a file" button to select the ".csv" file to be processed on your computer.
-Once the file has been validated, processing begins immediately:
-new accounts are created, existing accounts with empty passwords are deleted
-and the type and the first names/surnames of existing accounts are updated.
+Once validated, file processing begins immediately: 
+- New accounts are created.
+- Existing accounts with a password value of "-" are deleted.
+- Other existing accounts are updated with the new type, first name/surname and group values.
+(If a non-empty password is specified, it will also be updated;
+otherwise, the current password will be retained.
 
 **Note** : *The [documentation/exemple_en] directory (../../tree/main/documentation/exemple_en) contains an example file for creating 4 accounts (1 teacher account and 3 student accounts).
 This file is called [list.csv](../.../blob/main/documentation/example_en/list.csv)*
 
-| teacher | login email             | password  | surname/first name  |
-| ------- |:------------------------|:----------|:--------------------|
-| no      | student1@institution.uk | student1  | English Student n°1 |
-| no      | student2@institution.uk | student2  | English Student n°2 |
-| no      | student3@institution.uk | student3  | English Student n°3 |
-| yes     | teacher1@institution.uk | teacher1  | English Teahcer n°1 |
+| teacher | login email             | password  | surname/first name  | group  |
+| ------- |:------------------------|:----------|:--------------------|:-------|
+| no      | student1@institution.uk | student1  | English Student n°1 | group1 |
+| no      | student2@institution.uk | student2  | English Student n°2 | group1 |
+| no      | student3@institution.uk | student3  | English Student n°3 | group2 |
+| yes     | teacher1@institution.uk | teacher1  | English Teahcer n°1 |        |
 
 ### Download Buildroot software
 
@@ -258,7 +264,9 @@ in which users can then create their own projects.
 To do this, first exit the **Software settings** window by clicking on the close cross at the top
 right of the window, and then return to the project list.
 
-## Creating project categories
+## Project category management
+
+### Creating project categories
 
 The main window managing projects by category begins by displaying, at the top, a banner grouping
 together the projects in which you are participating (whatever the category in which they were
@@ -275,6 +283,19 @@ on the blue cross. A popup asks for the title of the category to be created.
 
 **Note** : *As soon as an image is finished being built, a pictogram of a large blue cross will
 appear in each project category, enabling users to create projects there.*
+
+Setting up project categories
+
+Under the project category title, the following appears for teachers:
+
+- A file can be uploaded as an optional starting point for all new projects
+in the category, using the first button.
+
+- A multiple-choice selection list allows you to indicate which groups of students will be able to
+access it.
+
+![category settings](../../blob/main/documentation/img_en/proj_rub2.png)
+
 
 ## Restarting and shutting down the server
 
