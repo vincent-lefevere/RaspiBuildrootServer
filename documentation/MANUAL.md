@@ -191,6 +191,19 @@ Une nouvelle fenêtre (la fenêtre du terminal) se substitue à la fenêtre de p
 Cette fenêtre peut, à tout moment, être refermée (en cliquant sur la croix en haut à droite)
 pour revenir à la fenêtre de paramétrage du projet.
 
+#### exportation du répertoire "**external**"
+
+Il est également possible d'extraire du serveur l'état actuel du répertoire "**external**" de
+la machine virtuelle sous la forme d'un fichier "**prjbr.tar.gz**" grâce au bouton suivant :
+
+![export](img_fr/export.png)
+
+**Remarque** : *Les professeurs pourront ainsi récupérer un projet et s'en servir comme configuration
+de départ pour une nouvelle catégorie de projets. Les étudiants pourront via ce bouton faire une
+exportation rapide de leur projet pour la transmettre à leur professeur. Pour que l'expertation
+reflète bien l'état complet du projet, il faut penser à utiliser, avant cela dans le terminal,
+la commande de buildroot "make savedefconfig" (dont l'usage est décrit plus loin dans ce manuel).*
+
 ### Bloc git
 
 Le 5ème bloc présente l'historique des modifications du projet telles que le serveur git interne

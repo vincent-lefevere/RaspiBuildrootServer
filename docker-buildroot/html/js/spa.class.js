@@ -209,6 +209,9 @@ class MySPA {
     var title=window.prompt(message);
     if (title!='' && title!=null) this.#backend.addPrj(id,title);
   }
+  savePrj(el) {
+    window.open("backend2/saveprj.php?id="+this.#proj.getidprj(),"_blank");
+  }
 
   lock(el) { this.#backend.lock(this.#proj.getidprj(),el.checked); }
   expert(el) { this.#backend.expert(this.#proj.getidprj(),el.checked); }

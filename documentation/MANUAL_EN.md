@@ -192,6 +192,14 @@ A new window (the terminal window) replaces the project settings window.
 This window can be closed at any time (by clicking on the cross at the top right)
 to return to the project settings window.
 
+#### Exporting the "**external**" directory
+
+It is also possible to extract the current state of the "**external**" directory of the virtual machine from the server in the form of a "**prjbr.tar.gz**" file using the following button:
+
+![export](img_en/export.png)
+
+**Note**: *Teachers will thus be able to retrieve a project and use it as a starting point for a new category of projects. Students can use this button to quickly export their project and send it to their teacher. To ensure that the export accurately reflects the complete state of the project, remember to use the buildroot command "make savedefconfig" (described later in this manual) in the terminal beforehand.*
+
 ### Git block
 
 The fifth block shows the history of changes to the project as tracked by the internal Git server.
