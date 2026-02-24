@@ -293,8 +293,13 @@ des projets.*
 
 Sous le titre de la catégorie de projets apparait pour les professeurs :
 
-- Un fichier peut être déposé comme point de départ optionnel pour tous les nouveaux projets
-de la catégorie, via le premier bouton.
+- Un fichier peut être déposé comme point de départ pour tous les nouveaux projets de la catégorie,
+via le premier bouton. On trouve également au bout de cette ligne un second bouton permettant de
+supprimer la précédente dépose.
+
+**Remarque** : *Quand un fichier a été déposé, il sera automatiquement pris comme point de départ
+lors du premier lancement de la machine virtuelle pour les nouveaux projetsde cette catégorie.
+Sinon on partira d'un projet vide.*
 
 - Une liste de sélection à choix multiples permet d'indiquer les groupes d'étudiants qui pourront
 y accéder.

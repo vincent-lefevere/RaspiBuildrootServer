@@ -288,8 +288,13 @@ Setting up project categories
 
 Under the project category title, the following appears for teachers:
 
-- A file can be uploaded as an optional starting point for all new projects
-in the category, using the first button.
+- A file can be set as the starting point for all new projects in the category,
+using the first button. At the end of this line, there is also a second button that allows you to
+delete the previous setting.
+
+**Note**: *When a file has been deposited, it will automatically be taken as the starting point
+when the virtual machine is first launched for new projects in this category.
+Otherwise, we will start with an empty project.*
 
 - A multiple-choice selection list allows you to indicate which groups of students will be able to
 access it.
