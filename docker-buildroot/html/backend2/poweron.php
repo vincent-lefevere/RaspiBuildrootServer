@@ -16,11 +16,12 @@
   if ($retval!=0) {
    exec("git clone --depth 1 git://git/projets.git /data/vm-{$vm}/external");
    exec("tar -C /data/vm-{$vm}/external -xvzpf /data/external.tar.gz");
+   if (file_exists("/data/examples/prjbr-{$iddep}.tar.gz")) { 
+    exec("tar -C /data/vm-{$vm}/external -xvzpf /data/examples/prjbr-{$iddep}.tar.gz");
+   }
    exec("cd /data/vm-{$vm}/external ; git config user.email {$email} ; git config user.name \"{$name}\" ; git add --all ; git commit --all -m 'create project' ; git branch -c prj{$p} ; git switch prj{$p} ; git push origin prj{$p}");
-  } else {
-    exec("cd /data/vm-{$vm}/external ; mkdir -p board configs custom-rootfs packages");
-    if (file_exists("/data/examples/prjbr-{$iddep}.tar.gz")) exec("tar -C /data/vm-{$vm}/external -xvzpf /data/examples/prjbr-{$iddep}.tar.gz");
-  }
+  } else
+   exec("cd /data/vm-{$vm}/external ; mkdir -p board configs custom-rootfs packages");
   if (file_exists($fname="/data/vm-{$vm}/external/configs/.idhardwareversion")) $previous=(int) file_get_contents($fname);
   else $previous=$version;
   if ($previous!=$version) {
