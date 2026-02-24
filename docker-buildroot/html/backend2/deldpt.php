@@ -8,7 +8,11 @@
  $id=(int) $_POST['id'];
  $mysqli->query("LOCK TABLES projects WRITE, departments WRITE");
  $val=$mysqli->query("SELECT count(id) as nb FROM projects WHERE iddep=$id")->fetch_assoc();
- if ($val['nb']==0) $mysqli->query("DELETE FROM departments WHERE id=$id");
+ if ($val['nb']==0){ 
+  $mysqli->query("DELETE FROM departments WHERE id=$id");
+  $file="/data/examples/prjbr-{$id}.tar.gz";
+  if (file_exists($file)) unlink($file);
+ }
  $mysqli->query("UNLOCK TABLES");
  frontend(0);
  send_mqtt_msg("/all");
