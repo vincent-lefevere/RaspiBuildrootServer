@@ -30,6 +30,7 @@ laquelle [Docker](https://www.docker.com) sera installé et paramétré via un s
 | [Debian](https://www.debian.org) | image docker téléchargée |
 | [Apache](https://httpd.apache.org/) | image docker téléchargée |
 | [php](https://www.php.net) | image docker téléchargée |
+| [php-mosquitto](https://github.com/ryco-dev/php-mosquitto/archive/refs/tags/0.5.1.tar.gz) | téléchargé |
 | [mariadb](https://mariadb.org/) | image docker téléchargée |
 | [git](https://git-scm.com/) | téléchargé |
 | [mosquitto](https://mosquitto.org/) | téléchargé |

@@ -28,6 +28,7 @@ with [Docker](https://www.docker.com) installed and configured using a provided 
 | [Debian](https://www.debian.org) | downloaded docker image |
 | [Apache](https://httpd.apache.org/) | downloaded docker image |
 | [php](https://www.php.net) | downloaded docker image |
+| [php-mosquitto](https://github.com/ryco-dev/php-mosquitto/archive/refs/tags/0.5.1.tar.gz) | downloaded |
 | [mariadb](https://mariadb.org/) | downloaded docker image |
 | [git](https://git-scm.com/) | downloaded |
 | [mosquitto](https://mosquitto.org/) | downloaded |
