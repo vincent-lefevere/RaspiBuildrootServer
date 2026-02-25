@@ -1,4 +1,4 @@
-FROM php:8.4-apache
+FROM php:8.5-apache
 
 ENV ALLOW_OVERRIDE=true
 
@@ -10,8 +10,8 @@ docker-php-ext-configure ldap && \
 docker-php-ext-install ldap
 RUN apt-get update && \
 	apt-get install -y --no-install-recommends sudo curl libmosquitto-dev && \
-	curl -sSL https://github.com/nismoryco/Mosquitto-PHP/archive/refs/tags/0.5.0.tar.gz | tar -C /tmp -xvzpf - && \
-	(cd /tmp/Mosquitto-PHP-0.5.0 && phpize && ./configure && make && make install) && rm -R /tmp/Mosquitto-PHP-0.5.0 && \
+	curl -sSL https://github.com/ryco-dev/php-mosquitto/archive/refs/tags/0.5.1.tar.gz | tar -C /tmp -xvzpf - && \
+	(cd /tmp/php-mosquitto-0.5.1 && phpize && ./configure && make && make install) && rm -R /tmp/php-mosquitto-0.5.1 && \
 	docker-php-ext-enable mosquitto
 RUN a2enmod ssl proxy proxy_wstunnel
 RUN curl -sSL https://get.docker.com/ | sh

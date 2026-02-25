@@ -11,14 +11,14 @@ docker container create --name tmp_wsssh make_wsssh:current
 docker cp -a -q tmp_wsssh:/usr/local/sbin/wsssh - | tar -C bin -xvf -
 docker container rm tmp_wsssh
 docker rmi make_wsssh:current
-BUILDKIT_PROGRESS=plain docker compose build master web mosquitto telegraf mqtt2mysql git
+BUILDKIT_PROGRESS=plain docker compose build master web mosquitto telegraf mqtt2mysql git || exit
 rm -Rf bin
 test -f conf/proftpd/custom/ssh_host_rsa_key && rm conf/proftpd/custom/ssh_host_rsa_key
 ssh-keygen -q -N ""  -t rsa -b 4096 -f conf/proftpd/custom/ssh_host_rsa_key
 test -d /var/tmp/.buildroot-ccache && rm -R /var/tmp/.buildroot-ccache
-mkdir /var/tmp/.buildroot-ccache
+mkdir -p /var/tmp/.buildroot-ccache
 chmod 777 /var/tmp/.buildroot-ccache
-mkdir data/brdl
+mkdir -p data/brdl
 chown www-data data data/brdl
 cat <<EOF >html/backend2/path.inc.php
 <?php

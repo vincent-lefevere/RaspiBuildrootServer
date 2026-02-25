@@ -1,11 +1,12 @@
-FROM debian:12.10
+FROM debian:13.3
 
-RUN apt-get update && apt-get install -y --no-install-recommends php8.2-cli php-dev make php8.2-mysql libmosquitto-dev wget ca-certificates && \
-	wget -qO - https://github.com/nismoryco/Mosquitto-PHP/archive/refs/tags/0.5.0.tar.gz | tar -C /tmp -xvzpf - && \
-	(cd /tmp/Mosquitto-PHP-0.5.0 && phpize && ./configure && make && make install) && rm -R /tmp/Mosquitto-PHP-0.5.0
+RUN apt-get update && apt-get install -y --no-install-recommends php8.4-cli php-dev make php8.4-mysql libmosquitto-dev wget ca-certificates && \
+	wget -qO - https://github.com/ryco-dev/php-mosquitto/archive/refs/tags/0.5.1.tar.gz | tar -C /tmp -xvzpf -  && \
+	(cd /tmp/php-mosquitto-0.5.1 && phpize && ./configure && make && make install) && \
+	rm -R /tmp/php-mosquitto-0.5.1
 
-COPY conf/mqtt2mysql/mosquitto.ini /etc/php/8.2/mods-available/mosquitto.ini
-RUN ln -s /etc/php/8.2/mods-available/mosquitto.ini /etc/php/8.2/cli/conf.d/20-mosquitto.ini
+COPY conf/mqtt2mysql/mosquitto.ini /etc/php/8.4/mods-available/mosquitto.ini
+RUN ln -s /etc/php/8.4/mods-available/mosquitto.ini /etc/php/8.4/cli/conf.d/20-mosquitto.ini
 COPY conf/mqtt2mysql/mqtt2mysql.php /usr/local/bin/mqtt2mysql.php
 
 CMD [ "php" , "/usr/local/bin/mqtt2mysql.php" ]

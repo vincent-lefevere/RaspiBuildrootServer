@@ -1,6 +1,6 @@
-FROM debian:12.10
+FROM debian:13.3
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends apt-transport-https wget gnupg ca-certificates build-essential libncurses5-dev libncursesw5-dev cpio unzip rsync file bc python3 graphviz python3-matplotlib less git m4 libwebsockets17 proftpd proftpd-mod-crypto proftpd-mod-mysql
+    apt-get install -y --no-install-recommends apt-transport-https wget gnupg ca-certificates build-essential libncurses5-dev libncursesw5-dev cpio unzip rsync file bc python3 graphviz python3-matplotlib less git m4 libwebsockets19t64 proftpd proftpd-mod-crypto proftpd-mod-mysql
 RUN deluser www-data && \
     addgroup --gid 33 buildroot && \
     adduser --home /home/buildroot --uid 33 --gid 33 buildroot && \
