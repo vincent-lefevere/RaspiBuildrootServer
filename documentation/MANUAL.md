@@ -227,8 +227,8 @@ du numéro de port pour le sftp).
 
 ## Utilisation du terminal de la machine virtuelle
 
-Dans la fenêtre du terminal, on trouve, en partie droite, des boutons permettant de lancer
-dans un shell les commandes de Buildroot les plus importantes et en partie gauche le terminal
+Dans la fenêtre du terminal, on trouve, en partie droite, des boutons permettant de lancer,
+dans un shell, les commandes de Buildroot les plus importantes et en partie gauche le terminal
 permettant de visualiser, ou d’interagir avec, l’exécution de la commande.
 
 ![term](img_fr/term.png)

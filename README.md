@@ -14,12 +14,12 @@ Le logiciel est prévu pour être installé dans une machine virtuelle (ou un se
 avec :
 - un minimum de mémoire centrale de 8 Giga,
 - un minimum de disque dur de 40 Giga,
-- un minimum de 1 cœures de calcul pour deux groupes de travaux pratiques utilisant simultanément le serveur.
+- un minimum de 1 cœur de calcul pour deux groupes de travaux pratiques utilisant simultanément le serveur.
 - une carte réseau Ethernet pour que le logiciel dispose d'un accès internet et pour que les utilisateurs 
 puissent avoir accès au logiciel en https sur le port 443 et en sftp sur les ports de 2201 à 2230.
 
-Le logiciel a été testé sur une installation minimaliste de [Debian](https://www.debian.org) 12 sur
-laquelle [Docker](https://www.docker.com) sera installé et paramétré via un script fourni
+Le logiciel a été testé sur une installation minimaliste de [Debian](https://www.debian.org) version 12 et
+version 13 sur laquelle [Docker](https://www.docker.com) sera installé et paramétré via un script fourni
 (voir paragraphe suivant).
 
 ## Liste des dépendances
