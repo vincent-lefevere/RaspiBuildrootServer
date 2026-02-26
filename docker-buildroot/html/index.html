@@ -110,18 +110,18 @@
         <span onclick="spa.buildrootBack();">X</span>
         <div id="terminal"></div>
         <div id="right">
-          <input class="fr" type="button" value="actualiser le terminal" onclick="spa.sendcmd('');"/><input class="en" type="button" value="update the terminal" onclick="spa.sendcmd('');"/><hr/>
-          <input class="color" type="button" value="make menuconfig" onclick="spa.sendcmd('menuconfig');"/><br/>
-          <input class="color" type="button" value="make manip_defconfig" onclick="spa.sendcmd('loaddefconfig');"/><br/>
-          <input class="color" type="button" value="make savedefconfig BR2_DEFCONFIG=..._defconfig" onclick="spa.sendcmd('savedefconfig');"/><br/>
-          <input class="color" type="button" value="make linux-menuconfig" onclick="spa.sendcmd('linux-menuconfig');"/><br/>
-          <input class="color" type="button" value="make" onclick="spa.sendcmd('make');"/><br/>
-          <input class="color" type="button" value="du -s -m target" onclick="spa.sendcmd('du');"/><br/>
-          <input class="color" type="button" value="make graph-depends" onclick="spa.sendcmd('graph-depends');"/><br/>
-          <input class="color" type="button" value="make <PACKAGE>-build" onclick="spa.sendcmd('build');"/><br/>
-          <input class="color" type="button" value="make <PACKAGE>-dirclean" onclick="spa.sendcmd('dirclean');"/><br/>
-          <input class="color" type="button" value="make clean" onclick="spa.sendcmd('clean');"/><hr class="expert"/>
-          <input class="color expert" type="button" value="bash" onclick="spa.sendcmd('bash');"/>
+          <input class="fr" type="button" value="revoir la commande précédente" onclick="spa.sendcmd('');"/><input class="en" type="button" value="review previous commands" onclick="spa.sendcmd('');"/><hr/>
+          <input type="button" value="make menuconfig" onclick="spa.sendcmd('menuconfig');"/><br/>
+          <input type="button" value="make manip_defconfig" onclick="spa.sendcmd('loaddefconfig');"/><br/>
+          <input type="button" value="make savedefconfig BR2_DEFCONFIG=..._defconfig" onclick="spa.sendcmd('savedefconfig');"/><br/>
+          <input type="button" value="make linux-menuconfig" onclick="spa.sendcmd('linux-menuconfig');"/><br/>
+          <input type="button" value="make" onclick="spa.sendcmd('make');"/><br/>
+          <input type="button" value="du -s -m target" onclick="spa.sendcmd('du');"/><br/>
+          <input type="button" value="make graph-depends" onclick="spa.sendcmd('graph-depends');"/><br/>
+          <input type="button" value="make <PACKAGE>-build" onclick="spa.sendcmd('build');"/><br/>
+          <input type="button" value="make <PACKAGE>-dirclean" onclick="spa.sendcmd('dirclean');"/><br/>
+          <input type="button" value="make clean" onclick="spa.sendcmd('clean');"/><hr class="expert"/>
+          <input class="expert" type="button" value="bash" onclick="spa.sendcmd('bash');"/>
         </div>
       </main>
 

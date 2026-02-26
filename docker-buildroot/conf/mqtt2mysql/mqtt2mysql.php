@@ -27,11 +27,37 @@ function connect($r) {
 
 	echo "Received response code {$r}\n";
 	$client->subscribe('#',2);
+	$client->subscribe('/prj/#',1);
 }
 
 function message($message) {
+	if ($message->topic[0]!='/') message_telegraf($message);
+	else message_term($message);
+}
+
+function message_term($message) {
 	global $client;
-	
+
+	$id=(int) substr($message->topic, 5);
+	if (!$mysqli = new mysqli(BDDSERVEUR,BDDLOGIN,BDDPASSWD,BDDBASE)) return;
+	switch ($message->payload) {
+		case '?':
+			$client->publish('/prj/'.$id,($mysqli->query("SELECT cmd FROM projects WHERE id={$id} AND cmd=1")->fetch_assoc())?'on':'off',1);
+			break;
+		case 'on':
+			$mysqli->query("UPDATE projects SET cmd=1 WHERE id={$id}");
+			break;
+		case 'off':
+			$mysqli->query("UPDATE projects SET cmd=0 WHERE id={$id}");
+			break;
+		default:
+			break;
+	}
+}
+
+function message_telegraf($message) {
+	global $client;
+
 	$payload=str_replace('com.docker.compose.service', 'service', $message->payload);
 	$obj=json_decode($payload);
 	if (($obj==NULL)||!isset($obj->name)||!isset($obj->timestamp)||!isset($obj->fields)) return;
@@ -43,7 +69,7 @@ function message($message) {
 		if ($name=='mem' && isset($obj->fields->used_percent) && isset($obj->fields->swap_total) && isset($obj->fields->swap_free)) {
 			$mem=(int) (100*$obj->fields->used_percent);
 			$swap=(int) (10000*(($obj->fields->swap_total-$obj->fields->swap_free)/$obj->fields->swap_total));
-			$sql=("INSERT INTO graph(timestamp,id,mem,swap) VALUES ({$timestamp},{$id},{$mem},{$swap}) ON DUPLICATE KEY UPDATE mem={$mem}, swap={$swap}");
+			$sql="INSERT INTO graph(timestamp,id,mem,swap) VALUES ({$timestamp},{$id},{$mem},{$swap}) ON DUPLICATE KEY UPDATE mem={$mem}, swap={$swap}";
 			$mysqli->query($sql);
 			$mem/=100;
 			$swap/=100;
@@ -64,7 +90,7 @@ function message($message) {
 			$id=(int) $row['id'];
 			if ($name=='docker_container_mem') {
 				$mem=(int) (100*$obj->fields->usage_percent);
-				$sql=("INSERT INTO graph(timestamp,id,lmem) VALUES ({$timestamp},{$id},{$mem}) ON DUPLICATE KEY UPDATE lmem={$mem}");
+				$sql="INSERT INTO graph(timestamp,id,lmem) VALUES ({$timestamp},{$id},{$mem}) ON DUPLICATE KEY UPDATE lmem={$mem}";
 				$mysqli->query($sql);
 				$mem/=100;
 				$client->publish('/met',"{\"time\":{$timestamp},\"id\":{$id},\"lmem\":{$mem}}",1);

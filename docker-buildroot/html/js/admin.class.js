@@ -95,7 +95,6 @@ class MyAdmin {
     if (flag) this.#versionsfortc.removeAttribute('disabled');
     else this.#versionsfortc.setAttribute('disabled','');
     var id=this.#defconfs.selectedOptions[0];
-    // if (this.#db.versions.length==0 || id==undefined) return;
     id=(id==undefined)?'':id.value;
     var now=this.#db.images.find((el) => el.now == true);
     now=(now!=undefined)?undefined:this.#db.toolchains.find((el) => el.install == false);

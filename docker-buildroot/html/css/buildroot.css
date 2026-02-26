@@ -353,13 +353,6 @@ label.mtlg img {
 #right > input {
   width: 100%;
 }
-#right.red > input.color {
-  color: red;
-}
-#right.green > input.color {
-  color: green;
-}
-
 #right > .expert { display: none; }
 #right.expert > .expert { display: block; }
 

@@ -147,6 +147,7 @@ CREATE TABLE IF NOT EXISTS projects (
   image int(11) NULL,
   expert bit(1) NOT NULL DEFAULT 0,
   allow bit(1) NOT NULL DEFAULT 0,
+  cmd bit(1) NOT NULL DEFAULT 0,
   FOREIGN KEY (iddep) REFERENCES departments (id) ON UPDATE RESTRICT ON DELETE CASCADE,
   FOREIGN KEY (image) REFERENCES images (id) ON UPDATE RESTRICT ON DELETE CASCADE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
@@ -177,7 +178,7 @@ CREATE TABLE IF NOT EXISTS graph (
 END;
   $mysqli->query($query);
   $pwd=crypt($_POST['pwd'], '$1$'.substr(base64_encode(random_bytes(6)),0,6).'$');
-  $mysqli->query("INSERT INTO users VALUES ('$login', '$pwd', 1,'FIRST ADMIN')");
+  $mysqli->query("INSERT INTO users VALUES ('$login', '$pwd', 1,'FIRST ADMIN',NULL)");
   $_SESSION['prof']=1;
   $_SESSION['name']='FIRST ADMIN';
   $query=<<<END

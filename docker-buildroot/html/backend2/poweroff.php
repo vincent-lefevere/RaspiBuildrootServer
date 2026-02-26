@@ -19,7 +19,7 @@
  $mysqli->query("LOCK TABLES projects WRITE, act WRITE");
  if ($mysqli->query("SELECT 1 FROM act WHERE id={$p} AND token IS NOT NULL AND email='".$_SESSION['login']."'")->fetch_assoc()) {
   if ($val=$mysqli->query("SELECT power FROM projects WHERE id={$p}")->fetch_assoc()) poweroff($val['power'],$p);
-  $mysqli->query("UPDATE projects SET power=NULL WHERE id={$p}");
+  $mysqli->query("UPDATE projects SET power=NULL, cmd=0 WHERE id={$p}");
  }
  $mysqli->query("UNLOCK TABLES");
  frontend($p);

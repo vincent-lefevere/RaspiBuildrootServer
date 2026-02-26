@@ -14,6 +14,8 @@ class MySPA {
   #mqttc;
   #flagloadversion;
 
+  #current;
+
   constructor() {
     this.#lang=new MyLang();
     this.#auth=new MyAuth(this);
@@ -21,7 +23,7 @@ class MySPA {
     this.#proj=new MyPrj(this.#auth);
     this.#settings=new MySettings(this.#auth,this.#proj);
     this.#backend=new MyBackend(this);
-    this.#term=new MyTerminal(this.#proj);
+    this.#term=new MyTerminal(this,this.#proj);
     this.#graph= new MyGraph();
     this.#lang.langue();
     this.#flagloadversion=0;
@@ -34,8 +36,9 @@ class MySPA {
     if (location.hostname!='') {
       this.#mqttc=new Paho.MQTT.Client(location.hostname, 443, clientId);
       this.#mqttc.onMessageArrived = function(message) { me._onMessageArrived(message); };
-      this.#mqttc.connect({useSSL: true , onSuccess: function() { me._onSuccess();} });      
+      this.#mqttc.connect({useSSL: true , onSuccess: function() { me._onSuccess();} });
     }
+    this.#current=0;
     this.loadversion();
   }
 
@@ -78,13 +81,24 @@ class MySPA {
     this.#mqttc.subscribe('/all', {qos: 1} );
     this.#mqttc.subscribe('/cnf', {qos: 1} );
     this.#mqttc.subscribe('/met', {qos: 1} );
+    if (this.#current!=0) this.#mqttc.subscribe('/prj/'+this.#current, {qos: 1} );
   }
 
   _onMessageArrived(message) {
-    if (message.destinationName=='/cnf') this.loadversion();
-    if (message.destinationName=='/all') this.#loaddb();
-    if (message.destinationName=='/met') this.#graph.update(JSON.parse(message.payloadString),this.#proj.getidprj());
+    if (message.destinationName=='/cnf')
+      this.loadversion();
+    else if (message.destinationName=='/all')
+      this.#loaddb();
+    else if (message.destinationName=='/met')
+      this.#graph.update(JSON.parse(message.payloadString),this.#proj.getidprj());
+    else if (message.destinationName=='/prj/'+this.#current) {
+      if (message.payloadString=='on') {
+        this.#term.sendcmd(this.#mqttc,'');
+      }
+    }
   }
+
+  sendoff(current) { this.#mqttc.send('/prj/'+current,'off',1,false); }
 
   langue() { this.#lang.langue(); }
   login() { 
@@ -139,7 +153,9 @@ class MySPA {
   adminRefresh3() { this.#admin.refresh3(); }
   adminRefresh5() { this.#admin.refresh5(); }
 
-  sendcmd(cmd) { this.#term.sendcmd(cmd); }
+  sendcmd(cmd) {
+    this.#term.sendcmd(this.#mqttc,cmd);
+  }
 
   selectPrj(el) {
     this.#proj.setidprj(el);
@@ -149,7 +165,8 @@ class MySPA {
 
   displayVM() {
     this.#settings.unshow();
-    this.#term.display();
+    this.#current=this.#term.display(this.#mqttc);
+
   }
 
   buildrootBack() {

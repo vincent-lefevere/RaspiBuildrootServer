@@ -1,14 +1,15 @@
 class MyTerminal {
   #ws;
-  #wsuri;
   #term;
   #callbackclose;
+  #spa;
   #proj;
   #last;
   #myinput;
   #myright;
 
-  constructor(proj) {
+  constructor(spa,proj) {
+    this.#spa=spa;
     this.#proj=proj;
     this.#myinput=document.getElementById('buildrootDisplay');
     this.#myright=document.getElementById('right');
@@ -18,11 +19,10 @@ class MyTerminal {
     this.#term._publicOptions.scrollback=100000;
     this.#term.open(document.getElementById('terminal'));
     this.#ws=undefined;
-    this.#wsuri=undefined;
     this.#last=undefined;
   }
 
-  display() {
+  display(mqttc) {
     var db=this.#proj.getmydb();
     if (db.allow) this.#myright.classList.add('expert');
     else this.#myright.classList.remove('expert');
@@ -30,41 +30,43 @@ class MyTerminal {
     this.#myinput.checked=true;
     var current=this.#proj.getidprj();
     if (this.#last!=current) {
+      mqttc.subscribe('/prj/'+current, {qos: 1} );
+      if (this.#last!=undefined) mqttc.unsubscribe('/prj/'+this.#last);
       if (this.#ws!=undefined) this.#ws.close();
+      this.#term.reset();
       this.#term.clear();
     }
+    mqttc.send('/prj/'+current,'?',1,false);
     this.#last=current;
+    return(current);
   }
 
   undisplay() {
     this.#myinput.checked=false;
   }
 
-  sendcmd(uri) {
-    var list=document.getElementById('right').classList;
-    list.remove('green');
-    list.add('red');
-    this.#wsuri=uri;
-    if (this.#ws != undefined) this.#ws.close();
-    else {
-      this.#term.clear();
-      this.#ws = new WebSocket("wss://"+document.domain+"/BR2-"+this.#proj.getmydb().power+"/"+this.#wsuri);
-      var me=this;
-      this.#ws.onmessage = function(event) { me.onmessage(event); };
-      this.#ws.onclose = function(event) { me.onclose(event); };
-      this.#wsuri='';
-      this.#term.focus();
-    }
+  sendcmd(mqttc,uri) {
+    Array.from(this.#myright.getElementsByTagName('input')).forEach( (el) => { el.disabled=true;});
+    if (this.#ws != undefined) return;
+    var me=this;
+    this.#ws = new WebSocket("wss://"+document.domain+"/BR2-"+this.#proj.getmydb().power+"/"+uri);
+    this.#term.reset();
+    this.#term.clear();
+    this.#ws.onmessage = function(event) { me.onmessage(event); };
+    this.#ws.onclose = function(event) { me.onclose(event); };
+    this.#term.focus();
+    mqttc.send('/prj/'+this.#proj.getidprj(),'on',1,false);
   }
 
   onclose(event) {
+    console.log(event);
     this.#ws=undefined;
-    var list=document.getElementById('right').classList;
-    list.add('green');
-    list.remove('red');
+    Array.from(this.#myright.getElementsByTagName('input')).forEach( (el) => { el.disabled=false;});
+    this.#spa.sendoff(this.#last);
   }
 
   onmessage(evt) {
+    
     var reader = new FileReader();
     var me=this;
     reader.addEventListener("loadend", function() {
