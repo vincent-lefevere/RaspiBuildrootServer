@@ -49,17 +49,18 @@ class MyTerminal {
     Array.from(this.#myright.getElementsByTagName('input')).forEach( (el) => { el.disabled=true;});
     if (this.#ws != undefined) return;
     var me=this;
+    var id=this.#proj.getidprj();
     this.#ws = new WebSocket("wss://"+document.domain+"/BR2-"+this.#proj.getmydb().power+"/"+uri);
     this.#term.reset();
     this.#term.clear();
     this.#ws.onmessage = function(event) { me.onmessage(event); };
     this.#ws.onclose = function(event) { me.onclose(event); };
+    this.#ws.onerror = function(event) { me.onclose(event); };
+    this.#ws.onopen = function(event) { mqttc.send('/prj/'+id,'on',1,false); }
     this.#term.focus();
-    mqttc.send('/prj/'+this.#proj.getidprj(),'on',1,false);
   }
 
   onclose(event) {
-    console.log(event);
     this.#ws=undefined;
     Array.from(this.#myright.getElementsByTagName('input')).forEach( (el) => { el.disabled=false;});
     this.#spa.sendoff(this.#last);

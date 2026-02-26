@@ -12,7 +12,7 @@
  function init($vm,$p,$version,$expert,$iddep) {
   $email=$_SESSION['login'];
   $name=$_SESSION['name'];
-  system("mkdir -p /data/vm-{$vm}/external ; git clone --branch prj{$p} git://git/projets.git /data/vm-{$vm}/external",$retval);
+  system("mkdir -p /data/vm-{$vm}/log ; mkdir -p /data/vm-{$vm}/external ; git clone --branch prj{$p} git://git/projets.git /data/vm-{$vm}/external",$retval);
   if ($retval!=0) {
    exec("git clone --depth 1 git://git/projets.git /data/vm-{$vm}/external");
    exec("tar -C /data/vm-{$vm}/external -xvzpf /data/external.tar.gz");
@@ -68,6 +68,7 @@ services:
       - {$path}/conf/proftpd/custom:/etc/proftpd/custom
       - {$path}/data/vm-{$vm}/external:/home/buildroot/external
       - {$path}/data/vm-{$vm}/mysql.conf:/etc/proftpd/conf.d/mysql.conf
+      - {$path}/data/vm-{$vm}/log:/tmp/.log
       - /var/tmp/.buildroot-ccache:/home/.buildroot-ccache
 networks:
   web_net:
@@ -107,7 +108,7 @@ EOT;
   <!ATTLIST cmd login CDATA #REQUIRED> <!-- login exécutant la commande -->
   <!ATTLIST cmd sql CDATA #IMPLIED> <!-- requête pour mettre des valeurs dans des variables field -->
 ]>
-<conf port="9000" uri="/BR2/" log="/tmp/cmd.log" cert="" key="" max="10" format="bin">
+<conf port="9000" uri="/BR2/" log="/tmp/.log/cmd.txt" cert="" key="" max="10" format="bin">
   <mysql host="mariadb" user="buildroot" pwd="buildroot" db="buildroot"/>
   <auth cookie="token">
     <sql>SELECT 1 FROM act WHERE token='%s' AND id={$p}</sql>
@@ -189,6 +190,13 @@ EOT;
   file_put_contents("/data/vm-{$vm}/mysql.conf", $tmp);
   exec("sudo /usr/bin/docker compose -p docker-buildroot -f /data/vm-{$vm}/vm.yml up -d vm-{$vm}");
   exec("sudo /usr/bin/docker compose -p docker-buildroot -f /data/vm-{$vm}/vm.yml exec -T -w /home/buildroot/output -u buildroot vm-{$vm} make manip_defconfig BR2_EXTERNAL=/home/buildroot/external");
+  sleep(3);
+  $tmp=<<<EOT
+
+--- === RaspiBuildrootServeur === ---
+
+EOT;
+  file_put_contents("/data/vm-{$vm}/log/cmd.txt", $tmp);
  }
 
  function poweron($vm,$p,$version,$expert,$iddep) {
