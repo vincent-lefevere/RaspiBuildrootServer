@@ -1,0 +1,19 @@
+*** a/numpy/meson.build	2025-03-15 20:58:58.397438464 +0100
+--- b/numpy/meson.build	2025-03-15 19:17:21.939275676 +0100
+*************** have_lapack = lapack.found()
+*** 74,80 ****
+  
+  dependency_map = {
+    'BLAS': blas,
+!   'LAPACK': lapack,
+  }
+  
+  # BLAS and LAPACK are optional dependencies for NumPy. We can only use a BLAS
+--- 74,80 ----
+  
+  dependency_map = {
+    'BLAS': blas,
+! #  'LAPACK': lapack,
+  }
+  
+  # BLAS and LAPACK are optional dependencies for NumPy. We can only use a BLAS
