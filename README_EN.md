@@ -39,8 +39,10 @@ with [Docker](https://www.docker.com) installed and configured using a provided 
 
 ## Prerequisite Installation
 
-This server requires [Docker](https://www.docker.com) to be installed beforehand,  
-using the script named `docker-install.sh` (to be run with root privileges).
+This server requires the prior installation of [Docker](https://www.docker.com) via one of the two scripts named 
+"docker-install-debian-12.sh" (for Debian version 12) and "docker-install-debian-13.sh" (for Debian version 13).
+
+**Note**:  The following commands must be executed with root privileges:
 
 ```bash
 git clone https://github.com/vincent-lefevere/RaspiBuildrootServer.git

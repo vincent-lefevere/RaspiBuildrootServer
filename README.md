@@ -41,13 +41,15 @@ version 13 sur laquelle [Docker](https://www.docker.com) sera installé et param
 
 ## Installation préalable
 
-Ce serveur nécessite l'installation préalable de [Docker](https://www.docker.com) via le script nommé 
-"docker-install.sh" (exécuté avec les droits root).
+Ce serveur nécessite l'installation préalable de [Docker](https://www.docker.com) via l'un des 2 scripts nommés 
+"docker-install-debian-12.sh" (pour la version 12 de Debian) et "docker-install-debian-13.sh" (pour la version 13 de Debian).
+
+**Remarque** :  Il faut exécuter avec les droits root les commandes suivantes :
 
 ```bash
 git clone https://github.com/vincent-lefevere/RaspiBuildrootServer.git
 cd RaspiBuildrootServer
-./docker-install.sh
+./docker-install-debian-13.sh
 ```
 
 ## Construction des containers 
