@@ -143,6 +143,7 @@
           <form onsubmit="return(false);">
             <p><span class="fr">Choisissez un matériel cible :</span><span class="en">Choose a hardware target:</span> <select id="admin_defconfs" onchange="spa.adminRefresh1();"></select></p>
             <p><span class="fr">Choisissez la version de toolchain à compiler :</span><span class="en">Choose the version of toolchain to make:</span> <select id="admin_versions_for_tc" onchange="spa.adminRefresh5();"></select> <button class="supr fr" type="button" onclick="spa.adminRm('Confirmation de suppression de version de Buildroot');"></button><button class="supr en" type="button" onclick="spa.adminRm('Confirmation of Buildroot version deletion');"></button></p>
+            <p><span class="fr">Système Exploitation utilisé :</span><span class="en">Operating System used:</span><select id="debian_version"> <option value="12">debian version 12 (bookworm)</option><option value="13">debian version 13 (trixie)</option></select></p>
             <p id="buttonCreateTC"><input class="fr" type="submit" value="Lancer la création de la toolchain" onclick="spa.adminCompileTC();" /><input class="en" type="submit" value="Start creating the toolchain" onclick="spa.adminCompileTC();" /></p>
           </form>
         </td><td class="separation"></td><td>

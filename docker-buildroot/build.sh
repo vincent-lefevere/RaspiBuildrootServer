@@ -11,7 +11,7 @@ docker container create --name tmp_wsssh make_wsssh:current
 docker cp -a -q tmp_wsssh:/usr/local/sbin/wsssh - | tar -C bin -xvf -
 docker container rm tmp_wsssh
 docker rmi make_wsssh:current
-BUILDKIT_PROGRESS=plain docker compose build master web mosquitto telegraf mqtt2mysql git || exit
+BUILDKIT_PROGRESS=plain docker compose build master-debian12 master-debian13 web mosquitto telegraf mqtt2mysql git || exit
 rm -Rf bin
 test -f conf/proftpd/custom/ssh_host_rsa_key && rm conf/proftpd/custom/ssh_host_rsa_key
 ssh-keygen -q -N ""  -t rsa -b 4096 -f conf/proftpd/custom/ssh_host_rsa_key

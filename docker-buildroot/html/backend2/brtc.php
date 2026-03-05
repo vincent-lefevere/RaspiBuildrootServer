@@ -15,7 +15,7 @@
   return(implode("\n",array_udiff($tdefconf,$tremove,$tadd,'mycmp')).$add);
  }
 
- function toolchain($toolchain) {
+ function toolchain($toolchain,$debian) {
   $tmpdc=file_get_contents("/data/tc-{$toolchain}/hardware_defconfig");
   $tmpadd=<<<EOT
 BR2_TOOLCHAIN_BUILDROOT_CXX=y
@@ -49,6 +49,8 @@ EOT;
  session_start();
  if (!isset($_SESSION['prof'])||$_SESSION['prof']==0) die('false');
  if (!isset($_POST['version'])||!isset($_POST['defconf'])) die('false');
+ $debian=12;
+ if (isset($_POST['debian']) && $_POST['debian']=='13') $debian=13;
  $mysqli = new mysqli(BDDSERVEUR,BDDLOGIN,BDDPASSWD,BDDBASE);
  $version=(int) $_POST['version'];
  $defconf=(int) $_POST['defconf'];
@@ -74,7 +76,7 @@ services:
 EOT;
  file_put_contents("/data/tc-{$toolchain}/tc.yml",$tmp);
  $tmp=<<<EOT
-FROM docker-buildroot-master:latest
+FROM docker-buildroot-master-debian{$debian}:latest
 USER 33
 COPY --chown=33 brdl/buildroot-{$title}.tar.gz /home
 COPY --chown=33 tc-{$toolchain}/toolchain_defconfig /home/buildroot-{$title}/configs/my_toolchain_defconfig
@@ -98,7 +100,7 @@ rm -Rf /home/buildroot/cross
 
 EOT;
  file_put_contents("/data/tc-{$toolchain}/build.sh",$tmp);
- toolchain($toolchain);
+ toolchain($toolchain,$debian);
  exec("php /var/www/html/backend2/compile.php {$toolchain} 0 >/dev/null 2>&1 &");
  die('true');
 ?>

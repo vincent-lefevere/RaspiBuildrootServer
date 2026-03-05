@@ -1,10 +1,16 @@
 services:
 
-  master:
+  master-debian12:
     restart: "no"
     build:
       context: .
-      dockerfile: Dockerfile-Master
+      dockerfile: Dockerfile-Master-Debian12
+
+  master-debian13:
+    restart: "no"
+    build:
+      context: .
+      dockerfile: Dockerfile-Master-Debian13
 
   git:
     restart: always

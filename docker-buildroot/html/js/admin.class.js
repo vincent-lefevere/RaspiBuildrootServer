@@ -219,7 +219,8 @@ class MyAdmin {
     iddefconf=iddefconf.value;
     var flag=this.#db.toolchains.find((el) => el.version==idversion && el.defconf==iddefconf);
     if (flag!=undefined) return false;
-    return new Array(idversion, iddefconf); 
+    var iddebian=document.getElementById('debian_version').selectedOptions[0].value;
+    return new Array(idversion, iddefconf,iddebian); 
   }
 
   checkCompile() {

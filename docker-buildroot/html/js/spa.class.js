@@ -250,7 +250,7 @@ class MySPA {
   }
   adminCompileTC() {
     var tab=this.#admin.checkCompileTC();
-    if (tab!=false) this.#backend.adminCompileTC(tab[0],tab[1]);
+    if (tab!=false) this.#backend.adminCompileTC(tab[0],tab[1],tab[2]);
   }
   adminRmTC(message) {
     if (confirm(message)==false) return;

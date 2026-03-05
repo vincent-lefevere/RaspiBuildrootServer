@@ -191,10 +191,11 @@ class MyBackend {
   this.#adminBackend('backend2/brrm.php',form,this.#spa.loadversion.bind(this.#spa),function() {});
  }
 
- adminCompileTC(version,defconf) {
+ adminCompileTC(version,defconf,debian) {
   var form = new FormData();
   form.append('version',version);
   form.append('defconf',defconf);
+  form.append('debian',debian);
   this.#adminBackend('backend2/brtc.php',form,this.#spa.loadversion.bind(this.#spa),function() {});
  }
 
