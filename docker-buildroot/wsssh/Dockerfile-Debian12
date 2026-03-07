@@ -1,0 +1,4 @@
+FROM debian:12.6
+COPY --chmod=755 install.sh /tmp/install.sh
+RUN /tmp/install.sh
+

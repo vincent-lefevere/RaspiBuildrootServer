@@ -1,4 +1,4 @@
-FROM debian:12.13
+FROM debian:12.6
 RUN apt-get update && \
     apt-get install -y --no-install-recommends apt-transport-https wget gnupg ca-certificates build-essential libncurses5-dev libncursesw5-dev cpio unzip rsync file bc python3 graphviz python3-matplotlib less git m4 libwebsockets17 proftpd proftpd-mod-crypto proftpd-mod-mysql
 RUN deluser www-data && \
