@@ -40,6 +40,7 @@ class MySPA {
     }
     this.#current=0;
     this.loadversion();
+    document.body.style.visibility='';
   }
 
   loadversion() {
