@@ -18,10 +18,11 @@
   $mem=is_null($row['mem'])?-1:$row['mem']/100;
   $lmem=is_null($row['lmem'])?-1:$row['lmem']/100;
   $swap=is_null($row['swap'])?-1:$row['swap']/100;
+  $disk=is_null($row['disk'])?-1:$row['disk']/100;
   if ($row['id']==0)
-   echo "{\"time\":$time,\"cpu\":$cpu,\"mem\":$mem,\"swap\":$swap}";
+   echo "{\"time\":{$time},\"cpu\":{$cpu},\"mem\":{$mem},\"swap\":{$swap},\"disk\":{$disk}}";
   else
-   echo "{\"time\":$time,\"lcpu\":$lcpu,\"lmem\":$lmem}";
+   echo "{\"time\":{$time},\"lcpu\":{$lcpu},\"lmem\":{$lmem}}";
  }
  echo ']';
 ?>

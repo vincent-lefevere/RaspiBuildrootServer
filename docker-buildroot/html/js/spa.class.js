@@ -140,6 +140,7 @@ class MySPA {
 
   adminShow() {
     this.#proj.unshow();
+    this.#graph.load(0);
     this.#admin.show();
   }
 

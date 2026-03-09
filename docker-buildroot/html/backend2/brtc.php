@@ -92,9 +92,8 @@ rm /home/buildroot-{$title}.tar.gz
 cd /home/buildroot-{$title}
 make O=/home/buildroot/cross my_toolchain_defconfig
 make O=/home/buildroot/cross toolchain || exit
-(cd /home/buildroot/cross/build ; echo gcc-final-*) | cut -d'-' -f3 > /home/cross/.gcc.version
-(cd /home/buildroot/cross/build ; echo linux-headers-*) | cut -d'-' -f3 > /home/cross/.headers.version
-cd
+(cd /home/buildroot/cross/build ; ls -d host-gcc-final-* gcc-final-*) > /home/cross/.gcc.version
+(cd /home/buildroot/cross/build ; ls -d linux-headers-*) > /home/cross/.headers.version
 rm -Rf /home/buildroot-{$title}
 rm -Rf /home/buildroot/cross
 

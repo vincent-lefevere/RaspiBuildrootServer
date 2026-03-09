@@ -65,6 +65,7 @@ class MyGraph {
 	#graph3;
 	#graph4;
 	#graph5;
+	#graph6;
 
 	constructor() {
 		this.#graph1=new graph('graph1',7200,'#0000ff','val1');
@@ -72,6 +73,7 @@ class MyGraph {
 		this.#graph3=new graph('graph3',7200,'#0000ff','val3');
 		this.#graph4=new graph('graph4',7200,'#0000ff','val4');
 		this.#graph5=new graph('graph5',7200,'#0000ff','val5');
+		this.#graph6=new graph('graph6',7200,'#0000ff','val6');
 	}
 
 	update(obj,p){
@@ -87,13 +89,17 @@ class MyGraph {
 			this.#graph3.input(obj.cpu,obj.time*1000);
 			this.#graph3.setLabel(obj.cpu);
 		}
+		if (obj.disk!=undefined && obj.disk>=0) {
+			this.#graph4.input(obj.disk,obj.time*1000);
+			this.#graph4.setLabel(obj.disk);
+		}
 		if (obj.id==p && obj.lmem!=undefined && obj.lmem>=0) {
-			this.#graph4.input(obj.lmem,obj.time*1000);
-			this.#graph4.setLabel(obj.lmem);
+			this.#graph5.input(obj.lmem,obj.time*1000);
+			this.#graph5.setLabel(obj.lmem);
 		}
 		if (obj.id==p && obj.lcpu!=undefined && obj.lcpu>=0) {
-			this.#graph5.input(obj.lcpu,obj.time*1000);
-			this.#graph5.setLabel(obj.lcpu);
+			this.#graph6.input(obj.lcpu,obj.time*1000);
+			this.#graph6.setLabel(obj.lcpu);
 		}
 	}
 
@@ -101,25 +107,28 @@ class MyGraph {
 		if (xhr.readyState !== XMLHttpRequest.DONE) return;
 	    if (xhr.status !== 200) return;
 		var tab=JSON.parse(xhr.responseText);
-		var mem,swap,cpu,lmem,lcpu;
+		var mem,swap,cpu,disk,lmem,lcpu;
 		this.#graph1.clear();
 		this.#graph2.clear();
 		this.#graph3.clear();
 		this.#graph4.clear();
 		this.#graph5.clear();
+		this.#graph6.clear();
 		for (var i=0; i<tab.length; i++) {
 			var obj = tab[i];
 			if (obj.mem!=undefined && obj.mem>=0) this.#graph1.input(mem=obj.mem,obj.time*1000);
 			if (obj.swap!=undefined && obj.swap>=0) this.#graph2.input(swap=obj.swap,obj.time*1000);
 			if (obj.cpu!=undefined && obj.cpu>=0) this.#graph3.input(cpu=obj.cpu,obj.time*1000);
-			if (obj.lmem!=undefined && obj.lmem>=0) this.#graph4.input(lmem=obj.lmem,obj.time*1000);
-			if (obj.lcpu!=undefined && obj.lcpu>=0) this.#graph5.input(lcpu=obj.lcpu,obj.time*1000);
+			if (obj.disk!=undefined && obj.disk>=0) this.#graph4.input(disk=obj.disk,obj.time*1000);
+			if (obj.lmem!=undefined && obj.lmem>=0) this.#graph5.input(lmem=obj.lmem,obj.time*1000);
+			if (obj.lcpu!=undefined && obj.lcpu>=0) this.#graph6.input(lcpu=obj.lcpu,obj.time*1000);
 		}
 		if (mem!=undefined) this.#graph1.setLabel(mem);
 		if (swap!=undefined) this.#graph2.setLabel(swap);
 		if (cpu!=undefined) this.#graph3.setLabel(cpu);
-		if (lmem!=undefined) this.#graph4.setLabel(lmem);
-		if (lcpu!=undefined) this.#graph5.setLabel(lcpu);
+		if (disk!=undefined) this.#graph4.setLabel(disk);
+		if (lmem!=undefined) this.#graph5.setLabel(lmem);
+		if (lcpu!=undefined) this.#graph6.setLabel(lcpu);
 	}
 
 	load(p) {

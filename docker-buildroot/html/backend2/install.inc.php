@@ -171,6 +171,7 @@ CREATE TABLE IF NOT EXISTS graph (
   cpu smallint(4) NULL,
   mem smallint(4) NULL,
   swap smallint(4) NULL,
+  disk smallint(4) NULL,
   lcpu int(11) NULL,
   lmem smallint(4) NULL,
   PRIMARY KEY (id, timestamp)

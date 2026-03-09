@@ -34,15 +34,27 @@ function compiletoolchain($toolchain) {
  $mysqli = new mysqli(BDDSERVEUR,BDDLOGIN,BDDPASSWD,BDDBASE);
  if ($ll!='') {
   system("sudo /usr/bin/docker container create --name tmp-toolchain-{$toolchain} docker-buildroot-toolchain-{$toolchain}:latest");
-  system("sudo /usr/bin/docker container cp -q tmp-toolchain-{$toolchain}:/home/cross/.gcc.version - | tar -C /tmp -xf -");
-  system("sudo /usr/bin/docker container cp -q tmp-toolchain-{$toolchain}:/home/cross/.headers.version - | tar -C /tmp -xf -");
+  system("sudo /usr/bin/docker container cp -q tmp-toolchain-{$toolchain}:/home/cross/.gcc.version - | tar -C /data/tc-{$toolchain} -xf -");
+  system("sudo /usr/bin/docker container cp -q tmp-toolchain-{$toolchain}:/home/cross/.headers.version - | tar -C /data/tc-{$toolchain} -xf -");
   system("sudo /usr/bin/docker container rm tmp-toolchain-{$toolchain}");
-  $gcc=(int) explode('.',file_get_contents("/tmp/.gcc.version"))[0];
-  $headers=explode('.',file_get_contents("/tmp/.headers.version"));
-  $major=(int) $headers[0];
-  $minor=(int) $headers[1];
-  $mysqli->query("UPDATE toolchains SET gcc='{$gcc}', headers='{$major}_{$minor}' WHERE id={$toolchain}");
- } else $mysqli->query("DELETE FROM toolchains WHERE id={$toolchain}");
+  $gcc=file_get_contents("/data/tc-{$toolchain}/.gcc.version");
+  if ($gcc!='') {
+   $gcc=explode('\n',$gcc"))[0];
+   $gcc=end(explode('-',$gcc));
+   $gcc=(int) explode('.',$gcc)[0];
+   $headers=file_get_contents("/data/tc-{$toolchain}/.headers.version");
+   if ($header!='') {
+    $headers=end(explode('-',$headers));
+    $headers=explode('.',$headers);
+    $major=(int) $headers[0];
+    $minor=(int) $headers[1];
+    $mysqli->query("UPDATE toolchains SET gcc='{$gcc}', headers='{$major}_{$minor}' WHERE id={$toolchain}");
+    $mysqli->close();
+    return;
+   }
+  }
+ }
+ $mysqli->query("DELETE FROM toolchains WHERE id={$toolchain}");
  $mysqli->close();
 }
 

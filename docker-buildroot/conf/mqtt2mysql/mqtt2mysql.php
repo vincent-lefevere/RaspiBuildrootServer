@@ -64,7 +64,7 @@ function message_telegraf($message) {
 	if (!$mysqli = new mysqli(BDDSERVEUR,BDDLOGIN,BDDPASSWD,BDDBASE)) return;
 	$timestamp=$obj->timestamp;
 	$name=$obj->name;
-	if (($name=='mem') || ($name=='cpu')) {
+	if (($name=='mem') || ($name=='disk') || ($name=='cpu')) {
 		$id=0;
 		if ($name=='mem' && isset($obj->fields->used_percent) && isset($obj->fields->swap_total) && isset($obj->fields->swap_free)) {
 			$mem=(int) (100*$obj->fields->used_percent);
@@ -80,6 +80,12 @@ function message_telegraf($message) {
 			$mysqli->query($sql);
 			$cpu/=100;
 			$client->publish('/met',"{\"time\":{$timestamp},\"cpu\":{$cpu}}",1);
+		} else if ($name=='disk' && isset($obj->fields->used_percent)) {
+			$disk=(int) (100*$obj->fields->used_percent);
+			$sql="INSERT INTO graph(timestamp,id,disk) VALUES ({$timestamp},{$id},{$disk}) ON DUPLICATE KEY UPDATE disk={$disk}";
+			$mysqli->query($sql);
+			$disk/=100;
+			$client->publish('/met',"{\"time\":{$timestamp},\"disk\":{$disk}}",1);
 		}
 	} else if (($name=='docker_container_mem') || ($name=='docker_container_cpu')) {
 		if (!isset($obj->fields->usage_percent)) return;
