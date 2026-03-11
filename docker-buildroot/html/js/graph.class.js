@@ -54,6 +54,7 @@ class graph {
 		for(i=1; i<this.#tab.length;i++)
 			this.#ctx.lineTo((this.#tab[i].time-min)*scale,this.#canvas.height-this.#tab[i].val);
 		this.#ctx.stroke();
+		if (this.#tab[this.#tab.length-1].time<now-120000) this.setLabel('??? ');
 	}
 
 	setLabel(val) { this.#label.innerHTML=val; }

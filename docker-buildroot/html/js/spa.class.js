@@ -31,13 +31,7 @@ class MySPA {
     this.#jauge1=document.getElementById("jauge1");
     this.#jauge2=document.getElementById("jauge2");
     
-    var clientId = 'br-'+(Date.now()%100000+Math.random());
-    var me=this;
-    if (location.hostname!='') {
-      this.#mqttc=new Paho.MQTT.Client(location.hostname, 443, clientId);
-      this.#mqttc.onMessageArrived = function(message) { me._onMessageArrived(message); };
-      this.#mqttc.connect({useSSL: true , onSuccess: function() { me._onSuccess();} });
-    }
+	this.#mqttconnect();
     this.#current=0;
     this.loadversion();
     document.body.style.visibility='';
@@ -78,14 +72,40 @@ class MySPA {
     xhr.send();
   }
 
-  _onSuccess() {
+  #mqttconnect() {
+    var clientId = 'br-'+(Date.now()%100000+Math.random());
+    if (location.hostname!='') {
+      this.#mqttc=new Paho.MQTT.Client(location.hostname, 443, clientId);
+	  this.#mqttc.onConnectionLost =this.#onFailure.bind(this);
+      this.#mqttc.onMessageArrived = this.#onMessageArrived.bind(this);
+      this.#mqttc.connect({
+        useSSL: true ,
+        onSuccess: this.#onSuccess.bind(this),
+        onFailure: this.#onFailure.bind(this)
+      });
+    }
+  }
+
+  #onFailure(responseObject) {
+    if (responseObject.errorCode == 7) {
+      this.#mqttconnect();
+    } else {
+      this.#mqttc.connect({
+        useSSL: true ,
+        onSuccess: this.#onSuccess.bind(this),
+        onFailure: this.#onFailure.bind(this)
+	  });
+    }
+  }
+
+  #onSuccess() {
     this.#mqttc.subscribe('/all', {qos: 1} );
     this.#mqttc.subscribe('/cnf', {qos: 1} );
     this.#mqttc.subscribe('/met', {qos: 1} );
     if (this.#current!=0) this.#mqttc.subscribe('/prj/'+this.#current, {qos: 1} );
   }
 
-  _onMessageArrived(message) {
+  #onMessageArrived(message) {
     if (message.destinationName=='/cnf')
       this.loadversion();
     else if (message.destinationName=='/all')
