@@ -39,7 +39,7 @@ function compiletoolchain($toolchain) {
   system("sudo /usr/bin/docker container rm tmp-toolchain-{$toolchain}");
   $gcc=file_get_contents("/data/tc-{$toolchain}/.gcc.version");
   if ($gcc!='') {
-   $gcc=explode('\n',$gcc")[0];
+   $gcc=explode('\n',$gcc)[0];
    $gcc=end(explode('-',$gcc));
    $gcc=(int) explode('.',$gcc)[0];
    $headers=file_get_contents("/data/tc-{$toolchain}/.headers.version");
