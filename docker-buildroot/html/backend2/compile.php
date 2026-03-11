@@ -43,7 +43,7 @@ function compiletoolchain($toolchain) {
    $gcc=end(explode('-',$gcc));
    $gcc=(int) explode('.',$gcc)[0];
    $headers=file_get_contents("/data/tc-{$toolchain}/.headers.version");
-   if ($header!='') {
+   if ($headers!='') {
     $headers=end(explode('-',$headers));
     $headers=explode('.',$headers);
     $major=(int) $headers[0];
