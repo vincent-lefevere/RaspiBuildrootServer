@@ -31,9 +31,8 @@ class MySPA {
     this.#jauge1=document.getElementById("jauge1");
     this.#jauge2=document.getElementById("jauge2");
     
-	this.#mqttconnect();
     this.#current=0;
-    this.loadversion();
+    this.#mqttconnect();
     document.body.style.visibility='';
   }
 
@@ -103,6 +102,8 @@ class MySPA {
     this.#mqttc.subscribe('/cnf', {qos: 1} );
     this.#mqttc.subscribe('/met', {qos: 1} );
     if (this.#current!=0) this.#mqttc.subscribe('/prj/'+this.#current, {qos: 1} );
+    this.loadversion();
+    this.#loaddb();
   }
 
   #onMessageArrived(message) {
