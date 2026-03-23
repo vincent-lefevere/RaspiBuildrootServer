@@ -68,7 +68,10 @@ function message_telegraf($message) {
 		$id=0;
 		if ($name=='mem' && isset($obj->fields->used_percent) && isset($obj->fields->swap_total) && isset($obj->fields->swap_free)) {
 			$mem=(int) (100*$obj->fields->used_percent);
-			$swap=(int) (10000*(($obj->fields->swap_total-$obj->fields->swap_free)/$obj->fields->swap_total));
+			if ($obj->fields->swap_total != 0)
+				$swap=(int) (10000*(($obj->fields->swap_total-$obj->fields->swap_free)/$obj->fields->swap_total));
+			else
+				$swap=0;
 			$sql="INSERT INTO graph(timestamp,id,mem,swap) VALUES ({$timestamp},{$id},{$mem},{$swap}) ON DUPLICATE KEY UPDATE mem={$mem}, swap={$swap}";
 			$mysqli->query($sql);
 			$mem/=100;
@@ -109,7 +112,7 @@ function message_telegraf($message) {
 			}
 		}
 	}
-	$mysqli->query("DELETE FROM graph WHERE timestamp < ({$timestamp} - 7800)");
+	$mysqli->query("DELETE FROM graph WHERE timestamp < ({$timestamp} - 87000)");
 }
 
 function disconnect() {

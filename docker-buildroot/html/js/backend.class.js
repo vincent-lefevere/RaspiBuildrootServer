@@ -39,6 +39,13 @@ class MyBackend {
   document.body.className='wait';
  }
 
+ renameDpt(id,title) {
+  var form = new FormData();
+  form.append('id',id);
+  form.append('title',title);
+  this.#modDpt(form,'backend2/rendpt.php',this.#spa);   
+ }
+
  supDpt(id) {
   var form = new FormData();
   form.append('id',id);

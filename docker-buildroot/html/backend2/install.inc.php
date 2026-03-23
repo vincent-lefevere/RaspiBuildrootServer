@@ -66,14 +66,16 @@ END;
   $query=<<<END
 CREATE TABLE IF NOT EXISTS speedups (
   id int(11) AUTO_INCREMENT PRIMARY KEY,
-  title varchar(200) NOT NULL
+  title varchar(200) NOT NULL,
+  del bit(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
 END;
   $mysqli->query($query);
   $query=<<<END
-INSERT INTO speedups(id,title) VALUES
-  (1,'Empty'),
-  (2,'GrovePi in Python')
+INSERT INTO speedups(id,title,del) VALUES
+  (1,'Empty no make',0),
+  (2,'Empty',0),
+  (3,'GrovePi in Python',0)
 END;
   $mysqli->query($query);
   $query=<<<END
@@ -88,22 +90,22 @@ END;
   $mysqli->query($query);
   $query=<<<END
 INSERT INTO host_pkgs(id,name,pri) VALUES
-  (2,'cmake',1),
-  (2,'fakeroot',2),
-  (2,'makedevs',3),
-  (2,'e2fsprogs',4),
-  (2,'python-cffi',5),
-  (2,'python-pythran',6),
-  (2,'flex',7),
-  (2,'openssl',8),
-  (2,'swig',9),
-  (2,'dosfstools',10),
-  (2,'genimage',11),
-  (2,'mtools',12),
-  (2,'patchelf',13),
-  (2,'skeleton',14),
-  (2,'pkgconf',15),
-  (2,'zlib',16)
+  (3,'cmake',1),
+  (3,'fakeroot',2),
+  (3,'makedevs',3),
+  (3,'e2fsprogs',4),
+  (3,'python-cffi',5),
+  (3,'python-pythran',6),
+  (3,'flex',7),
+  (3,'openssl',8),
+  (3,'swig',9),
+  (3,'dosfstools',10),
+  (3,'genimage',11),
+  (3,'mtools',12),
+  (3,'patchelf',13),
+  (3,'skeleton',14),
+  (3,'pkgconf',15),
+  (3,'zlib',16)
 END;
   $mysqli->query($query);
   $query=<<<END
@@ -119,9 +121,9 @@ END;
   $mysqli->query($query);
   $query=<<<END
 INSERT INTO pkgs(id,name,env,pri) VALUES
-  (2,'lapack','PACKAGE_LAPACK',1),
-  (2,'openblas','PACKAGE_OPENBLAS',2),
-  (2,'python-scipy','PACKAGE_PYTHON_SCIPY',3)
+  (3,'lapack','PACKAGE_LAPACK',1),
+  (3,'openblas','PACKAGE_OPENBLAS',2),
+  (3,'python-scipy','PACKAGE_PYTHON_SCIPY',3)
 END;
   $mysqli->query($query);
   $query=<<<END

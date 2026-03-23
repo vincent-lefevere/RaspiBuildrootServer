@@ -34,7 +34,8 @@ class graph {
 	 	this.update();
 	}
 
-	clear() {
+	clear(mt) {
+		if (mt!=undefined) this.#maxTime = 1000*mt;
 		this.#tab=new Array();
 		this.#label.innerHTML='';
 		this.#ctx.clearRect(0, 0, this.#canvas.width, this.#canvas.height);
@@ -67,6 +68,7 @@ class MyGraph {
 	#graph4;
 	#graph5;
 	#graph6;
+	#p;
 
 	constructor() {
 		this.#graph1=new graph('graph1',7200,'#0000ff','val1');
@@ -75,6 +77,7 @@ class MyGraph {
 		this.#graph4=new graph('graph4',7200,'#0000ff','val4');
 		this.#graph5=new graph('graph5',7200,'#0000ff','val5');
 		this.#graph6=new graph('graph6',7200,'#0000ff','val6');
+		this.#p=0;
 	}
 
 	update(obj,p){
@@ -109,12 +112,6 @@ class MyGraph {
 	    if (xhr.status !== 200) return;
 		var tab=JSON.parse(xhr.responseText);
 		var mem,swap,cpu,disk,lmem,lcpu;
-		this.#graph1.clear();
-		this.#graph2.clear();
-		this.#graph3.clear();
-		this.#graph4.clear();
-		this.#graph5.clear();
-		this.#graph6.clear();
 		for (var i=0; i<tab.length; i++) {
 			var obj = tab[i];
 			if (obj.mem!=undefined && obj.mem>=0) this.#graph1.input(mem=obj.mem,obj.time*1000);
@@ -133,12 +130,20 @@ class MyGraph {
 	}
 
 	load(p) {
+		if (p!=undefined) this.#p=p;
+		var mt=document.getElementById('mtgraph').value;
+		this.#graph1.clear(mt);
+		this.#graph2.clear(mt);
+		this.#graph3.clear(mt);
+		this.#graph4.clear(mt);
+		this.#graph5.clear(mt);
+		this.#graph6.clear(mt);
 		var xhr= new XMLHttpRequest();
 		xhr.open("POST","backend2/graph.php", true);
 		var form = new FormData();
-		form.append('project',p);
+		form.append('project',this.#p);
 		var me=this;
-		xhr.addEventListener('readystatechange', function() { me.callback_load(xhr); });
+		xhr.addEventListener('readystatechange', function() { me.callback_load(xhr)});
 		xhr.send(form);
 	}
 }

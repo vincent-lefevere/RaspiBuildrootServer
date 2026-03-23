@@ -31,8 +31,9 @@ class MySPA {
     this.#jauge1=document.getElementById("jauge1");
     this.#jauge2=document.getElementById("jauge2");
     
-    this.#current=0;
     this.#mqttconnect();
+    this.#current=0;
+    this.loadversion();
     document.body.style.visibility='';
   }
 
@@ -102,8 +103,6 @@ class MySPA {
     this.#mqttc.subscribe('/cnf', {qos: 1} );
     this.#mqttc.subscribe('/met', {qos: 1} );
     if (this.#current!=0) this.#mqttc.subscribe('/prj/'+this.#current, {qos: 1} );
-    this.loadversion();
-    this.#loaddb();
   }
 
   #onMessageArrived(message) {
@@ -163,7 +162,17 @@ class MySPA {
   adminShow() {
     this.#proj.unshow();
     this.#graph.load(0);
-    this.#admin.show();
+    if (this.#admin.show()==true) {
+      var xhr= new XMLHttpRequest();
+      xhr.open('GET','backend2/lstbr.php', true);
+      xhr.addEventListener('readystatechange', function() {
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+        if (xhr.status !== 200) return;
+        var db=JSON.parse(xhr.responseText);
+        this.#admin.initlst(db);
+      }.bind(this));
+      xhr.send(); 
+    }
   }
 
   adminBack() {
@@ -211,6 +220,10 @@ class MySPA {
  
   updatedpt(db) {
     this.#proj.buildlist(db);
+  }
+  renameDpt(el, message) {
+    var title=prompt(message,el.innerText);
+    if (title!=null) this.#backend.renameDpt(this.#proj.renameDpt(el),title);
   }
   supDpt(el, message) {
     if (confirm(message)==false) return;
@@ -285,7 +298,7 @@ class MySPA {
     if (tab!=false) this.#backend.adminCompile(tab[0],tab[1],tab[2]);
   }
   admin_show_error() {
-    this.#admin.show_error();
+    this.#admin.show_error(2);
   }
 
   speedupRefresh() {
@@ -302,6 +315,10 @@ class MySPA {
   adminRmImg(el,message) {
     if (confirm(message)==false) return;
     this.#backend.adminRmImg(el.parentNode.parentNode.children[0].value);
+  }
+
+  metchange() {
+    this.#graph.load();
   }
 
   metshow() {

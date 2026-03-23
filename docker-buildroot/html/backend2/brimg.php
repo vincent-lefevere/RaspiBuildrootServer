@@ -10,7 +10,7 @@
  $toolchain=(int) $_POST['toolchain'];
  $speedup=(int) $_POST['speedup'];
  
- if ($mysqli->query("SELECT 1 FROM images WHERE version={$version} AND toolchain={$toolchain}")->fetch_assoc()) die('false');
+ if ($mysqli->query("SELECT 1 FROM images WHERE version={$version} AND toolchain={$toolchain} AND speedup={$speedup}")->fetch_assoc()) die('false');
  $val=$mysqli->query("SELECT iddefconf FROM prop WHERE idtoolchain={$toolchain}")->fetch_assoc();
  if ($val==false) die('false');
  $iddefconf=$val['iddefconf'];
@@ -42,9 +42,11 @@ RUN tar -C /home -xzpf /home/buildroot-{$title}.tar.gz && \
     chmod -R ug-w /home/buildroot-{$title} && \
     rm /home/buildroot-{$title}.tar.gz
 COPY --chown=33 br-{$id}/usage_defconfig /home/buildroot-{$title}/configs/my_usage_defconfig
-COPY --chown=33 br-{$id}/withaddon_defconfig /home/buildroot-{$title}/configs/my_withaddon_defconfig
 COPY --chown=33 --chmod=755 br-{$id}/build.sh /tmp/build.sh
 RUN --mount=type=cache,target=/home/.buildroot-ccache,sharing=shared,from=docker-buildroot-web,source=ccache /tmp/build.sh
+COPY --chown=33 br-{$id}/withaddon_defconfig /home/buildroot-{$title}/configs/my_withaddon_defconfig
+COPY --chown=33 --chmod=755 br-{$id}/speedup.sh /tmp/speedup.sh
+RUN --mount=type=cache,target=/home/.buildroot-ccache,sharing=shared,from=docker-buildroot-web,source=ccache /tmp/speedup.sh
 USER root
 
 EOT;

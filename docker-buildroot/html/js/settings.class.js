@@ -14,6 +14,8 @@ class MySettings {
   #myversion;
   #tplgitlog;
   #mygitlog;
+  #db;
+  #prjdb;
 
   constructor(auth,proj) {
     this.#auth=auth;
@@ -34,34 +36,43 @@ class MySettings {
   }
 
   init(db) {
+        this.#db=db;
+        if (this.#prjdb!=undefined) this.#init(this.#prjdb.expert);
+  }
+  #init(expert) {
+    var flag=false;
     this.#myselect.innerHTML='';
-    for (var i=0; i<db.images.length; i++) {
-      var image=db.images[i];
-      var toolchain=db.toolchains.find((el) => el.id==image.toolchain);
+    for (var i=0; i<this.#db.images.length; i++) {
+      var image=this.#db.images[i];
+      var toolchain=this.#db.toolchains.find((el) => el.id==image.toolchain);
       var option=document.createElement('option');
-      option.setAttribute('value',db.images[i].id);
-      if (image.install==false) option.setAttribute('disabled','');
-      var tmp='Buildroot '+db.versions.find((el) => el.id == image.version).title;
-      tmp+=' ('+db.defconfs.find((el) => el.id == image.defconf).defconfig;
-      tmp+=' - Toolchain '+db.versions.find((el) => el.id == toolchain.version).title;
-      tmp+=')'
+      option.setAttribute('value',image.id);
+      if (image.id==this.#prjdb.version) option.setAttribute('selected','');
+      if (!expert && image.speedup==1) option.style.display='none';
+      else if (image.install==false) option.setAttribute('disabled','');
+      else flag=true;
+      var tmp='Buildroot '+this.#db.versions.find((el) => el.id == image.version).title;
+      tmp+=' ('+this.#db.defconfs.find((el) => el.id == image.defconf).defconfig;
+      tmp+=' - Toolchain '+this.#db.versions.find((el) => el.id == toolchain.version).title;
+      tmp+=') ['+this.#db.speedups.find((el) => el.id == image.speedup).title+']';
       option.innerText=tmp;
       this.#myselect.appendChild(option);
     }
+    document.getElementById('poweron').style.display=(flag)?'':'none';
   }
 
   update() {
-    var db=this.#proj.getmydb();
-    if (db==undefined) return this.unshow();
-    this.#idspan.innerHTML=db.id;
-    this.#lock.checked=db.lock;
-    this.#expert_prof.checked=db.expert;
-    this.#expert_student.style.visibility=db.expert?'visible':'hidden';
-    this.#titlefield.value=db.title;
+    this.#prjdb=this.#proj.getmydb();
+    if (this.#prjdb==undefined) return this.unshow();
+    this.#idspan.innerHTML=this.#prjdb.id;
+    this.#lock.checked=this.#prjdb.lock;
+    this.#expert_prof.checked=this.#prjdb.expert;
+    this.#expert_student.style.visibility=this.#prjdb.expert?'visible':'hidden';
+    this.#titlefield.value=this.#prjdb.title;
     this.#titlefield.setAttribute('readonly','');
-    this.#mydiv.className=(db.power!==false)?'on':'off';
+    this.#mydiv.className=(this.#prjdb.power!==false)?'on':'off';
     this.#users.innerHTML='';
-    for (var i=0; i<this.#myselect.childNodes.length; i++) if (this.#myselect.childNodes[i].value==db.version) {
+    for (var i=0; i<this.#myselect.childNodes.length; i++) if (this.#myselect.childNodes[i].value==this.#prjdb.version) {
       this.#myversion.value=this.#myselect.childNodes[i].innerHTML;
       this.#myselect.selectedIndex=i;
     }
@@ -72,8 +83,8 @@ class MySettings {
     tmp.children[2].value=this.#auth.getname();
     this.#users.appendChild(tmp);
     this.#users.className='';
-    for (var i=0; i<db.users.length; i++) {
-      var user=db.users[i];
+    for (var i=0; i<this.#prjdb.users.length; i++) {
+      var user=this.#prjdb.users[i];
       if (user.email!=login) {
         var tmp=this.#tpluser.cloneNode(true);
         tmp.removeAttribute('id');
@@ -92,26 +103,27 @@ class MySettings {
       this.#mydiv.classList.add('prof');
       this.#titlefield.removeAttribute('readonly');
     }
-    document.getElementById('settings_sftp').innerHTML=2200+db.power;
+    document.getElementById('settings_sftp').innerHTML=2200+this.#prjdb.power;
     this.#mygitlog.innerHTML='';
     this.#mygitlog.style.display='none';
-    if (db.history!=undefined) {
+    if (this.#prjdb.history!=undefined) {
       var j=0;
-      for (var i=0; i<db.history.length; i++) {
+      for (var i=0; i<this.#prjdb.history.length; i++) {
         this.#mygitlog.style.display='';
         var tmp=this.#tplgitlog.cloneNode(true);
         tmp.removeAttribute('id');
         var span=document.createElement('span');
-        span.innerHTML=db.history[i].replaceAll('\n','<br/>');
+        span.innerHTML=this.#prjdb.history[i].replaceAll('\n','<br/>');
         tmp.appendChild(span);
         var pre=document.createElement('pre');
-        for (i++;db.history[i]!='' && i<db.history.length;i++) pre.innerHTML+=db.history[i]+'\n';
+        for (i++;this.#prjdb.history[i]!='' && i<this.#prjdb.history.length;i++) pre.innerHTML+=this.#prjdb.history[i]+'\n';
         tmp.appendChild(pre);
         tmp.children[0].value=j;
         this.#mygitlog.appendChild(tmp);
         j++;
       }
     }
+    this.#init(this.#prjdb.expert);
     return true;
   }
 

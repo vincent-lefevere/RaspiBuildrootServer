@@ -18,10 +18,10 @@
  }
 
  $speedups='';
- $result=$mysqli->query("SELECT id, title FROM speedups ORDER BY id");
+ $result=$mysqli->query("SELECT id, title, del FROM speedups ORDER BY id");
  while ($val=$result->fetch_assoc()) {
   $title=str_replace(array('"'), array('\"'),$val['title']);
-  $speedups.='{"id":'.$val['id'].',"title":"'.$title.'"},';
+  $speedups.='{"id":'.$val['id'].',"title":"'.$title.($val['del']==1?'","del": true},':'","del": false},');
  }
  $speedups=substr($speedups,0,-1);
 
@@ -49,7 +49,7 @@
  $toolchains=substr($toolchains,0,-1);
 
  $images='';
- $result=$mysqli->query("SELECT images.id, images.version, images.toolchain, images.install, prop.iddefconf FROM images INNER JOIN prop ON images.toolchain=prop.idtoolchain ORDER BY images.id");
- while ($val=$result->fetch_assoc()) $images.='{"id":'.$val['id'].',"version":'.$val['version'].',"toolchain":'.$val['toolchain'].',"defconf":'.$val['iddefconf'].($val['install']==0?',"now":true':',"now":false').($val['install']==2?',"install":true},':',"install":false},');
+ $result=$mysqli->query("SELECT images.id, images.version, images.toolchain, images.speedup, images.install, prop.iddefconf FROM images INNER JOIN prop ON images.toolchain=prop.idtoolchain ORDER BY images.id");
+ while ($val=$result->fetch_assoc()) $images.='{"id":'.$val['id'].',"version":'.$val['version'].',"toolchain":'.$val['toolchain'].',"defconf":'.$val['iddefconf'].',"speedup":'.$val['speedup'].($val['install']==0?',"now":true':',"now":false').($val['install']==2?',"install":true},':',"install":false},');
  $images=substr($images,0,-1);
 ?>{ "versions":[<?php echo $versions; ?>], "defconfs":[<?php echo $defconfs; ?>], "toolchains":[<?php echo $toolchains; ?>], "images":[<?php echo $images; ?>],"speedups":[<?php echo $speedups; ?>]}

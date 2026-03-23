@@ -8,7 +8,7 @@
  $title=$mysqli->escape_string($_POST['title']);
  $packages=explode("\n",$_POST['packages']);
  $hostpri=$pri=1;
- $mysqli->query("INSERT INTO speedups(title) VALUES ('{$title}')");
+ $mysqli->query("INSERT INTO speedups(title,del) VALUES ('{$title}',0)");
  $id=$mysqli->insert_id;
  $previous=[];
  foreach ($packages as $line) {

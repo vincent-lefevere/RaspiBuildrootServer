@@ -312,6 +312,8 @@ label.mtlg img {
 #cm, #mtlg { display: none; }
 #cm:checked ~ #mtlg { display: block; }
 
+#mtlg > div > p { margin: 0px; text-align:center; }
+
 #mtlg > div > span > canvas { background-color: #f0f0f0; margin: 12px;
   width: calc(100% - 34px); height: calc(100% - 34px);
   border: solid 5px var(--color2);
@@ -322,7 +324,7 @@ label.mtlg img {
   border-radius: 0px 0px 8px 8px; padding: 4px; background-color: lightgrey;
 }
 #mtlg > div > span {
-  width: calc(33.33% - 3px); height: calc(50% - 25px);
+  width: calc(33.33% - 3px); height: calc(50% - 35px);
   display: inline-block;
   text-align: left;
 }
@@ -374,7 +376,12 @@ label.mtlg img {
   width: 50%; vertical-align: top; 
   background-color: var(--color2); border: var(--color2) solid 10px; border-radius:5px; 
   margin: 10px; padding: 10px; }
-#admin .error { visibility: hidden; color:red; font-weight: bold; }
+#admin .error { visibility: hidden; height: 32px; }
+#admin .error > span { display:none; color:red; font-weight: bold; }
+#admin option.ok { background-color: green; }
+#admin option.ko { background-color: red; }
+#admin option.mi { background-color: yellow; }
+#admin option.tt { background-color: black; color: yellow; }
 #admin option.compiled { background-color: lightgreen; }
 #admin option.compiling { background-color: orange; }
 #admin option.compiling.now {

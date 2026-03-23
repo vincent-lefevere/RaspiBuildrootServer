@@ -42,6 +42,9 @@ BR2_LINUX_KERNEL_NEEDS_HOST_OPENSSL=y
 BR2_TARGET_ROOTFS_EXT2=y
 BR2_TARGET_ROOTFS_EXT2_4=y
 BR2_TARGET_ROOTFS_EXT2_SIZE=y
+BR2_ROOTFS_POST_BUILD_SCRIPT=""
+BR2_ROOTFS_POST_IMAGE_SCRIPT=""
+BR2_PACKAGE_RPI_FIRMWARE=y
 EOT;
   file_put_contents("/data/tc-{$toolchain}/toolchain_defconfig",cfmerge($tmpdc,$tmprm,$tmpadd));
  }
@@ -51,6 +54,7 @@ EOT;
  if (!isset($_POST['version'])||!isset($_POST['defconf'])) die('false');
  $debian=12;
  if (isset($_POST['debian']) && $_POST['debian']=='13') $debian=13;
+ $ip=$_SERVER['HTTP_HOST'];
  $mysqli = new mysqli(BDDSERVEUR,BDDLOGIN,BDDPASSWD,BDDBASE);
  $version=(int) $_POST['version'];
  $defconf=(int) $_POST['defconf'];
@@ -94,6 +98,8 @@ make O=/home/buildroot/cross my_toolchain_defconfig
 make O=/home/buildroot/cross toolchain || exit
 (cd /home/buildroot/cross/build ; ls -d host-gcc-final-* gcc-final-*) > /home/cross/.gcc.version
 (cd /home/buildroot/cross/build ; ls -d linux-headers-*) > /home/cross/.headers.version
+make O=/home/buildroot/cross sdk
+curl -k -T /home/buildroot/cross/images/*_sdk-buildroot.tar.gz https://{$ip}/upload/tc.tar.gz 
 rm -Rf /home/buildroot-{$title}
 rm -Rf /home/buildroot/cross
 

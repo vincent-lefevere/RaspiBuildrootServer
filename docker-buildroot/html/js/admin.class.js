@@ -11,6 +11,8 @@ class MyAdmin {
   #buttonCreateTC;
   #buttonCreateIMG;
   #db;
+  #previous_speedup;
+  #previous_defconf;
 
   constructor() {
     this.#mydiv=document.getElementById('admin');
@@ -24,18 +26,21 @@ class MyAdmin {
     this.#toolchains=document.getElementById('admin_toolchains');
     this.#buttonCreateTC=document.getElementById('buttonCreateTC');
     this.#buttonCreateIMG=document.getElementById('buttonCreateIMG');
+    this.#previous_speedup=0
+    this.#previous_defconf=0;
   }
 
   init(db) {
-    if (db==undefined) db={versions:[],toolchains:[],defconfs:[],speedups:[],images:[]};
     this.#db=db;
     this.#defconfs.innerHTML='';
     if (db.defconfs.length==0) this.#defconfs.setAttribute('disabled','');
     else this.#defconfs.removeAttribute('disabled');
     for (var i=0; i<db.defconfs.length; i++) {
       var option=document.createElement('option');
-      option.setAttribute('value',db.defconfs[i].id);
-      option.innerText=db.defconfs[i].defconfig;
+      var defconf=db.defconfs[i];
+      option.setAttribute('value',defconf.id);
+      if (defconf.id==this.#previous_defconf) option.setAttribute('selected','');
+      option.innerText=defconf.defconfig;
       this.#defconfs.appendChild(option);
     }
     var now=db.images.find((el) => el.now == true);
@@ -68,11 +73,18 @@ class MyAdmin {
 
     this.#speedups.innerHTML='';
     if (db.speedups.length==0) this.#speedups.setAttribute('disabled','');
-    else this.#speedups.removeAttribute('disabled');
+    else {
+      var i;
+      for (i=0; i<db.speedups.length; i++) if (db.speedups[i].id==this.#previous_speedup) break;
+      if (i>=db.speedups.length) this.#previous_speedup=2;
+      this.#speedups.removeAttribute('disabled');
+    }
     for (var i=0; i<db.speedups.length; i++) {
       var speedup=db.speedups[i];
+      if (speedup.del) continue;
       var option=document.createElement('option');
       option.setAttribute('value',speedup.id);
+      if (speedup.id==this.#previous_speedup) option.setAttribute('selected','');
       option.innerText=speedup.title;
       this.#speedups.appendChild(option);
     }
@@ -82,6 +94,17 @@ class MyAdmin {
     this.refresh4();
     this.refresh5();
     this.refresh6();
+  }
+
+  initlst(db) {
+    var theselect=document.getElementById('admin_version');
+    theselect.innerHTML='';
+    for(var i=0; i<db.length; i++) {
+      var option=document.createElement('option');
+      option.setAttribute('value',option.innerText=db[i].title);
+      option.classList.add(db[i].color);
+      theselect.appendChild(option);
+    }
   }
 
   #hideSuprOrNot(node,flag) {
@@ -96,6 +119,7 @@ class MyAdmin {
     else this.#versionsfortc.setAttribute('disabled','');
     var id=this.#defconfs.selectedOptions[0];
     id=(id==undefined)?'':id.value;
+    this.#previous_defconf=id;
     var now=this.#db.images.find((el) => el.now == true);
     now=(now!=undefined)?undefined:this.#db.toolchains.find((el) => el.install == false);
     if (flag) {
@@ -140,10 +164,10 @@ class MyAdmin {
       option.innerText=version.title;
       var image=this.#db.images.find((el) => el.version==version.id && el.toolchain == id);
       if (image!=undefined) {
-        option.setAttribute('disabled','');
         option.classList.add((image.install)?'compiled':'compiling');
         if (now!=undefined && now.version==version.id && now.toolchain==id) option.classList.add('now');
       }
+
       if (defver==version.id) option.setAttribute('selected','');
       this.#versions.appendChild(option);
     }
@@ -151,7 +175,7 @@ class MyAdmin {
   }
 
   refresh3() {
-    this.#hideSuprOrNot(this.#speedups.parentNode,this.#speedups.value<3);
+    this.#hideSuprOrNot(this.#speedups.parentNode,(this.#previous_speedup=this.#speedups.value)<4);
   }
 
   refresh4() {
@@ -181,7 +205,7 @@ class MyAdmin {
       var tmp='Buildroot '+this.#db.versions.find((el) => el.id == image.version).title;
       tmp+=' ('+this.#db.defconfs.find((el) => el.id == image.defconf).defconfig;
       tmp+=' - Toolchain '+this.#db.versions.find((el) => el.id == toolchain.version).title;
-      tmp+=')'
+      tmp+=') ['+this.#db.speedups.find((el) => el.id == image.speedup).title+']';
       div.children[0].value=image.id;
       div.children[1].value=tmp;
       if (! image.install) { 
@@ -195,6 +219,7 @@ class MyAdmin {
 
   show() {
     this.#mydiv.style.display='block';
+    return (document.getElementById('admin_version').children.length==0);
   }
 
   unshow() {
@@ -204,10 +229,10 @@ class MyAdmin {
 
   checkAdd() {
     var title=document.getElementById('admin_version').value;
-    var flag=this.#db.versions.find((element) => element.title == title)==undefined;
-    document.getElementById('admin_errorAdd').style.visibility=flag?'':'visible';
-    setTimeout(() => { document.getElementById('admin_errorAdd').style.visibility=''; }, 5000);
-    if (flag==false) return false;
+    if (this.#db.versions.find((element) => element.title == title)!=undefined) {
+      this.show_error(1);
+      return false;
+    }
     return title;
   }
 
@@ -231,12 +256,17 @@ class MyAdmin {
     idversion=idversion.value;
     idtoolchain=idtoolchain.value;
     idspeedup=idspeedup.value;
-    var flag=this.#db.images.find((el) => el.version==idversion && el.toolchain==idtoolchain);
+    var flag=this.#db.images.find((el) => el.version==idversion && el.toolchain==idtoolchain && el.speedup==idspeedup);
     if (flag!=undefined) return false;
     return new Array(idversion,idtoolchain,idspeedup); 
   }
 
-  show_error() {
-    document.getElementById('admin_errorAdd').style.visibility='visible';
+  show_error(n) {
+    var error=document.getElementById('admin_errorAdd');
+    var errors=Array.from(error.children);
+    errors.forEach((el) => el.style.display='');
+    errors[n-1].style.display='inline';
+    error.style.visibility='visible';
+    setTimeout(() => { errors.forEach((el) => el.style.display=''); error.style.visibility='' }, 5000);
   }
 }

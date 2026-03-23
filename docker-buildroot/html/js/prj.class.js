@@ -75,9 +75,12 @@ class MyPrj {
       tmp.firstElementChild.value=id;
       if (id==seldpt) tmp.children[1].checked=true;
       id='dpt'+id;
-      var lbl=tmp.getElementsByClassName('tag_dpt_title')[0];
-      lbl.innerText=list[i].title;
-      lbl.setAttribute('for',id);
+      var tlbl=tmp.getElementsByClassName('tag_dpt_title');
+      for (var j = 0; j < tlbl.length; j++) {
+        var lbl=tlbl[j];
+        lbl.innerText=list[i].title;
+        lbl.setAttribute('for',id);
+      }
       tmp.children[1].setAttribute('id',id);
       var visibility=list[i].projects.length==0?'':'hidden'
       Array.from(tmp.children[2].getElementsByClassName('supr')).forEach(function (el) {el.style.visibility=visibility;});
@@ -130,6 +133,10 @@ class MyPrj {
   }
 
   grpDpt(el) {
+    return(el.parentNode.parentNode.firstElementChild.value);
+  }
+
+  renameDpt(el) {
     return(el.parentNode.parentNode.firstElementChild.value);
   }
 }

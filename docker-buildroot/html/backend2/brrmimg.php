@@ -16,6 +16,7 @@
  exec("rm -R /data/br-{$id}");
  $mysqli->query("DELETE FROM images WHERE id={$id}");
  $mysqli->query("UNLOCK TABLES");
+ $mysqli->query("DELETE s FROM speedups AS s LEFT JOIN images ON s.id=images.speedup WHERE speedup IS NULL AND del=1");
  send_mqtt_msg('/cnf');
  die('true');
 ?>

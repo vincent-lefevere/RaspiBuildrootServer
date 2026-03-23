@@ -95,7 +95,7 @@
         </div>
         <div style="height: 182px;">
           <p class="poweroff"><input class="fr" type="button" value="Supprimer le projet" onclick="spa.supPrj('Confirmer la suppression du projet.');"><input class="en" type="button" value="Delete project" onclick="spa.supPrj('Confirm deletion of the project.');"></p>
-          <p class="poweroff"><input class="fr" type="button" value="Démarrer Machine Virtuelle" onclick="spa.startVM();"><input class="en" type="button" value="Start Virtual Machine" onclick="spa.startVM();"></p>
+          <p class="poweroff" id='poweron'><input class="fr" type="button" value="Démarrer Machine Virtuelle" onclick="spa.startVM();"><input class="en" type="button" value="Start Virtual Machine" onclick="spa.startVM();"></p>
           <p class="poweron"><input class="fr" type="button" value="Arrêter Machine Virtuelle" onclick="spa.stopVM();"><input class="en" type="button" value="Stop Virtual Machine" onclick="spa.stopVM();"></p>
           <p class="poweron"><input class="fr" type="button" value="Visualiser Machine Virtuelle" onclick="spa.displayVM();"><input class="en" type="button" value="Display Virtual Machine" onclick="spa.displayVM();"></p>
           <p class="poweron"><b><span class="fr">Accès aux fichiers par sftp sur le port n°</span><span class="en">Access to files via sftp on port n°</span> <span id="settings_sftp"></span></b></p>
@@ -135,15 +135,17 @@
           </form>
         </td><td class="separation"></td><td>
           <form onsubmit="return(false);">
-            <p><span class="fr">Renseignez le numéro de la version à installer :</span><span class="en">Enter the number of the version to be installed:</span> <input id="admin_version" type="text" value=""/></p>
+            <p><span class="fr">Choisissez le numéro de la version à installer :</span><span class="en">Choose the number of the version to be installed:</span> <select id="admin_version"></select></p>
+
             <p><input class="fr" type="submit" value="Ajouter la version indiquée" onclick="spa.adminAdd();" /><input class="en" type="submit" value="Add the indicated version" onclick="spa.adminAdd();" /></p>
-            <p id="admin_errorAdd" class="error"><span class="fr">Ajout impossible, car la version existe déjà dans le système !</span><span class="en">Impossible to add, as the version already exists in the system!</span></p>
+            <p id="admin_errorAdd" class="error"><span><span class="fr">Ajout impossible, car la version existe déjà dans le système !</span><span class="en">Impossible to add, as the version already exists in the system!</span></span>
+            <span><span class="fr">Ajout impossible, erreur de téléchargement depuis le site web <a href="https://buildroot.org/downloads/">https://buildroot.org/downloads/</a> !</span><span class="en">Unable to add; download error from the website <a href="https://buildroot.org/downloads/">https://buildroot.org/downloads/</a>!</span></span></p>
           </form>
         </td></tr><tr class="separation"></tr><tr><td>
           <form onsubmit="return(false);">
             <p><span class="fr">Choisissez un matériel cible :</span><span class="en">Choose a hardware target:</span> <select id="admin_defconfs" onchange="spa.adminRefresh1();"></select></p>
             <p><span class="fr">Choisissez la version de toolchain à compiler :</span><span class="en">Choose the version of toolchain to make:</span> <select id="admin_versions_for_tc" onchange="spa.adminRefresh5();"></select> <button class="supr fr" type="button" onclick="spa.adminRm('Confirmation de suppression de version de Buildroot');"></button><button class="supr en" type="button" onclick="spa.adminRm('Confirmation of Buildroot version deletion');"></button></p>
-            <p><span class="fr">Système Exploitation utilisé :</span><span class="en">Operating System used:</span><select id="debian_version"> <option value="12">debian version 12 (bookworm)</option><option value="13">debian version 13 (trixie)</option></select></p>
+            <p><span class="fr">Système Exploitation utilisé :</span><span class="en">Operating System used:</span> <select id="debian_version"><option value="12">debian version 12 (bookworm)</option><option value="13">debian version 13 (trixie)</option></select></p>
             <p id="buttonCreateTC"><input class="fr" type="submit" value="Lancer la création de la toolchain" onclick="spa.adminCompileTC();" /><input class="en" type="submit" value="Start creating the toolchain" onclick="spa.adminCompileTC();" /></p>
           </form>
         </td><td class="separation"></td><td>
@@ -170,6 +172,7 @@
       <div id="mtlg">
         <span onclick="spa.metunshow();">X</span>
         <div>
+          <p><span class="fr">Graphiques sur une période de</span><span class="en">Charts covering a period of</span> <select id="mtgraph" onchange="spa.metchange();"><option value="3600">1</option><option selected value="7200">2</option><option value="14400">4</option><option value="21600">6</option><option value="28800">8</option><option value="43200">12</option><option value="86400">24</option></select> <span class="fr">heures</span><span class="en">hours</span></p>
           <span><canvas id="graph1" width="360" height="100"></canvas><b><span class="fr">Mémoire globalement utilisée : </span><span class="en">Total memory used: </span><span id="val1">0</span>%</b></span>
           <span><canvas id="graph2" width="360" height="100"></canvas><b><span class="fr">SWAP globalement utilisé : </span><span class="en">Total SWAP used: </span><span id="val2">0</span>%</b></span>
           <span><canvas id="graph5" width="360" height="100"></canvas><b><span class="fr">Mémoire utilisée par le projet : </span><span class="en">Memory used by the project: </span><span id="val5">0</span>%</b></span>
@@ -195,7 +198,7 @@
         <h2>
           <button class="supr prof fr" onclick="spa.supDpt(this,'Confirmation de suppression de la catégorie de projets');"></button>
           <button class="supr prof en" onclick="spa.supDpt(this,'Confirmation of project category deletion');"></button>
-          <label class="tag_dpt_title"></label><hr class="prof option"/>
+          <label class="tag_dpt_title fr" ondblclick="spa.renameDpt(this,'Changez le titre de la catégorie');"></label><label class="tag_dpt_title en" ondblclick="spa.renameDpt(this,'Change the category title');"></label><hr class="prof option"/>
           <span class="prof option fr">Sélectionnez le fichier prjbr.tar.gz à inclure : <input type="file" onchange="spa.loadexample(this,'Confirmation de dépose du fichier sélectionné');"/> ou demandez en la <input type="button" value="suppression"onclick="spa.delexample(this,'Confirmation de suppression de l\'exemple précédent');"/></span><span class="prof option en">Select the prjbr.tar.gz file to include: <input type="file" onchange="spa.loadexample(this,'Confirmation of selected file upload');"/> or request its <input type="button" value="removal" onclick="spa.delexample(this,'Confirmation of deletion of the previous example');"/></span><br class="prof option"/>
           <span class="prof option fr">Sélectionnez les groupes ayant accès : </span><span class="prof option en">Select the groups with access: </span><select class="prof option tag_select_group" multiple size="1" onchange="spa.grpDpt(this)"></select>
         </h2>

@@ -1,0 +1,4 @@
+[{"min":"2023.02-rc1","max":"2023.11.3","color":"ok","debian12":"ok","debian13":"ko"},
+{"min":"2024.02-rc1","max":"2024.11.4","color":"mi","debian12":"ok","debian13":"ko"},
+{"min":"2025.02-rc1","max":"2025.02.11","color":"mi","debian12":"ok","debian13":"ko"},
+{"min":"2026.02-rc1","max":"2026.02","color":"tt","debian12":"ko","debian13":"ok"}]

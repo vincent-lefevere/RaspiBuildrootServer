@@ -39,13 +39,12 @@ function compiletoolchain($toolchain) {
   system("sudo /usr/bin/docker container rm tmp-toolchain-{$toolchain}");
   $gcc=file_get_contents("/data/tc-{$toolchain}/.gcc.version");
   if ($gcc!='') {
-   $gcc=explode('\n',$gcc)[0];
-   $gcc=end(explode('-',$gcc));
-   $gcc=(int) explode('.',$gcc)[0];
+   $gcc=explode('-',explode('\n',$gcc)[0]);
+   $gcc=(int) explode('.',end($gcc))[0];
    $headers=file_get_contents("/data/tc-{$toolchain}/.headers.version");
    if ($headers!='') {
-    $headers=end(explode('-',$headers));
-    $headers=explode('.',$headers);
+    $headers=explode('-',$headers);
+    $headers=explode('.',end($headers));
     $major=(int) $headers[0];
     $minor=(int) $headers[1];
     $mysqli->query("UPDATE toolchains SET gcc='{$gcc}', headers='{$major}_{$minor}' WHERE id={$toolchain}");
@@ -55,6 +54,7 @@ function compiletoolchain($toolchain) {
   }
  }
  $mysqli->query("DELETE FROM toolchains WHERE id={$toolchain}");
+ $mysqli->query("UPDATE prop SET idtoolchain=NULL WHERE idtoolchain={$toolchain}");
  $mysqli->close();
 }
 
@@ -63,45 +63,62 @@ function compileimage($id,$toolchain) {
  $val=$mysqli->query("SELECT versions.title, images.speedup FROM versions INNER JOIN images ON versions.id=images.version WHERE images.id={$id}")->fetch_assoc();
  $title=$val['title'];
  $speedup=$val['speedup'];
- $tmp=<<<EOT
+ $buildsh=<<<EOT
 #!/bin/bash
 cd /home/buildroot-{$title}
+
+EOT;
+ $speedupsh=$buildsh;
+ if ($speedup>1) {
+  $tmp=<<<EOT
 make O=/home/buildroot/output my_withaddon_defconfig
 
 EOT;
- $result=$mysqli->query("SELECT name FROM host_pkgs WHERE id={$speedup} ORDER BY pri ASC");
- while($val=$result->fetch_assoc()) {
-  $pkg=$val['name'];
-  $tmp.=<<<EOT
+  $speedupsh.=$tmp;
+  $result=$mysqli->query("SELECT name FROM host_pkgs WHERE id={$speedup} ORDER BY pri ASC");
+  while($val=$result->fetch_assoc()) {
+   $pkg=$val['name'];
+   $tmp=<<<EOT
 echo "### make host-{$pkg} ###"
 make O=/home/buildroot/output host-{$pkg} >>/dev/null || exit
 
 EOT;
- }
- $tmp.=<<<EOT
-cd /home/buildroot/output
+   $speedupsh.=$tmp;
+  }
+  $tmp=<<<EOT
 mkdir -p /home/buildroot/external/custom-rootfs
+make O=/home/buildroot/output my_usage_defconfig
 echo "### make ###"
-make || exit
+make source O=/home/buildroot/output || exit 1
+make O=/home/buildroot/output || exit 1
 
 EOT;
- $result=$mysqli->query("SELECT name FROM pkgs WHERE id={$speedup} ORDER BY pri ASC");
- while($val=$result->fetch_assoc()) {
-  $pkg=$val['name'];
-  $tmp.=<<<EOT
+  $buildsh.=$tmp;
+  $result=$mysqli->query("SELECT name FROM pkgs WHERE id={$speedup} ORDER BY pri ASC");
+  while($val=$result->fetch_assoc()) {
+   $pkg=$val['name'];
+   $tmp=<<<EOT
 echo "### make {$pkg}-source ###"
 make {$pkg}-source
 echo "### make {$pkg}-build ###"
 make {$pkg}-build
 
 EOT;
- }
- $tmp.=<<<EOT
-make my_usage_defconfig
-rm /home/buildroot/output/images/sdcard.img
+   $speedupsh.=$tmp;
+  }
+  $tmp=<<<EOT
+test -f /home/buildroot/output/images/sdcard.img && rm /home/buildroot/output/images/sdcard.img
 
 EOT;
- file_put_contents("/data/br-{$id}/build.sh",$tmp);
+  $buildsh.=$tmp;
+ }
+ $tmp=<<<EOT
+make O=/home/buildroot/output my_usage_defconfig
+
+EOT;
+ $speedupsh.=$tmp;
+ file_put_contents("/data/br-{$id}/build.sh",$buildsh);
+ file_put_contents("/data/br-{$id}/speedup.sh",$speedupsh);
  $val=$mysqli->query("SELECT gcc, headers FROM toolchains WHERE id={$toolchain}")->fetch_assoc();
  $gcc_version=$val['gcc'];
  $headers_version=$val['headers'];
