@@ -156,7 +156,7 @@
           </form>            
         </td></tr><tr class="separation"></tr><tr><td>
           <form onsubmit="return(false);">
-            <p><span class="fr">Choisissez un matériel cible et sa toolchain :</span><span class="en">Choose a hardware target ans its toolchain:</span> <select id="admin_toolchains" onchange="spa.adminRefresh2();"></select> <button class="supr fr" type="button" onclick="spa.adminRmTC('Confirmation de suppression d\'une toolchain');"></button><button class="supr en" type="button" onclick="spa.adminRmTC('Confirmation of deletion of a toolchain');"></button></p>
+            <p><span class="fr">Choisissez un matériel cible et sa toolchain :</span><span class="en">Choose a hardware target ans its toolchain:</span> <select id="admin_toolchains" onchange="spa.adminRefresh2();"></select> <button class="supr fr" type="button" onclick="spa.adminRmTC('Confirmation de suppression d\'une toolchain');"></button><button class="supr en" type="button" onclick="spa.adminRmTC('Confirmation of deletion of a toolchain');"></button><button class="load" type="button" onclick="spa.adminDlTcLog(this);"></button></p>
             <p><span class="fr">Choisissez la version de buildroot :</span><span class="en">Choose the version of buildroot:</span> <select id="admin_versions"></select></p>
             <p><span class="fr">Choisissez une liste de précompilation :</span><span class="en">Select a pre-compilation list:</span> <select id="speedup_list" onchange="spa.adminRefresh3();"></select> <button class="supr fr" type="button" onclick="spa.speedupRm('Confirmation de suppression d\'une liste de pré-compilation');"></button><button class="supr en" type="button" onclick="spa.speedupRm('Confirmation of deletion of a pre-compilation list');"></button></p>
             <p id="buttonCreateIMG"><input class="fr" type="submit" value="Lancer la création de l'image pour les Machines Virtuelles" onclick="spa.adminCompile();" /><input class="en" type="submit" value="Start creating the image for Virtual Machines" onclick="spa.adminCompile();" /></p>
@@ -185,8 +185,8 @@
     </div>
     <footer>
       <p class="jauge"><span id="jauge"><span class="fr">VM utilisées : </span><span class="en">VM used: </span><progress id="jauge1" max="30" value="0"></progress> <span id="jauge2">0</span>/30</span></p>
-      <p class="scroll"><span class="en"><strong>RaspiBuildrootServer</strong> : Server <a href="https://buildroot.org" target="_blank">Buildroot</a> generating images for <a href="https://www.raspberrypi.com" target="_blank">Raspberry Pi</a> by <a href="mailto:vincent.lefevere@junia.com">Vincent Lefévère</a> of <a href="https://www.junia.com" target="_blank">Junia</a> <span style="display:inline-block; transform: rotate(180deg);">&copy;</span> march 2026 (GNU licence)</span>
-      <span class="fr"><strong>RaspiBuildrootServer</strong> : Serveur <a href="https://buildroot.org" target="_blank">Buildroot</a> générant des images pour <a href="https://www.raspberrypi.com" target="_blank">Raspberry Pi</a> par <a href="mailto:vincent.lefevere@junia.com">Vincent Lefévère</a> de <a href="https://www.junia.com" target="_blank">Junia</a> <span style="display:inline-block; transform: rotate(180deg);">&copy;</span> mars 2026 (licence GNU)</span><p>
+      <p class="scroll"><span class="en"><strong>RaspiBuildrootServer</strong> : Server <a href="https://buildroot.org" target="_blank">Buildroot</a> generating images for <a href="https://www.raspberrypi.com" target="_blank">Raspberry Pi</a> by <a href="mailto:vincent.lefevere@junia.com">Vincent Lefévère</a> of <a href="https://www.junia.com" target="_blank">Junia</a> <span style="display:inline-block; transform: rotate(180deg);">&copy;</span> april 2026 (GNU licence)</span>
+      <span class="fr"><strong>RaspiBuildrootServer</strong> : Serveur <a href="https://buildroot.org" target="_blank">Buildroot</a> générant des images pour <a href="https://www.raspberrypi.com" target="_blank">Raspberry Pi</a> par <a href="mailto:vincent.lefevere@junia.com">Vincent Lefévère</a> de <a href="https://www.junia.com" target="_blank">Junia</a> <span style="display:inline-block; transform: rotate(180deg);">&copy;</span> avril 2026 (licence GNU)</span><p>
     </footer>
     <footer style="display:none;">
       <div id="template_project">
@@ -218,7 +218,7 @@
         <img src="img/rollback.png" width="20px" onclick="spa.rollback(this);" />
       </div>
       <div id="template_image">
-        <input type="hidden"><input type="text" readonly /><span><button class="supr fr" type="button" onclick="spa.adminRmImg(this,'Confirmation de suppression d\'une image de Machine Virtuelle');"></button><button class="supr en" type="button" onclick="spa.adminRmImg(this,'Confirmation of deletion of a Virtual Machine image');"></button></span>
+        <input type="hidden"><input type="text" readonly /><span><button class="supr fr" type="button" onclick="spa.adminRmImg(this,'Confirmation de suppression d\'une image de Machine Virtuelle');"></button><button class="supr en" type="button" onclick="spa.adminRmImg(this,'Confirmation of deletion of a Virtual Machine image');"></button></span><span><button class="load" type="button" onclick="spa.adminDlBrLog(this);"></button></span>
       </div>
     </footer>
   </body>

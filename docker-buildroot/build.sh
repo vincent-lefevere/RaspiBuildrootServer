@@ -27,8 +27,8 @@ ssh-keygen -q -N ""  -t rsa -b 4096 -f conf/proftpd/custom/ssh_host_rsa_key
 test -d /var/tmp/.buildroot-ccache && rm -R /var/tmp/.buildroot-ccache
 mkdir -p /var/tmp/.buildroot-ccache
 chmod 777 /var/tmp/.buildroot-ccache
-mkdir -p data/brdl
-chown www-data data data/brdl
+mkdir -p data/brdl data/tcdl
+chown www-data data data/brdl data/tcdl
 cat <<EOF >html/backend2/path.inc.php
 <?php
 define('PATH_ROOT_INSTALL','`pwd`');

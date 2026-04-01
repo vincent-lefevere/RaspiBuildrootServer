@@ -99,9 +99,9 @@ EOT;
    $pkg=$val['name'];
    $tmp=<<<EOT
 echo "### make {$pkg}-source ###"
-make {$pkg}-source
+make O=/home/buildroot/output {$pkg}-source
 echo "### make {$pkg}-build ###"
-make {$pkg}-build
+make O=/home/buildroot/output {$pkg}-build
 
 EOT;
    $speedupsh.=$tmp;
