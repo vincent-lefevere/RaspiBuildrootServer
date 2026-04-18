@@ -64,6 +64,7 @@ class MySettings {
   update() {
     this.#prjdb=this.#proj.getmydb();
     if (this.#prjdb==undefined) return this.unshow();
+    this.#init(this.#prjdb.expert);
     this.#idspan.innerHTML=this.#prjdb.id;
     this.#lock.checked=this.#prjdb.lock;
     this.#expert_prof.checked=this.#prjdb.expert;
@@ -123,7 +124,6 @@ class MySettings {
         j++;
       }
     }
-    this.#init(this.#prjdb.expert);
     return true;
   }
 
