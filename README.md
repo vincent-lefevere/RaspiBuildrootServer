@@ -301,7 +301,7 @@ via le premier bouton. On trouve également au bout de cette ligne un second bou
 supprimer la précédente dépose.
 
 **Remarque** : *Quand un fichier a été déposé, il sera automatiquement pris comme point de départ
-lors du premier lancement de la machine virtuelle pour les nouveaux projetsde cette catégorie.
+lors du premier lancement de la machine virtuelle pour les nouveaux projets de cette catégorie.
 Sinon on partira d'un projet vide.*
 
 - Une liste de sélection à choix multiples permet d'indiquer les groupes d'étudiants qui pourront
