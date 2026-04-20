@@ -211,6 +211,7 @@ class MyAdmin {
       if (! image.install) { 
         div.children[1].disabled=true;
         div.children[2].style.visibility='hidden';
+        div.children[3].style.visibility='hidden';
       }
       if (one) div.children[2].style.visibility='hidden';
       this.#images.appendChild(div);

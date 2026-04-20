@@ -89,7 +89,6 @@ EOT;
 mkdir -p /home/buildroot/external/custom-rootfs
 make O=/home/buildroot/output my_usage_defconfig
 echo "### make ###"
-make source O=/home/buildroot/output || exit 1
 make O=/home/buildroot/output || exit 1
 
 EOT;

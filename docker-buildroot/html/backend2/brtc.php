@@ -54,12 +54,12 @@ EOT;
  if (!isset($_POST['version'])||!isset($_POST['defconf'])) die('false');
  $debian=12;
  if (isset($_POST['debian']) && $_POST['debian']=='13') $debian=13;
- $ip=gethostbyname($_SERVER['HTTP_HOST']);
+ $ip=$_SERVER['HTTP_HOST'];
  $mysqli = new mysqli(BDDSERVEUR,BDDLOGIN,BDDPASSWD,BDDBASE);
  $version=(int) $_POST['version'];
  $defconf=(int) $_POST['defconf'];
  if ($mysqli->query("SELECT 1 FROM prop WHERE idversion={$version} AND iddefconf={$defconf} AND idtoolchain IS NOT NULL")->fetch_assoc()) die('false');
- $mysqli->query("INSERT INTO toolchains(gcc,headers,file,install) VALUES (NULL,NULL,NULL,0)");
+ $mysqli->query("INSERT INTO toolchains(gcc,headers) VALUES (NULL,NULL)");
  $toolchain=$mysqli->insert_id;
  $mysqli->query("UPDATE prop SET idtoolchain={$toolchain} WHERE idversion={$version} AND iddefconf={$defconf}");
  $val=$mysqli->query("SELECT title FROM versions WHERE id={$version}")->fetch_assoc();
@@ -99,7 +99,7 @@ make O=/home/buildroot/cross toolchain || exit
 (cd /home/buildroot/cross/build ; ls -d host-gcc-final-* gcc-final-*) > /home/cross/.gcc.version
 (cd /home/buildroot/cross/build ; ls -d linux-headers-*) > /home/cross/.headers.version
 make O=/home/buildroot/cross sdk
-curl -k -T /home/buildroot/cross/images/*_sdk-buildroot.tar.gz https://{$ip}/upload/tc-{$toolchain}.tar.gz 
+curl -k -T /home/buildroot/cross/images/*_sdk-buildroot.tar.gz https://{$ip}/upload/tc.tar.gz 
 rm -Rf /home/buildroot-{$title}
 rm -Rf /home/buildroot/cross
 

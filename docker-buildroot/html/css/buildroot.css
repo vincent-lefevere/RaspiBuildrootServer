@@ -395,7 +395,8 @@ label.mtlg img {
   50%   { background-color: lightgreen; }
 }
 #admin button.supr { width: 18px; height: 18px; background-size: cover; background-image: url(../img/supr.png); }
-#admin form > div > input { width: calc(100% - 30px); }
+#admin button.load { width: 18px; height: 18px; background-size: cover; background-image: url(../img/load.png); }
+#admin form > div > input { width: calc(100% - 48px); }
 /* ********************************************************************** *
  * Fin du block main#admin                                                *
  * ********************************************************************** */

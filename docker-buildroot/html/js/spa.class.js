@@ -317,6 +317,16 @@ class MySPA {
     this.#backend.adminRmImg(el.parentNode.parentNode.children[0].value);
   }
 
+  adminDlBrLog(el) {
+    var id=el.parentNode.parentNode.children[0].value;
+    window.open("backend2/dllog.php?type=br&id="+id,"_blank");
+  }
+
+  adminDlTcLog() {
+    var tab=this.#admin.checkCompileTC();
+    if (tab!=false) window.open("backend2/dllog.php?type=tc&id="+tab[0],"_blank");
+  }
+
   metchange() {
     this.#graph.load();
   }
