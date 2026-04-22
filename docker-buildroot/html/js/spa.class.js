@@ -242,11 +242,11 @@ class MySPA {
     }
   }
   delexample(el, message) {
-    var id=this.#proj.grpDpt(el.parentNode);
+    var id=this.#proj.grpDpt(el.parentNode.parentNode);
     if (confirm(message)!=false) this.#backend.loadexample(undefined,id);    
   }
   loadexample(el, message) {
-    var id=this.#proj.grpDpt(el.parentNode);
+    var id=this.#proj.grpDpt(el.parentNode.parentNode);
     if (confirm(message)!=false) this.#backend.loadexample(el,id);
     el.value='';
   }

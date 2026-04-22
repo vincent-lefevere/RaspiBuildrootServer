@@ -177,6 +177,7 @@ main { width: calc(100% - 10px); position: absolute; }
 #projects div > p.expert { background-image: url(../img/expert.png); }
 #projects div > p.lock.expert { background-image: url(../img/lock-expert.png); }
 #projects div > p.lock, #projects div > p.expert { background-repeat: no-repeat; background-position-x: 5px; background-position-y: 5px; }
+#tag_dpt > div:not(.example) span.example, #tag_dpt > div.example span.noexample { display: none; }
 
 /* ********************************************************************** *
  * Fin du block main#project                                              *

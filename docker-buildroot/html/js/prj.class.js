@@ -72,6 +72,7 @@ class MyPrj {
       var tmp=tpl.cloneNode(true);
       tmp.removeAttribute('id');
       div.appendChild(tmp);
+      if (list[i].example) tmp.classList.add('example');
       tmp.firstElementChild.value=id;
       if (id==seldpt) tmp.children[1].checked=true;
       id='dpt'+id;

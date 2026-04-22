@@ -16,9 +16,17 @@
   if ($retval!=0) {
    exec("git clone --depth 1 git://git/projets.git /data/vm-{$vm}/external");
    exec("tar -C /data/vm-{$vm}/external -xvzpf /data/external.tar.gz");
-   if (file_exists("/data/examples/prjbr-{$iddep}.tar.gz")) { 
-    exec("tar -C /data/vm-{$vm}/external -xvzpf /data/examples/prjbr-{$iddep}.tar.gz");
-   }
+   $mysqli = new mysqli(BDDSERVEUR,BDDLOGIN,BDDPASSWD,BDDBASE);
+   $mysqli->query("LOCK TABLES departments WRITE");
+   $file="/data/examples/prjbr-{$iddep}.tar.gz";
+   $val=$mysqli->query("SELECT example FROM departments WHERE id={$iddep}");
+   if ($val['example']==1) {
+    if (file_exists($file)) { 
+     exec("tar -C /data/vm-{$vm}/external -xvzpf {$file}");
+    } else $mysqli->query("UPDATE departments SET example=0 WHERE id={$iddep}");
+   } else if (file_exists($file)) unlink($file);
+   $mysqli->query("UNLOCK TABLES");
+   $mysqli->close();
    exec("cd /data/vm-{$vm}/external ; git config user.email {$email} ; git config user.name \"{$name}\" ; git add --all ; git commit --all -m 'create project' ; git branch -c prj{$p} ; git switch prj{$p} ; git push origin prj{$p}");
   } else
    exec("cd /data/vm-{$vm}/external ; mkdir -p board configs custom-rootfs packages");

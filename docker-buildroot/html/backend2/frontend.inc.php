@@ -96,15 +96,16 @@ function frontend($p) {
  $myprj=substr($myprj,0,-1);
 
  $dpts='';
- if ($_SESSION['prof']) $result=$mysqli->query("SELECT id, title FROM departments");
- else $result=$mysqli->query("SELECT departments.id, departments.title FROM departments INNER JOIN (access INNER JOIN users ON access.grp=users.grp) ON departments.id=access.id WHERE users.email='{$login}'");
+ if ($_SESSION['prof']) $result=$mysqli->query("SELECT id, title, example FROM departments");
+ else $result=$mysqli->query("SELECT departments.id, departments.title, departments.example FROM departments INNER JOIN (access INNER JOIN users ON access.grp=users.grp) ON departments.id=access.id WHERE users.email='{$login}'");
  while ($val=$result->fetch_assoc()) {
   $id=$val['id'];
   $title=str_replace(array('"'),array('\"'),$val['title']);
+  $example=($val['example']==1)?'true':'false';
   $grps=get_grps($id);
   $list=get_projects($id);
   if ($_SESSION['prof'])
-   $dpts.='{"id":'.$id.',"title":"'.$title.'","grps":['.$grps.'],"projects":['.$list.']},';
+   $dpts.='{"id":'.$id.',"title":"'.$title.'","example":'.$example.',"grps":['.$grps.'],"projects":['.$list.']},';
   else
    $dpts.='{"id":'.$id.',"title":"'.$title.'","grps":[],"projects":['.$list.']},';
  }

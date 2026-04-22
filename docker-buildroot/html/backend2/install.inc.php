@@ -17,7 +17,8 @@ END;
   $query=<<<END
 CREATE TABLE IF NOT EXISTS departments (
   id int(11) AUTO_INCREMENT PRIMARY KEY,
-  title varchar(200) NOT NULL
+  title varchar(200) NOT NULL,
+  example bit(1) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
 END;
   $mysqli->query($query);
