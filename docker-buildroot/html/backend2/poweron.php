@@ -19,7 +19,7 @@
    $mysqli = new mysqli(BDDSERVEUR,BDDLOGIN,BDDPASSWD,BDDBASE);
    $mysqli->query("LOCK TABLES departments WRITE");
    $file="/data/examples/prjbr-{$iddep}.tar.gz";
-   $val=$mysqli->query("SELECT example FROM departments WHERE id={$iddep}");
+   $val=$mysqli->query("SELECT example FROM departments WHERE id={$iddep}")->fetch_assoc();
    if ($val['example']==1) {
     if (file_exists($file)) { 
      exec("tar -C /data/vm-{$vm}/external -xvzpf {$file}");
