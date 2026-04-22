@@ -11,7 +11,7 @@
  $raw=$mysqli->query("SELECT title FROM versions WHERE id={$id}")->fetch_assoc();
  if (!$raw) die('false');
  $title=$raw['title'];
- system("rm -R /data/brdl/buildroot-{$title}.tar.gz /data/br-{$id}");
+ system("rm -R /data/brdl/buildroot-{$title}.tar.gz");
  $mysqli->query("DELETE FROM prop WHERE idversion={$id}");
  $mysqli->query("DELETE FROM versions WHERE id={$id}");
  send_mqtt_msg('/cnf');
