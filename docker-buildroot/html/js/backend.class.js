@@ -5,22 +5,6 @@ class MyBackend {
   this.#spa=spa;
  }
 
- loadusers(csv) {
-  var form = new FormData();
-  form.append('upload[file]',csv.files[0]);
-  form.append('upload[name]',csv.value);
-  form.append('csv',csv.value);
-  var xhttp= new XMLHttpRequest();
-  xhttp.open("POST","backend2/adduser.php", true);
-  xhttp.addEventListener('readystatechange', function() {
-    if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
-      document.body.className='';
-    }
-  });
-  xhttp.send(form);
-  document.body.className='wait';
- }
-
  #modDpt(form,url,spa) {
   var xhttp= new XMLHttpRequest();
   xhttp.open('POST',url, true);
@@ -174,7 +158,7 @@ class MyBackend {
     if (xhttp.readyState === XMLHttpRequest.DONE) {
       document.body.className='';
       if (xhttp.status === 200) {
-        if (xhttp.responseText!='false') on_success();
+       if (xhttp.responseText!='false') on_success(JSON.parse(xhttp.responseText));
         else on_error();
       }
     }
@@ -184,6 +168,14 @@ class MyBackend {
   });
   xhttp.send(form);
   document.body.className='wait';
+ }
+
+ loadusers(csv) {
+  var form = new FormData();
+  form.append('upload[file]',csv.files[0]);
+  form.append('upload[name]',csv.value);
+  form.append('csv',csv.value);
+  this.#adminBackend('backend2/adduser.php',form,this.#spa.loaduserscallback.bind(this.#spa),function() {});
  }
 
  adminAdd(title) {

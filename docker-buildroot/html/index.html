@@ -182,6 +182,18 @@
           <span></span>
         </div>
       </div>
+      
+      <input id="clu" type="checkbox"/>
+      <div id="lu">
+        <span onclick="spa.luunshow();">X</span>
+        <div>
+          <h1><span class="fr">Liste des utilisateurs enregistrés</span><span class="en">List of registered users</span></h1>
+          <div><table>
+            <thead><tr class="fr"><th>Login</th><th>Nom</th></tr><tr class="en"><th>Login</th><th>Name</th></tr></thead>
+            <tbody id="tag_raw_user"></tbody>
+          </table></div>
+        </div>
+      </div>
     </div>
     <footer>
       <p class="jauge"><span id="jauge"><span class="fr">VM utilisées : </span><span class="en">VM used: </span><progress id="jauge1" max="30" value="0"></progress> <span id="jauge2">0</span>/30</span></p>
@@ -189,6 +201,11 @@
       <span class="fr"><strong>RaspiBuildrootServer</strong> : Serveur <a href="https://buildroot.org" target="_blank">Buildroot</a> générant des images pour <a href="https://www.raspberrypi.com" target="_blank">Raspberry Pi</a> par <a href="mailto:vincent.lefevere@junia.com">Vincent Lefévère</a> de <a href="https://www.junia.com" target="_blank">Junia</a> <span style="display:inline-block; transform: rotate(180deg);">&copy;</span> avril 2026 (licence GNU)</span><p>
     </footer>
     <footer style="display:none;">
+      <table>
+       <tbody>
+        <tr id="template_user"><td class="tag_login"></td><td class="tag_name"></td></tr>
+       </tbody>
+      </table>
       <div id="template_project">
         <p onclick="spa.selectPrj(this);"><span class="fr">projet n°</span><span class="en">project n°</span> <span class="tag_idprj"></span><br/><span class="tag_title"></span><br/><br/><span class="tag_mail"></span></p>
       </div>

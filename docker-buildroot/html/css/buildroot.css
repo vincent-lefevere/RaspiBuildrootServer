@@ -398,6 +398,44 @@ label.mtlg img {
 #admin button.supr { width: 18px; height: 18px; background-size: cover; background-image: url(../img/supr.png); }
 #admin button.load { width: 18px; height: 18px; background-size: cover; background-image: url(../img/load.png); }
 #admin form > div > input { width: calc(100% - 48px); }
+
+#lu {
+  z-index: 9;
+  position: fixed;
+  height: calc(100% - 162px);
+  top: 104px;
+  width: calc(100% - 20px);
+  border: solid 10px white;
+  left: 0px;
+}
+#lu > span { position: absolute; right: 6px; top: 3px; cursor: pointer; }
+#lu > div {
+  background-color: var(--color1);
+  border: solid 10px var(--color1);
+  border-radius: 5px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  left: 0px;
+}
+#lu > div > h1 { text-align: center; }
+#lu > div > div {
+  background-color: var(--color2);
+  border: solid 10px var(--color2);
+  border-radius: 5px;
+  width: calc(100% - 20px);
+  height: calc(100% - 100px);
+  overflow-y: scroll;
+}
+#lu > div > div > table { width: 100%; }
+#lu > div > div > table > tbody > tr.prof { font-weight: bold; }
+#lu > div > div > table > tbody > tr.error { color: red; }
+#lu > div > div > table > tbody > tr.change { color: green; }
+#lu > div > div > table > tbody > tr.delete { color: white; }
+#lu > div > div > table > tbody > tr.created { color: green; font-style: italic; }
+
+#clu, #lu { display: none; }
+#clu:checked ~ #lu { display: block; }
+
 /* ********************************************************************** *
  * Fin du block main#admin                                                *
  * ********************************************************************** */

@@ -216,8 +216,25 @@ class MySPA {
   loadusers(el) {
     this.#backend.loadusers(el);
     el.value='';
+    document.getElementById('tag_raw_user').innerHTML='';
+    document.getElementById('clu').checked=true;
   }
  
+  loaduserscallback(list) {
+    var tbody=document.getElementById('tag_raw_user');
+    var tpl=document.getElementById('template_user');
+    for(var i=0;i<list.length;i++) {
+      var el=list[i];
+      var tr=tpl.cloneNode(true);
+      tr.removeAttribute('id');
+      tr.className=el.status;
+      if (el.prof) tr.classList.add('prof');
+      tr.getElementsByClassName('tag_login')[0].innerText=el.email;
+      tr.getElementsByClassName('tag_name')[0].innerText=el.name;
+      tbody.appendChild(tr);
+    }
+  }
+   
   updatedpt(db) {
     this.#proj.buildlist(db);
   }
