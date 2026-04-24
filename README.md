@@ -145,6 +145,21 @@ Ce fichier s'appelle [list.csv](../../blob/main/documentation/exemple_fr/list.cs
 | non        | etudiant3@institut.fr   | etudiant3     | Etudiant Français n°3   | groupe2 |
 | oui        | professeur1@institut.fr | professeur1   | Professeur Français n°1 |         |
 
+Une fenêtre popup apparait alors pour indiquer que le traitement a bien été pris en compte
+mais également pour afficher la liste des email de login et des nom/prénom
+de chaque utilisateur présent dans système et ayant été affecté par l'opération.
+
+![liste des utilisateurs](../../blob/main/documentation/img_fr/list_user.png)
+
+**Remarques** :
+
+- Pour un professeur, la ligne apparait en gras.
+- Pour un nouveau compte, la ligne apparait en italique de couleur verte.
+- Pour un compte existant que l'on vient de modifier, la ligne apparait juste de couleur verte
+- Pour un compte que l'on a supprimer, la ligne apparait de couleur blanche
+- Quand l'opération demandé sur le compte n'a pas put être corectement traité la ligne apparait de couleur rouge.
+Cela arrivera si le fichier  ".csv" contient un caractère non UTF-8 sur la ligne de cet utilisateur.
+
 ### Téléchargement du logiciel Buildroot
 
 La seconde rubrique, en haut à droite de la fenêtre, offre un accès pour récupérer

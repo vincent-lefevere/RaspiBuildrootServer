@@ -144,6 +144,21 @@ This file is called [list.csv](../.../blob/main/documentation/example_en/list.cs
 | no      | student3@institution.uk | student3  | English Student n°3 | group2 |
 | yes     | teacher1@institution.uk | teacher1  | English Teahcer n°1 |        |
 
+A pop-up window will then appear to confirm that the process has been successfully completed,
+as well as to display a list of the login email addresses and first and last names of each user
+in the system who has been affected by the operation.
+
+![liste des utilisateurs](../../blob/main/documentation/img_en/list_user.png)
+
+**Notes**:
+
+- For a teacher, the row appears in bold.
+- For a new account, the row appears in green italics.
+- For an existing account that has just been modified, the row appears in green.
+- For an account that has been deleted, the row appears in white.
+- When the requested operation on the account could not be processed correctly, the row appears in red.
+This will happen if the ‘.csv’ file contains a non-UTF-8 character in that user’s row.
+
 ### Download Buildroot software
 
 The second section, at the top right of the window, provides access to download
